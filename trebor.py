@@ -16,6 +16,7 @@ import numpy as np
 import networkx as nx
 import scipy.stats as sps
 import matplotlib.pyplot as plt
+import matplotlib as mpl
 
 # lingpy imports
 from lingpy.thirdparty import cogent as cg
@@ -133,6 +134,8 @@ class TreBor(object):
         # create dictionary for distributions
         self.dists = {}
 
+        # create dictionary for graph attributes
+        self.graph = {}
     
     def get_weighted_GLS(
             self,
@@ -667,30 +670,15 @@ class TreBor(object):
         Calculate the Contemporary Vocabulary Size Distribution (CVSD).
 
         """
+        # XXX todo: Note that form/meaning distributions are problematic, we have
+        # XXX find a much better way to cope with this
+
         # define taxa and concept as attribute for convenience
         taxa = self.taxa
         concepts = self.wl.concept
 
         # create list to store the forms and the concepts
         dist = [] 
-
-        # iterate over all taxa and calculate the number of cogs for each concept
-        for i,taxon in enumerate(self.taxa):
-            
-            # get the number of distinct forms of the taxon
-            tmp_forms = set(
-                    self.wl.get_list(
-                        col=taxon,
-                        entry=self._pap_string,
-                        flat=True
-                        )
-                    )
-            
-            # get the number of distinct concepts
-            tmp_concepts = set([c.split(':')[1] for c in tmp_forms])
-
-            # append form-meaning ratio to dist
-            dist.append(len(tmp_forms) / len(tmp_concepts))
         
         # calculate vocabulary size
         size = []
@@ -707,7 +695,7 @@ class TreBor(object):
             size += [s]
         
         # store the stuff as an attribute
-        self.dists['contemporary'] = (dist,size)
+        self.dists['contemporary'] = size
 
         if verbose: print("[i] Calculated the distributions for contemporary taxa.")
         
@@ -721,6 +709,9 @@ class TreBor(object):
         """
         Function retrieves all paps for ancestor languages in a given tree.
         """
+
+        # XXX todo: Note that form/meaning distributions are problematic, we have
+        # XXX find a much better way to cope with this
 
         # define concepts for convenience
         concepts = self.wl.concept
@@ -779,41 +770,252 @@ class TreBor(object):
         # get the vocabulary size
         size = [sum([p[i] for p in paps]) for i in range(len(nodes))]
 
-        # get the vocabulary distribution
-        dist = []
-
-        for i,node in enumerate(nodes):
-            
-            # get the pap values of the taxon
-            tmp_forms = set(
-                    [
-                        b for a,b in zip(
-                            [p[i] for p in paps],
-                            cog_list
-                            ) if a > 0
-                        ]
-                    )
-
-            # get the number of distinct concepts
-            tmp_concepts = set([c.split(':')[1] for c in tmp_forms])
-            
-            # append the form-meaning ratio to dist
-            dist.append(len(tmp_forms)/len(tmp_concepts))
-
         # store the stuff as an attribute
-        self.dists[mode_string] = (dist,size)
+        self.dists[mode_string] = size
 
         if verbose: print("[i] Calculated the distributions for ancestral taxa.")
 
         return
-    
+
+    def get_MLN(
+            self,
+            mode_string,
+            threshold = 1,
+            verbose = False
+            ):
+        """
+        Compute an evolutionary network for a given model.
+        """
+        
+        # create the primary graph
+        gPrm = nx.Graph()
+
+        # create the template graph XXX add fallback procedure
+        gTpl = nx.read_gml(self.dataset+'.gml')
+
+        # make alias for tree and taxa for convenience
+        taxa = self.taxa
+        tree = self.tree
+
+        # make alias for the current gls for convenience
+        scenarios = self.gls[mode_string]
+
+        # create dictionary for inferred lateral events
+        ile = {}
+
+        # create mst graph
+        gMST = nx.Graph()
+
+        # create out graph
+        gOut = nx.Graph()
+
+        # load data for nodes into new graph
+        for node,data in gTpl.nodes(data=True):
+            if data['label'] in taxa:
+                data['graphics']['fill'] = '#ff0000'
+                data['graphics']['type'] = 'rectangle'
+                data['graphics']['w'] = 80.0
+                data['graphics']['h'] = 20.0
+            else:
+                data['graphics']['type'] = 'ellipse'
+                data['graphics']['w'] = 30.0
+                data['graphics']['h'] = 30.0
+                data['graphics']['fill'] = '#ff0000'
+            gPrm.add_node(data['label'],**data)
+
+        # load edge data into new graph
+        for nodeA,nodeB,data in gTpl.edges(data=True):
+            data['graphics']['width'] = 10.0
+            data['graphics']['fill'] = '#000000'
+            data['label'] = 'vertical'
+
+            gPrm.add_edge(
+                    gTpl.node[nodeA]['label'],
+                    gTpl.node[nodeB]['label'],
+                    **data
+                    )
+
+        # start to assign the edge weights
+        for cog,(gls,noo) in scenarios.items():
+            
+            # get the origins
+            oris = [x[0] for x in gls if x[1] == 1]
+
+            # connect origins by edges
+            for i,oriA in enumerate(oris):
+                for j,oriB in enumerate(oris):
+                    if i < j:
+                        try:
+                            gPrm.edge[oriA][oriB]['weight'] += 1
+                        except:
+                            gPrm.add_edge(
+                                    oriA,
+                                    oriB,
+                                    weight=1
+                                    )
+
+        # verbose output
+        if verbose: print("[i] Calculated primary graph.")
+        
+        # verbose output
+        if verbose: print("[i] Inferring lateral edges...")
+            
+        # create MST graph
+        gMST = nx.Graph()
+
+        for cog,(gls,noo) in scenarios.items():
+            
+            ile[cog] = []
+
+            # get the origins
+            oris = [x[0] for x in gls if x[1] == 1]
+
+            # create a graph of weights
+            gWeights = nx.Graph()
+            
+            # iterate over nodes
+            for i,nodeA in enumerate(oris):
+                for j,nodeB in enumerate(oris):
+                    if i < j:
+                        w = 1000000 / int(gPrm.edge[nodeA][nodeB]['weight'])
+                        gWeights.add_edge(
+                                nodeA,
+                                nodeB,
+                                weight=w
+                                )
+            
+            # if the graph is not empty
+            if gWeights:
+                
+                # calculate the MST
+                mst = nx.minimum_spanning_tree(gWeights)
+                
+                # assign the MST-weights to gMST
+                for nodeA,nodeB in mst.edges():
+                    try:
+                        gMST.edge[nodeA][nodeB]['weight'] += 1
+                        gMST.edge[nodeA][nodeB]['cogs'] += [cog]
+                    except:
+                        gMST.add_edge(
+                                nodeA,
+                                nodeB,
+                                weight=1,
+                                cogs=[cog]
+                                )
+                    ile[cog]+= [(nodeA,nodeB)]
+
+        # get colormap for edgeweights
+        edge_weights = []
+        for nodeA,nodeB,data in gMST.edges(data=True):
+            edge_weights.append(data['weight'])
+        
+        # determine a colorfunction
+        cfunc = np.array(np.linspace(0,256,len(set(edge_weights))),dtype='int')
+        lfunc = np.linspace(0.5,8,len(set(edge_weights)))
+
+        # sort the weights
+        weights = sorted(set(edge_weights))
+
+        # get the scale for the weights (needed for the line-width)
+        scale = 20.0 / max(edge_weights)
+
+        # load data for nodes into new graph
+        for node,data in gTpl.nodes(data=True):
+            if data['label'] in taxa:
+                data['graphics']['fill'] = '#ff0000'
+                data['graphics']['type'] = 'rectangle'
+                data['graphics']['w'] = 80.0
+                data['graphics']['h'] = 20.0
+            else:
+                data['graphics']['type'] = 'ellipse'
+                data['graphics']['w'] = 30.0
+                data['graphics']['h'] = 30.0
+                data['graphics']['fill'] = '#ff0000'
+            
+            gOut.add_node(data['label'],**data)
+
+        # load edge data into new graph
+        for nodeA,nodeB,data in gTpl.edges(data=True):
+            data['graphics']['width'] = 10.0
+            data['graphics']['fill'] = '#000000'
+            data['label'] = 'vertical'
+            del data['graphics']['Line']
+
+            gOut.add_edge(
+                    gTpl.node[nodeA]['label'],
+                    gTpl.node[nodeB]['label'],
+                    **data
+                    )
+        
+        # assign new edge weights
+        for nodeA,nodeB,data in gMST.edges(data=True):
+            w = data['weight']
+
+            # get the color for the weight
+            color = mpl.colors.rgb2hex(mpl.cm.jet(cfunc[weights.index(w)]))
+
+            data['graphics'] = {}
+            data['graphics']['fill'] = color
+            data['graphics']['width'] = w * scale
+            data['cogs'] = ','.join([str(i) for i in data['cogs']])
+
+            # check for threshold
+            if w >= threshold:
+                try:
+                    gOut.edge[nodeA][nodeB]
+                except:
+                    # add the data to the out-graph
+                    gOut.add_edge(
+                        nodeA,
+                        nodeB,
+                        **data
+                        )
+
+        # verbose output
+        if verbose: print("[i] Writing graph to file...")
+
+        # write the graph to file
+        f = open(self.dataset+'_trebor/mln-'+mode_string+'.gml','w')
+        for line in nx.generate_gml(gOut):
+            f.write(line+'\n')
+        f.close()
+        #nx.write_gml(gOut,self.dataset+'_trebor/mln-'+mode_string+'.gml')
+
+        # write the inferred borrowing events (ILS, inferred lateral event) 
+        # between all taxa to file
+        # verbose output
+        if verbose: print("[i] Writing Inferred Lateral Events to file...")
+
+        f = open(self.dataset+'_trebor/ile-'+mode_string+'.csv','w')
+        for cog,events in ile.items():
+            if events:
+                f.write(
+                        cog+'\t'+','.join(
+                            ['{0}:{1}'.format(a,b) for a,b in events]
+                            )+'\n'
+                        )
+        f.close()
+
+        # create file name for node labels (cytoscape output)
+        f = open(self.dataset+'_trebor/node.label.NA','w')
+        f.write("node.label (class=java.lang.String)\n")
+        for taxon in taxa:
+            f.write('{0} = {1}\n'.format(taxon,taxon))
+        f.close()
+
+        # add gOut to graphattributes
+        self.graph[mode_string] = gOut
+
+        return 
+
     def analyze(
             self,
             runs = "default",
             verbose = False,
             output_gml = False,
             tar = False,
-            plot_dists = False
+            plot_dists = False,
+            usetex = True
             ):
         """
         Carry out a full analysis using various parameters.
@@ -824,7 +1026,8 @@ class TreBor(object):
             Define a couple of different models to be analyzed.
         verbose : bool (default = False)
             If set to c{True}, be verbose when carrying out the analysis.
-
+        usetex : bool (default=True)
+            Specify whether you want to use LaTeX to render plots.
         """
         
         # define a default set of runs
@@ -835,15 +1038,15 @@ class TreBor(object):
                     ('weighted',(3,1)),
                     ('weighted',(2,1)),
                     ('weighted',(1,1)),
-                    ('weighted',(1,2)),
-                    ('weighted',(1,3)),
-                    ('weighted',(1,4)),
-                    ('weighted',(1,5)),
-                    ('restriction',1),
-                    ('restriction',2),
-                    ('restriction',3),
-                    ('restriction',4),
-                    ('restriction',5)
+                    #('weighted',(1,2)),
+                    #('weighted',(1,3)),
+                    #('weighted',(1,4)),
+                    #('weighted',(1,5)),
+                    #('restriction',1),
+                    #('restriction',2),
+                    #('restriction',3),
+                    #('restriction',4),
+                    #('restriction',5)
                     ]
         
         # carry out the various analyses
@@ -892,29 +1095,23 @@ class TreBor(object):
         
         zp_fmd,zp_vsd = [],[]
         for m in modes:
-            fmd = sps.mannwhitneyu(
-                    self.dists['contemporary'][0],
-                    self.dists[m][0]
-                    )
             vsd = sps.mannwhitneyu(
-                    self.dists['contemporary'][1],
-                    self.dists[m][1]
+                    self.dists['contemporary'],
+                    self.dists[m]
                     )
 
-            zp_fmd.append(fmd)
             zp_vsd.append(vsd)
 
         # write results to file
         print("[i] Writing stats to file.")
         f = open(self.dataset+'_trebor/'+self.dataset+'.stats','w')
-        f.write("Mode\tANO\tMNO\tFMD_z\tFMD_p\tVSD_z\tVSD_p\n")
+        f.write("Mode\tANO\tMNO\tVSD_z\tVSD_p\n")
         for i in range(len(zp_fmd)):
             f.write(
-                    '{0}\t{1:.2f}\t{2}\t{3}\t{4}\n'.format(
+                    '{0}\t{1:.2f}\t{2}\t{3}\n'.format(
                         modes[i],
                         self.stats[modes[i]]['ano'],
                         self.stats[modes[i]]['mno'],
-                        '{0[0]}\t{0[1]:.4f}'.format(zp_fmd[i]),
                         '{0[0]}\t{0[1]:.4f}'.format(zp_vsd[i])
                         )
                     )
@@ -922,18 +1119,18 @@ class TreBor(object):
 
         # plot the stats if this is defined in the settings
         if plot_dists:
+
+            # specify latex
+            mpl.rc('text',usetex=usetex)
                         
             # store distributions in lists
-            dists_fmd = [self.dists[m][0] for m in modes]
-            dists_vsd = [self.dists[m][1] for m in modes]
+            dists_vsd = [self.dists[m] for m in modes]
             
             # store contemporary dists
-            dist_fmd = self.dists['contemporary'][0]
-            dist_vsd = self.dists['contemporary'][1]
+            dist_vsd = self.dists['contemporary']
             
             # get the average number of origins
             ano = [self.stats[m]['ano'] for m in modes]
-
 
             # create a sorter for the distributions
             sorter = [s[0] for s in sorted(
@@ -942,74 +1139,62 @@ class TreBor(object):
                 )]
 
             # sort the stuff
-            dists_fmd = [dists_fmd[i] for i in sorter]
             dists_vsd = [dists_vsd[i] for i in sorter]
             modes = [modes[i] for i in sorter]
 
             # sort the zp-values
-            zp_fmd = [zp_fmd[i] for i in sorter]
             zp_vsd = [zp_vsd[i] for i in sorter]
 
             # format the zp-values
-            p_fmd = []
-            for z,p in zp_fmd:
-                if p < 0.001:
-                    p_fmd.append('p<{0:.2f}'.format(p))
-                else:
-                    p_fmd.append('p={0:.2f}'.format(p))
+            if usetex:
 
-            p_vsd = []
-            for z,p in zp_fmd:
-                if p < 0.001:
-                    p_vsd.append('p<{0:.2f}'.format(p))
-                else:
-                    p_vsd.append('p={0:.2f}'.format(p))
-
-            for i in range(2):
-                # create the figure
-                fig = plt.figure()
-
-                # create the axis
-                ax = fig.add_subplot(111)
+                p_vsd = []
+                for i,(z,p) in enumerate(zp_vsd):
+                    if p < 0.001:
+                        p_vsd.append('p$<${0:.2f}'.format(p))
+                    elif p >= 0.05:
+                        p_vsd.append(r'\textbf{{p$=${0:.2f}}}'.format(p))
+                        # adjust the modes
+                        modes[i] = r'\textbf{'+modes[i]+'}'
+                    else:
+                        p_vsd.append('p$=${0:.2f}'.format(p))
                 
-                if i == 0:
-                    # add the boxplots
-                    ax.boxplot([dist_fmd]+dists_fmd)
+            else:
+                p_vsd = []
+                for z,p in zp_vsd:
+                    if p < 0.001:
+                        p_vsd.append('p<{0:.2f}'.format(p))
+                    elif p >= 0.05:
+                        p_vsd.append(r'{p={0:.2f}'.format(p))
+                    else:
+                        p_vsd.append('p={0:.2f}'.format(p))
+            
+            # create the figure
+            fig = plt.figure()
 
-                    # add the xticks
-                    plt.xticks(
-                            range(1,len(modes)+2),
-                            ['']+['M_{0}\n{1}'.format(
-                                m,
-                                p
-                                ) for m,p in zip(modes,p_fmd)
-                                ],
-                            size=6
-                            )
-                    
-                    # save the figure
-                    plt.savefig(self.dataset+'_trebor/fmd.pdf')
-                    plt.clf()
+            # create the axis
+            ax = fig.add_subplot(111)
 
-                elif i == 1:
-                    # add the boxplots
-                    ax.boxplot([dist_vsd]+dists_vsd)
+            # add the boxplots
+            ax.boxplot([dist_vsd]+dists_vsd)
 
-                    # add the xticks
-                    plt.xticks(
-                            range(1,len(modes)+2),
-                            ['']+['M_{0}\n{1}'.format(
-                                m,
-                                p
-                                ) for m,p in zip(modes,p_vsd)
-                                ],
-                            size=6
-                            )
-                    # save the figure
-                    plt.savefig(self.dataset+'_trebor/vsd.pdf')
-                    plt.clf()
+            # add the xticks
+            plt.xticks(
+                    range(1,len(modes)+2),
+                    ['']+['{0}\n{1}'.format(
+                        m,
+                        p
+                        ) for m,p in zip(modes,p_vsd)
+                        ],
+                    size=6
+                    )
+
+            # save the figure
+            plt.savefig(self.dataset+'_trebor/vsd.pdf')
+            plt.clf()
             
             print("[i] Plotted the distributions.")
+
         
 
 
