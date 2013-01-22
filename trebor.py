@@ -13,13 +13,9 @@ import os
 
 # thirdparty imports
 import numpy as np
-try:
-    import networkx as nx
-except:
-    print(
-            "[!] Cannot load networkx module. Some functions will not be available."
-            )
-
+import networkx as nx
+import scipy.stats as sps
+import matplotlib.pyplot as plt
 
 # lingpy imports
 from lingpy.thirdparty import cogent as cg
@@ -138,7 +134,7 @@ class TreBor(object):
         self.dists = {}
 
     
-    def get_weighted_gls(
+    def get_weighted_GLS(
             self,
             pap,
             ratio = (1,1),
@@ -314,7 +310,7 @@ class TreBor(object):
                 key = lambda x:sum([i[1] for i in x])
                 )[0]
 
-    def get_restricted_gls(
+    def get_restricted_GLS(
             self,
             pap,
             restriction = 4,
@@ -470,7 +466,7 @@ class TreBor(object):
                 key = lambda x:len(x)
                 )[0]
 
-    def get_gls(
+    def get_GLS(
             self,
             mode = 'weighted',
             ratio = (1,1),
@@ -529,13 +525,13 @@ class TreBor(object):
         for cog in self.cogs:
             if verbose: print("[i] Calculating GLS for COG {0}...".format(cog),end="")
             if mode == 'weighted':
-                gls = self.get_weighted_gls(
+                gls = self.get_weighted_GLS(
                         self.paps[cog],
                         ratio = ratio
                         )
 
             if mode == 'restriction':
-                gls = self.get_restricted_gls(
+                gls = self.get_restricted_GLS(
                         self.paps[cog],
                         restriction = restriction
                         )
@@ -675,27 +671,26 @@ class TreBor(object):
         taxa = self.taxa
         concepts = self.wl.concept
 
-        # create a numpy-array for the taxa and the concepts
-        dists = np.zeros((len(taxa),len(concepts)))
+        # create list to store the forms and the concepts
+        dist = [] 
 
         # iterate over all taxa and calculate the number of cogs for each concept
         for i,taxon in enumerate(self.taxa):
             
-            # get the pap values of the taxon
-            paps = set(self.wl.get_list(
-                    col=taxon,
-                    entry=self._pap_string,
-                    flat=True
-                    ))
+            # get the number of distinct forms of the taxon
+            tmp_forms = set(
+                    self.wl.get_list(
+                        col=taxon,
+                        entry=self._pap_string,
+                        flat=True
+                        )
+                    )
+            
+            # get the number of distinct concepts
+            tmp_concepts = set([c.split(':')[1] for c in tmp_forms])
 
-            these_concepts = [c.split(':')[1] for c in paps]
-
-            # calculate specific distribution for the given taxon
-            for j,c in enumerate(concepts):
-                dists[i][j] = these_concepts.count(c)
-
-        # calculate the distribution
-        dist = [d.mean() for d in dists]
+            # append form-meaning ratio to dist
+            dist.append(len(tmp_forms) / len(tmp_concepts))
         
         # calculate vocabulary size
         size = []
@@ -710,7 +705,6 @@ class TreBor(object):
                         ) if x in self.cogs
                     ])
             size += [s]
-        #size = [sum([d[i] for d in dists]) for i in range(len(taxa))]
         
         # store the stuff as an attribute
         self.dists['contemporary'] = (dist,size)
@@ -737,7 +731,6 @@ class TreBor(object):
                 key=lambda x: len(self.tree.getNodeMatchingName(x).tips()),
                 reverse = True
                 )
-        print(nodes)
 
         # retrieve scenarios
         tmp = sorted([(a,b,c) for a,(b,c) in self.gls[mode_string].items()])
@@ -787,12 +780,12 @@ class TreBor(object):
         size = [sum([p[i] for p in paps]) for i in range(len(nodes))]
 
         # get the vocabulary distribution
-        dists = np.zeros((len(nodes),len(concepts)))
+        dist = []
 
         for i,node in enumerate(nodes):
-
+            
             # get the pap values of the taxon
-            tmp_pap = set(
+            tmp_forms = set(
                     [
                         b for a,b in zip(
                             [p[i] for p in paps],
@@ -801,21 +794,226 @@ class TreBor(object):
                         ]
                     )
 
-            these_concepts = [c.split(':')[1] for c in tmp_pap]
+            # get the number of distinct concepts
+            tmp_concepts = set([c.split(':')[1] for c in tmp_forms])
+            
+            # append the form-meaning ratio to dist
+            dist.append(len(tmp_forms)/len(tmp_concepts))
 
-            # calculate specific distribution for the given taxon
-            for j,c in enumerate(concepts):
-                dists[i][j] = these_concepts.count(c)
-
-        # calculate the distribution
-        dist = [d.mean() for d in dists]
-        
         # store the stuff as an attribute
         self.dists[mode_string] = (dist,size)
 
         if verbose: print("[i] Calculated the distributions for ancestral taxa.")
 
-        return paps
+        return
+    
+    def analyze(
+            self,
+            runs = "default",
+            verbose = False,
+            output_gml = False,
+            tar = False,
+            plot_dists = False
+            ):
+        """
+        Carry out a full analysis using various parameters.
+
+        Parameters
+        ----------
+        runs : {str list} (default="default")
+            Define a couple of different models to be analyzed.
+        verbose : bool (default = False)
+            If set to c{True}, be verbose when carrying out the analysis.
+
+        """
+        
+        # define a default set of runs
+        if runs == 'default':
+            runs = [
+                    ('weighted',(5,1)),
+                    ('weighted',(4,1)),
+                    ('weighted',(3,1)),
+                    ('weighted',(2,1)),
+                    ('weighted',(1,1)),
+                    ('weighted',(1,2)),
+                    ('weighted',(1,3)),
+                    ('weighted',(1,4)),
+                    ('weighted',(1,5)),
+                    ('restriction',1),
+                    ('restriction',2),
+                    ('restriction',3),
+                    ('restriction',4),
+                    ('restriction',5)
+                    ]
+        
+        # carry out the various analyses
+        for mode,params in runs:
+            if mode == 'weighted':
+                print(
+                        "[i] Analysing dataset with mode {0} ".format(mode)+\
+                                "and ratio {0[0]}:{0[1]}...".format(params)
+                                )
+
+                self.get_GLS(
+                        mode = mode,
+                        ratio = params,
+                        verbose = verbose,
+                        output_gml = output_gml,
+                        tar = tar,
+                        )
+            elif mode == 'restriction':
+                print(
+                        "[i] Analysing dataset with mode {0} ".format(mode)+\
+                                "and restriction {0}...".format(params)
+                                )
+                
+                self.get_GLS(
+                        mode = mode,
+                        restriction = params,
+                        verbose = verbose,
+                        output_gml = output_gml,
+                        tar = tar,
+                        )
+    
+        # calculate the different distributions
+        # start by calculating the contemporary distributions
+        print("[i] Calculating the Contemporary Vocabulary Distributions...")
+        self.get_CVSD(verbose=verbose)
+        
+    
+        # now calculate the rest of the distributions
+        print("[i] Calculating the Ancestral Vocabulary Distributions...")
+        modes = list(self.gls.keys())
+        for m in modes:
+            self.get_AVSD(m,verbose=verbose)
+
+        # compare the distributions using mannwhitneyu
+        print("[i] Comparing the distributions...")
+        
+        zp_fmd,zp_vsd = [],[]
+        for m in modes:
+            fmd = sps.mannwhitneyu(
+                    self.dists['contemporary'][0],
+                    self.dists[m][0]
+                    )
+            vsd = sps.mannwhitneyu(
+                    self.dists['contemporary'][1],
+                    self.dists[m][1]
+                    )
+
+            zp_fmd.append(fmd)
+            zp_vsd.append(vsd)
+
+        # write results to file
+        print("[i] Writing stats to file.")
+        f = open(self.dataset+'_trebor/'+self.dataset+'.stats','w')
+        f.write("Mode\tANO\tMNO\tFMD_z\tFMD_p\tVSD_z\tVSD_p\n")
+        for i in range(len(zp_fmd)):
+            f.write(
+                    '{0}\t{1:.2f}\t{2}\t{3}\t{4}\n'.format(
+                        modes[i],
+                        self.stats[modes[i]]['ano'],
+                        self.stats[modes[i]]['mno'],
+                        '{0[0]}\t{0[1]:.4f}'.format(zp_fmd[i]),
+                        '{0[0]}\t{0[1]:.4f}'.format(zp_vsd[i])
+                        )
+                    )
+        f.close()
+
+        # plot the stats if this is defined in the settings
+        if plot_dists:
+                        
+            # store distributions in lists
+            dists_fmd = [self.dists[m][0] for m in modes]
+            dists_vsd = [self.dists[m][1] for m in modes]
+            
+            # store contemporary dists
+            dist_fmd = self.dists['contemporary'][0]
+            dist_vsd = self.dists['contemporary'][1]
+            
+            # get the average number of origins
+            ano = [self.stats[m]['ano'] for m in modes]
+
+
+            # create a sorter for the distributions
+            sorter = [s[0] for s in sorted(
+                zip(range(len(modes)),ano),
+                key=lambda x:x[1]   
+                )]
+
+            # sort the stuff
+            dists_fmd = [dists_fmd[i] for i in sorter]
+            dists_vsd = [dists_vsd[i] for i in sorter]
+            modes = [modes[i] for i in sorter]
+
+            # sort the zp-values
+            zp_fmd = [zp_fmd[i] for i in sorter]
+            zp_vsd = [zp_vsd[i] for i in sorter]
+
+            # format the zp-values
+            p_fmd = []
+            for z,p in zp_fmd:
+                if p < 0.001:
+                    p_fmd.append('p<{0:.2f}'.format(p))
+                else:
+                    p_fmd.append('p={0:.2f}'.format(p))
+
+            p_vsd = []
+            for z,p in zp_fmd:
+                if p < 0.001:
+                    p_vsd.append('p<{0:.2f}'.format(p))
+                else:
+                    p_vsd.append('p={0:.2f}'.format(p))
+
+            for i in range(2):
+                # create the figure
+                fig = plt.figure()
+
+                # create the axis
+                ax = fig.add_subplot(111)
+                
+                if i == 0:
+                    # add the boxplots
+                    ax.boxplot([dist_fmd]+dists_fmd)
+
+                    # add the xticks
+                    plt.xticks(
+                            range(1,len(modes)+2),
+                            ['']+['M_{0}\n{1}'.format(
+                                m,
+                                p
+                                ) for m,p in zip(modes,p_fmd)
+                                ],
+                            size=6
+                            )
+                    
+                    # save the figure
+                    plt.savefig(self.dataset+'_trebor/fmd.pdf')
+                    plt.clf()
+
+                elif i == 1:
+                    # add the boxplots
+                    ax.boxplot([dist_vsd]+dists_vsd)
+
+                    # add the xticks
+                    plt.xticks(
+                            range(1,len(modes)+2),
+                            ['']+['M_{0}\n{1}'.format(
+                                m,
+                                p
+                                ) for m,p in zip(modes,p_vsd)
+                                ],
+                            size=6
+                            )
+                    # save the figure
+                    plt.savefig(self.dataset+'_trebor/vsd.pdf')
+                    plt.clf()
+            
+            print("[i] Plotted the distributions.")
+        
+
+
+
 
 
 

@@ -19,13 +19,15 @@ stats = 0
 #print(stats / len(tr.cogs))
 
 
-tr.get_gls(
-        mode = 'weighted',
-        ratio = (3,1),
-        #verbose = True,
-        #output_gml = True,
-        #tar = True
-        )
+tr.analyze(plot_dists=True)
 
-a = tr.get_CVSD()
-t = tr.get_AVSD('w-3-1')
+#tr.get_GLS(
+#        mode = 'weighted',
+#        ratio = (3,1),
+#        #verbose = True,
+#        #output_gml = True,
+#        #tar = True
+#        )
+#
+#a = tr.get_CVSD()
+#t = tr.get_AVSD('w-3-1')
