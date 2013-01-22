@@ -1006,7 +1006,72 @@ class TreBor(object):
         # add gOut to graphattributes
         self.graph[mode_string] = gOut
 
+        # write stats to file
+        f = open(self.dataset+'_trebor/taxa-'+mode_string+'.stats','w')
+        
+        # get the degree
+        nodes = tree.getNodeNames()
+
+        dgr,wdgr = [],[]
+        for taxon in nodes:
+            
+            horizontals = [g for g in gOut[taxon] if 'weight' in gOut[taxon][g]]
+            
+            dgr.append(len(horizontals))
+            wdgr.append(sum([gOut[taxon][g]['weight'] for g in horizontals]))
+
+        sorted_nodes = sorted(
+                zip(nodes,dgr,wdgr),
+                key=lambda x:x[1],
+                reverse=True
+                )
+        for n,d,w in sorted_nodes:
+            f.write(
+                    '{0}\t{1}\t{2}\t{3}\n'.format(
+                        n,
+                        str(tree.getNodeMatchingName(n)),
+                        d,
+                        w
+                        )
+                    )
+        f.close()
+
+        if verbose: print("[i] Wrote node degree distributions to file.")
+
+        # write edge distributions
+        f = open(self.dataset+'_trebor/edge-'+mode_string+'.stats','w')
+        edges = []
+        edges = [g for g in gOut.edges(data=True) if 'weight' in g[2]]
+
+        for nA,nB,d in sorted(
+                edges,
+                key=lambda x: x[2]['weight'],
+                reverse = True
+                ):
+            f.write(
+                    '{0}\t{1}\t{2}\t{3}\t{4}\t{5}\n'.format(
+                        nA,
+                        nB,
+                        d['weight'],
+                        d['cogs'],
+                        tree.getNodeMatchingName(nA),
+                        tree.getNodeMatchingName(nB)
+                        )
+                    )
+        f.close()
+        if verbose: print("[i] Wrote edge-weight distributions to file.")
+
         return 
+
+    def get_PDC(
+            self,
+            mode_string,
+            **keywords
+            ):
+        """
+        Calculate Patchily Distributed Cognates.
+        """
+        pass
 
     def analyze(
             self,
@@ -1093,7 +1158,7 @@ class TreBor(object):
         # compare the distributions using mannwhitneyu
         print("[i] Comparing the distributions...")
         
-        zp_fmd,zp_vsd = [],[]
+        zp_vsd = []
         for m in modes:
             vsd = sps.mannwhitneyu(
                     self.dists['contemporary'],
@@ -1106,7 +1171,7 @@ class TreBor(object):
         print("[i] Writing stats to file.")
         f = open(self.dataset+'_trebor/'+self.dataset+'.stats','w')
         f.write("Mode\tANO\tMNO\tVSD_z\tVSD_p\n")
-        for i in range(len(zp_fmd)):
+        for i in range(len(zp_vsd)):
             f.write(
                     '{0}\t{1:.2f}\t{2}\t{3}\n'.format(
                         modes[i],
