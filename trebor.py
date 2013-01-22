@@ -10,13 +10,16 @@ Tree-based detection of borrowings in lexicostatistical wordlists.
 
 # basic imports
 import os
-import zipfile
+
+# thirdparty imports
+import numpy as np
 try:
     import networkx as nx
 except:
     print(
             "[!] Cannot load networkx module. Some functions will not be available."
             )
+
 
 # lingpy imports
 from lingpy.thirdparty import cogent as cg
@@ -33,7 +36,7 @@ class TreBor(object):
             self,
             dataset,
             tree = None,
-            paps = 'cog',
+            paps = 'pap',
             verbose = False,
             ):
         """
@@ -44,18 +47,32 @@ class TreBor(object):
             Name of the dataset that shall be analyzed.
         tree : {None, string}
             Name of the tree file.
-        paps : string (default="cog")
-            Name of the column that stores the cognate judgments.
+        paps : string (default="pap")
+            Name of the column that stores the specific cognate IDs consisting
+            of an arbitrary integer key and a key for the concept.
 
         """
-        # store the name of the dataset
+        # store the name of the dataset and the identifier for paps
         self.dataset = dataset
+        self._pap_string = paps
 
         # open csv-file of the data and store it as a word list attribute
         self.Wordlist = Wordlist(dataset+'.csv')
         self.wl = self.Wordlist
 
-        if verbose: print("[i] Loaded the Wordlist file.")
+        if verbose: print("[i] Loaded the wordlist file.")
+
+        # check for paps as attribute in the wordlist
+        if paps not in self.wl.entries:
+            
+            # define the function for conversion
+            f = lambda x,y: "{0}:{1}".format(x[y[0]],x[y[1]])
+            self.wl.add_entries(
+                    paps,
+                    'cogid,concept',
+                    f
+                    )
+            if verbose: print("[i] Created entry PAP (CogID:Concept).")
         
         # get the paps and the etymological dictionary
         self.paps = self.wl.get_paps(ref=paps)
@@ -113,6 +130,12 @@ class TreBor(object):
 
         # create a stats-dictionary
         self.stats = {}
+
+        # create gls-dictionary
+        self.gls = {}
+
+        # create dictionary for distributions
+        self.dists = {}
 
     
     def get_weighted_gls(
@@ -458,6 +481,23 @@ class TreBor(object):
             ):
         """
         Create gain-loss-scenarios for all non-singleton paps in the data.
+
+        Parameters
+        ----------
+        mode : string (default="weighted")
+            Select between "weighted" and "restriction".
+        ratio : tuple (default=(1,1))
+            If "weighted" mode is selected, define the ratio between the
+            weights for gains and losses.
+        restriction : int (default=3)
+            If "restriction" is selected as mode, define the maximal number of
+            gains.
+        output_gml : bool (default=False)
+            If set to c{True}, the decisions for each GLS are stored in a
+            separate file in GML-format.
+        tar : bool (default=False)
+            If set to c{True}, the GML-files will be added to a compressed tar-file.
+
         """
         if mode not in ['weighted','w','r','restriction']:
             raise ValueError("[!] The mode {0} is not available".format(mode))
@@ -468,22 +508,26 @@ class TreBor(object):
         else:
             mode = 'restriction'
 
-        # store the statistics
-        self.stats['mode'] = mode
-        self.stats['dataset'] = self.dataset
-
-        # attribute stores all gls for each cog
-        self.gls = {}
-        self.stats['gls'] = {}
-
         # create a named string for the mode
         if mode == 'weighted':
             mode_string = 'w-{0[0]}-{0[1]}'.format(ratio)
         elif mode == 'restriction':
             mode_string = 'r-{0}'.format(restriction)
+        
+        # create statistics for this run
+        self.stats[mode_string] = {}
+
+        # store the statistics
+        self.stats[mode_string]['mode'] = mode
+        self.stats[mode_string]['dataset'] = self.dataset
+
+        # attribute stores all gls for each cog
+        
+        self.gls[mode_string] = {}
+        #self.stats[mode_string]['gls'] = {}
 
         for cog in self.cogs:
-            if verbose: print("[i] Calculating GLS for COG {0}...".format(cog))
+            if verbose: print("[i] Calculating GLS for COG {0}...".format(cog),end="")
             if mode == 'weighted':
                 gls = self.get_weighted_gls(
                         self.paps[cog],
@@ -496,11 +540,15 @@ class TreBor(object):
                         restriction = restriction
                         )
 
-            self.gls[cog] = gls
-            self.stats['gls'][cog] = sum([t[1] for t in gls])
+            noo = sum([t[1] for t in gls])
+            #self.stats[mode_string]['gls'][cog] = sum([t[1] for t in gls])
+            
+            self.gls[mode_string][cog] = (gls,noo)
+
 
             # attend scenario to gls
-            if verbose: print("... done.")
+            if verbose: print(" done.")
+        if verbose: print("[i] Successfully calculated Gain-Loss-Scenarios.")
  
         # write the results to file
         # make the folder for the data to store the stats
@@ -535,7 +583,7 @@ class TreBor(object):
 
             # store the graph
             for cog in self.cogs:
-                gls = self.gls[cog]
+                gls = self.gls[mode_string][cog][0]
                 gls2gml(
                         gls,
                         self.graph,
@@ -550,29 +598,225 @@ class TreBor(object):
             # if tar is chosen, put it into a tarfile
             if tar:
                 os.system(
-                        'tar -pczf {0}-{1}.tar.gz {0}_trebor/gml/{0}-{1}'.format(
+                        'cd {0}_trebor/gml/ ; tar -pczf {0}-{1}.tar.gz {0}-{1}; cd ..; cd ..'.format(
                             self.dataset,
                             mode_string
                             )
                         )
-                os.system('mv {0}-{1}.tar.gz {0}_trebor/gml/'.format(self.dataset,mode_string))
                 os.system('rm {0}_trebor/gml/{0}-{1}/*.gml'.format(self.dataset,mode_string))
                 os.system('rmdir {0}_trebor/gml/{0}-{1}'.format(self.dataset,mode_string))
 
 
-        # store some statistics
-        self.stats['ano'] = sum(self.stats['gls'].values()) / len(self.stats['gls'])
-        self.stats['mno'] = max(self.stats['gls'].values())
+        # store some statistics as attributes
+        self.stats[mode_string]['ano'] = sum(
+                [v[1] for v in self.gls[mode_string].values()]
+                ) / len(self.gls[mode_string])
+        self.stats[mode_string]['mno'] = max([v[1] for v in self.gls[mode_string].values()])
+        self.stats[mode_string]['ratio'] = ratio 
+        self.stats[mode_string]['restriction'] = restriction
+
+        # store statistics and gain-loss-scenarios in textfiles
+        # create folder for gls-data
+        try:
+            os.mkdir(folder+'/gls')
+        except:
+            pass
         
-        self.stats['ratio'] = ratio 
-        self.stats['restriction'] = restriction
-
-
-
-        if verbose: print(
-                "[i] Average Number of Origins {0:.2f}".format(
-                    self.stats['ano']
+        if verbose: print("[i] Writing GLS data to file... ",end="")
+        
+        # write gls-data to folder
+        f = open(folder+'/gls/{0}-{1}.gls'.format(self.dataset,mode_string),'w')
+        f.write('PAP\tGainLossScenario\tNumberOfOrigins\n')
+        for cog in sorted(self.gls[mode_string]):
+            gls,noo = self.gls[mode_string][cog]
+            f.write(
+                    "{0}\t".format(cog)+','.join(
+                        ["{0}:{1}".format(a,b) for a,b in gls]
+                        ) + '\t'+str(noo)+'\n'
                     )
+        f.close()
+        if verbose: print("done.")
+
+        
+        # print out average number of origins
+        if verbose: print("[i] Average Number of Origins: {0:.2f}".format(self.stats[mode_string]['ano']))
+
+        # write statistics to stats file
+        try:
+            os.mkdir(folder+'/stats')
+        except:
+            pass
+
+        f = open(folder+'/stats/{0}-{1}'.format(self.dataset,mode_string),'w')
+        f.write('Number of PAPs (total): {0}\n'.format(len(self.paps)))
+        f.write('Number of PAPs (non-singletons): {0}\n'.format(len(self.gls[mode_string])))
+        f.write('Number of Singletons: {0}\n'.format(len(self.singletons)))
+        f.write('Average Number of Origins: {0:.2f}\n'.format(self.stats[mode_string]['ano']))
+        f.write('Maximum Number of Origins: {0}\n'.format(self.stats[mode_string]['mno']))
+        f.write('Mode: {0}\n'.format(mode))
+        if mode == 'weighted':
+            f.write('Ratio: {0[0]} / {0[1]}\n'.format(ratio))
+        elif mode == 'restriction':
+            f.write('Restriction: {0}\n'.format(restriction))
+
+        f.close()
+
+        return
+
+    def get_CVSD(
+            self,
+            verbose = False
+            ):
+        """
+        Calculate the Contemporary Vocabulary Size Distribution (CVSD).
+
+        """
+        # define taxa and concept as attribute for convenience
+        taxa = self.taxa
+        concepts = self.wl.concept
+
+        # create a numpy-array for the taxa and the concepts
+        dists = np.zeros((len(taxa),len(concepts)))
+
+        # iterate over all taxa and calculate the number of cogs for each concept
+        for i,taxon in enumerate(self.taxa):
+            
+            # get the pap values of the taxon
+            paps = set(self.wl.get_list(
+                    col=taxon,
+                    entry=self._pap_string,
+                    flat=True
+                    ))
+
+            these_concepts = [c.split(':')[1] for c in paps]
+
+            # calculate specific distribution for the given taxon
+            for j,c in enumerate(concepts):
+                dists[i][j] = these_concepts.count(c)
+
+        # calculate the distribution
+        dist = [d.mean() for d in dists]
+        
+        # calculate vocabulary size
+        size = []
+        for taxon in taxa:
+            s = len([
+                    x for x in set(
+                        self.wl.get_list(
+                            col=taxon,
+                            entry=self._pap_string,
+                            flat = True
+                            )
+                        ) if x in self.cogs
+                    ])
+            size += [s]
+        #size = [sum([d[i] for d in dists]) for i in range(len(taxa))]
+        
+        # store the stuff as an attribute
+        self.dists['contemporary'] = (dist,size)
+
+        if verbose: print("[i] Calculated the distributions for contemporary taxa.")
+        
+        return 
+
+    def get_AVSD(
+            self,
+            mode_string,
+            verbose = False
+            ):
+        """
+        Function retrieves all paps for ancestor languages in a given tree.
+        """
+
+        # define concepts for convenience
+        concepts = self.wl.concept
+        
+        # get all internal nodes, i.e. the nontips and also the root
+        nodes = ['root'] + sorted(
+                [node.Name for node in self.tree.nontips()],
+                key=lambda x: len(self.tree.getNodeMatchingName(x).tips()),
+                reverse = True
                 )
+        print(nodes)
+
+        # retrieve scenarios
+        tmp = sorted([(a,b,c) for a,(b,c) in self.gls[mode_string].items()])
+        cog_list = [t[0] for t in tmp]
+        gls_list = [t[1] for t in tmp]
+        noo_list = [t[2] for t in tmp]
+
+        # create a list that stores the paps
+        paps = [[0 for i in range(len(nodes))] for j in range(len(cog_list))]
+
+        # iterate and assign values
+        for i,cog in enumerate(cog_list):
+            
+            # sort the respective gls
+            gls = sorted(
+                    gls_list[i],
+                    key = lambda x: len(self.tree.getNodeMatchingName(x[0]).tips()),
+                    reverse = True
+                    )
+
+            # retrieve the state of the root
+            if gls[0][1] == 1 and gls[0][0] == 'root':
+                state = 1
+            else:
+                state = 0
+
+            # assign the state of the root to all nodes
+            paps[i] = [state for node in nodes]
+
+            # iterate over the gls and assign the respective values to all
+            # children
+            for name,event in gls:
+                if event == 1:
+                    this_state = 1
+                else:
+                    this_state = 0
+
+                # get the subtree nodes
+                sub_tree_nodes = [node.Name for node in
+                        self.tree.getNodeMatchingName(name).nontips()]
+
+                # assign this state to all subtree nodes
+                for node in sub_tree_nodes:
+                    paps[i][nodes.index(node)] = this_state
+        
+        # get the vocabulary size
+        size = [sum([p[i] for p in paps]) for i in range(len(nodes))]
+
+        # get the vocabulary distribution
+        dists = np.zeros((len(nodes),len(concepts)))
+
+        for i,node in enumerate(nodes):
+
+            # get the pap values of the taxon
+            tmp_pap = set(
+                    [
+                        b for a,b in zip(
+                            [p[i] for p in paps],
+                            cog_list
+                            ) if a > 0
+                        ]
+                    )
+
+            these_concepts = [c.split(':')[1] for c in tmp_pap]
+
+            # calculate specific distribution for the given taxon
+            for j,c in enumerate(concepts):
+                dists[i][j] = these_concepts.count(c)
+
+        # calculate the distribution
+        dist = [d.mean() for d in dists]
+        
+        # store the stuff as an attribute
+        self.dists[mode_string] = (dist,size)
+
+        if verbose: print("[i] Calculated the distributions for ancestral taxa.")
+
+        return paps
+
+
 
 

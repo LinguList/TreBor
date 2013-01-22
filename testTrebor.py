@@ -22,8 +22,10 @@ stats = 0
 tr.get_gls(
         mode = 'weighted',
         ratio = (3,1),
-        verbose = True,
-        output_gml = True,
-        tar = True
+        #verbose = True,
+        #output_gml = True,
+        #tar = True
         )
 
+a = tr.get_CVSD()
+t = tr.get_AVSD('w-3-1')
