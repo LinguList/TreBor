@@ -59,6 +59,24 @@ class TreBor(object):
 
         if verbose: print("[i] Loaded the wordlist file.")
 
+        # check for glossid
+        if 'glid' not in self.wl.entries:
+            self._gl2id = dict(
+                    zip(
+                        self.wl.rows,
+                        [i+1 for i in range(len(self.wl.rows))]
+                        )
+                    )
+            self._id2gl = dict([(b,a) for a,b in self._gl2id.items()])
+
+            f = lambda x: self._gl2id[x]
+
+            self.wl.add_entries(
+                    'glid',
+                    'concept',
+                    f
+                    )
+
         # check for paps as attribute in the wordlist
         if paps not in self.wl.entries:
             
@@ -66,10 +84,11 @@ class TreBor(object):
             f = lambda x,y: "{0}:{1}".format(x[y[0]],x[y[1]])
             self.wl.add_entries(
                     paps,
-                    'cogid,concept',
+                    'cogid,glid',
                     f
                     )
-            if verbose: print("[i] Created entry PAP (CogID:Concept).")
+
+            if verbose: print("[i] Created entry PAP.")
         
         # get the paps and the etymological dictionary
         self.paps = self.wl.get_paps(ref=paps)
@@ -1066,12 +1085,115 @@ class TreBor(object):
     def get_PDC(
             self,
             mode_string,
+            verbose = False,
             **keywords
             ):
         """
         Calculate Patchily Distributed Cognates.
         """
-        pass
+        
+        patchy = {}
+        paps = []
+
+        for key,(gls,noo) in self.gls[mode_string].items():
+
+            # get the origins
+            oris = [x[0] for x in gls if x[1] == 1]
+            
+            # get the tip-taxa for each origin
+            tips = []
+
+            # get the losses 
+            tmp_loss = [x[0] for x in gls if x[1] == 0]
+            losses = []
+            for l in tmp_loss:
+                losses += self.tree.getNodeMatchingName(l).getTipNames()
+
+            for i,ori in enumerate(oris):
+                tips += [
+                        (
+                            i+1,
+                            [t for t in self.tree.getNodeMatchingName(
+                                ori
+                                ).getTipNames() if t not in losses]
+                            )
+                        ]
+
+            # now, all set of origins with their tips are there, we store them
+            # in the patchy dictionary, where each taxon is assigned the
+            # numerical value of the given patchy dist
+            patchy[key] = {}
+            if len(tips) > 1:
+                for i,tip in tips:
+                    for taxon in tip:
+                        patchy[key][taxon] = i
+            else:
+                for i,tip in tips:
+                        patchy[key][taxon] = 0
+            
+            paps.append((key,noo))
+        
+        if verbose: print("[i] Retrieved patchy distributions.")
+
+        # get the index for the paps in the wordlist
+        papIdx = self.wl.header['pap']
+        taxIdx = self.wl._colIdx
+
+        # create a dictionary as updater for the wordlist
+        updater = {}
+        for key in self.wl:
+
+            # get the taxon first
+            taxon = self.wl[key][taxIdx]
+
+            # get the pap
+            pap = self.wl[key][papIdx]
+            
+            try:
+                updater[key] = '{0}:{1}'.format(pap,patchy[pap][taxon])
+            except KeyError:
+                updater[key] = '{0}:{1}'.format(pap,0)
+
+        # update the wordlist
+        self.wl.add_entries(
+                'patchy',
+                updater,
+                lambda x:x
+                )
+
+        # write data to file
+        self.wl.output('csv',filename=self.dataset+'_trebor/wl-'+mode_string)
+
+        if verbose: print("[i] Updated the wordlist.")
+
+        # write ranking of concepts to file
+        f = open(self.dataset + '_trebor/paps-'+mode_string+'.stats','w')
+        concepts = {}
+        for a,b in sorted(paps,key=lambda x:x[1],reverse=True):
+            
+            a1,a2 = a.split(':')
+            a3 = self._id2gl[int(a2)]
+            
+            try:
+                concepts[a3] += [b]
+            except:
+                concepts[a3] = [b]
+
+            f.write('{0}\t{1}\t{2}\t{3}\n'.format(a1,a2,a3,b))
+        f.close()
+        if verbose: print("[i] Wrote stats on paps to file.")
+
+        # write stats on concepts
+        f = open(self.dataset+'_trebor/concepts-'+mode_string+'.stats','w')
+        for key in concepts:
+            concepts[key] = sum(concepts[key])/len(concepts[key])
+
+        for a,b in sorted(concepts.items(),key=lambda x:x[1],reverse=True):
+            f.write('{0}\t{1:.2f}\n'.format(a,b))
+        f.close()
+        if verbose: print("[i] Wrote stats on concepts to file.")
+
+
 
     def analyze(
             self,
@@ -1259,8 +1381,6 @@ class TreBor(object):
             plt.clf()
             
             print("[i] Plotted the distributions.")
-
-        
 
 
 
