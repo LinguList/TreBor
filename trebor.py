@@ -977,6 +977,7 @@ class TreBor(object):
             data['graphics']['fill'] = color
             data['graphics']['width'] = w * scale
             data['cogs'] = ','.join([str(i) for i in data['cogs']])
+            data['label'] = 'horizontal'
 
             # check for threshold
             if w >= threshold:
@@ -998,7 +999,6 @@ class TreBor(object):
         for line in nx.generate_gml(gOut):
             f.write(line+'\n')
         f.close()
-        #nx.write_gml(gOut,self.dataset+'_trebor/mln-'+mode_string+'.gml')
 
         # write the inferred borrowing events (ILS, inferred lateral event) 
         # between all taxa to file
@@ -1129,6 +1129,7 @@ class TreBor(object):
                         patchy[key][taxon] = i
             else:
                 for i,tip in tips:
+                    for taxon in tip:
                         patchy[key][taxon] = 0
             
             paps.append((key,noo))
@@ -1193,8 +1194,6 @@ class TreBor(object):
         f.close()
         if verbose: print("[i] Wrote stats on concepts to file.")
 
-
-
     def analyze(
             self,
             runs = "default",
@@ -1220,18 +1219,19 @@ class TreBor(object):
         # define a default set of runs
         if runs == 'default':
             runs = [
-                    ('weighted',(5,1)),
-                    ('weighted',(4,1)),
-                    ('weighted',(3,1)),
-                    ('weighted',(2,1)),
-                    ('weighted',(1,1)),
+                    #('weighted',(5,2)),
+                    #('weighted',(79,40)),
+                    #('weighted',(39,20)),
+                    #('weighted',(3,1)),
+                    #('weighted',(2,1)),
+                    #('weighted',(1,1)),
                     #('weighted',(1,2)),
                     #('weighted',(1,3)),
-                    #('weighted',(1,4)),
-                    #('weighted',(1,5)),
+                    #('weighted',(2,5)),
+                    #('weighted',(2,3)),
                     #('restriction',1),
                     #('restriction',2),
-                    #('restriction',3),
+                    ('restriction',3),
                     #('restriction',4),
                     #('restriction',5)
                     ]
@@ -1382,7 +1382,161 @@ class TreBor(object):
             
             print("[i] Plotted the distributions.")
 
+    def plot_MLN(
+            self,
+            mode_string,
+            verbose = False,
+            filename = 'pdf',
+            threshold = 1,
+            fileformat = 'pdf',
+            usetex = True
+            ):
+        """
+        Plot the MLN with help of Matplotlib.
+        """
+        
+        # get the graph
+        graph = self.graph[mode_string]
 
+        # store in internal and external nodes
+        inodes = []
+        enodes = []
+        
+        # get the nodes
+        for n,d in graph.nodes(data=True):
+            g = d['graphics']
+            x = g['x']
+            y = g['y']
+            h = g['h']
+            w = g['w']
+
+            if d['label'] not in self.taxa:
+                inodes += [(x,y)]
+            else:
+                if usetex:
+                    enodes += [(x,y,r'\textbf{'+d['label']+r'}')]
+                else:
+                    enodes += [(x,y,d['label'])]
+        
+        # store vertical and lateral edges
+        vedges = []
+        ledges = []
+        weights = []
+
+        # get the edges
+        for a,b,d in graph.edges(data=True):
+            
+            xA = graph.node[a]['graphics']['x']
+            yA = graph.node[a]['graphics']['y']
+            xB = graph.node[b]['graphics']['x']
+            yB = graph.node[b]['graphics']['y']
+
+            if d['label'] == 'vertical':
+
+                vedges += [(xA,xB,yA,yB)]
+            else:
+                g = d['graphics']
+                f = g['fill']
+                w = g['width']
+                if d['weight'] < threshold:
+                    w = 0.0
+
+                ledges += [(xA,xB,yA,yB,f,w)]
+
+                weights.append(d['weight'])
+        
+        # usetex
+        mpl.rc('text',usetex = usetex)
+
+        # create the figure
+        fig = plt.figure(facecolor='white')
+        figsp = fig.add_subplot(111)
+        
+        # create the axis
+        ax = plt.axes(frameon=False)
+        plt.xticks([0],[''])
+        plt.yticks([0],[''])
+        
+        # set equal axis
+        plt.axis('equal')
+
+        # draw the horizontal edges
+        for xA,xB,yA,yB,f,w in ledges:
+            plt.plot(
+                    [xA,xB],
+                    [yA,yB],
+                    '-',
+                    color=f,
+                    linewidth=float(w) / 3,
+                    alpha=0.75
+                    )
+
+        # draw the vertical edges
+        for xA,xB,yA,yB in vedges:
+            plt.plot(
+                    [xA,xB],
+                    [yA,yB],
+                    '-',
+                    color='black',
+                    linewidth=5,
+                    )
+
+        # draw the nodes
+        for x,y in inodes:
+            plt.plot(
+                    x,
+                    y,
+                    'o',
+                    markersize=10,
+                    color='black',
+                    )
+
+        # draw the leaves
+        for x,y,t in enodes:
+            plt.text(
+                    x,
+                    y,
+                    t,
+                    size = '5',
+                    verticalalignment='center',
+                    backgroundcolor='black',
+                    horizontalalignment='center',
+                    color='white'
+                    )
+
+        # add a colorbar
+        cax = figsp.imshow([[1,2],[1,2]],visible=False)
+        cbar = fig.colorbar(
+                cax,
+                ticks = [
+                    1,
+                    1.25,
+                    1.5,
+                    1.75,
+                    2
+                    ],
+                orientation='vertical',
+                shrink=0.55
+                )
+        cbar.set_clim(1.0)
+        cbar.set_label('Inferred Borrowings')
+        cbar.ax.set_yticklabels(
+                [
+                    str(min(weights)),
+                    '',
+                    str(int(max(weights) / 2)),
+                    '',
+                    str(max(weights))
+                    ]
+                )
+
+        plt.subplots_adjust(left=0.05,right=0.95,top=0.95,bottom=0.05)
+
+        # save the figure
+        plt.savefig(filename+'.'+fileformat)
+        plt.clf()
+
+        return cbar
 
 
 
