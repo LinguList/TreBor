@@ -10,39 +10,50 @@ Tree-based detection of borrowings in lexicostatistical wordlists.
 
 # basic imports
 import os
+import json
 
 # thirdparty imports
 import numpy as np
 import networkx as nx
 import scipy.stats as sps
+import numpy.linalg as linalg
 
 # import error classes
 from lingpy.check.exceptions import *
+from lingpy.check.messages import *
 
 # mpl is only used for specific plots, we can therefor make a safe import
 try:
     import matplotlib as mpl
     import matplotlib.pyplot as plt
 except ImportError:
-    print(ThirdPartyModuleError('matplotlib').warning())
+    ThirdPartyModuleError('matplotlib').warning()
 
 # import the geoplot module
 try:
-    import mpl_toolkits.basemaps as bmp
+    import mpl_toolkits.basemap as bmp
 except ImportError:
-    print(ThirdPartyModuleError('basemap').warning())
+    ThirdPartyModuleError('basemap').warning()
 
+# import polygon
+#try:
+from .polygon import getConvexHull
+#except:
+#    ThirdPartyModuleError('polygon').warning()
 
 # lingpy imports
 from lingpy.thirdparty import cogent as cg
 from lingpy.convert.gml import *
 from lingpy.basic import Wordlist
-
+from lingpy.read.csv import csv2dict,csv2list
 
 class TreBor(object):
     """
     Basic class for calculations using the TreBor method.
     """
+
+    # XXX generally: find a way to check whether a dataset was already loaded,
+    # XXX otherwise it takes too long a time to recalculate everything
     
     def __init__(
             self,
@@ -1557,22 +1568,348 @@ class TreBor(object):
         # save the figure
         plt.savefig(filename+'.'+fileformat)
         plt.clf()
+        if verbose: FileWriteMessage(filename,fileformat).message('written')
 
-        return cbar
+        return 
 
     def geoplot_MLN(
             self,
             mode_string,
             verbose=False,
             filename='pdf',
-            fileformat='pdf'
+            fileformat='pdf',
+            mode = "basic",
+            threshold = 1,
+            only = None
             ):
         """
         Carry out a geographical plot of a given MLN.
         """
     
-        pass
+        # redefine taxa and tree for convenience
+        taxa,tree = self.taxa,self.tree
 
+        # get the graph
+        graph = self.graph[mode_string]
+
+        # XXX check for coordinates of the taxa, otherwise load them from file and
+        # add them to the wordlist XXX add later, we first load it from file
+        if 'coords' in self.wl.entries:
+            pass
+        
+        else:
+            coords = csv2dict(
+                    self.dataset,
+                    'coords',
+                    dtype=[str,float,float]
+                    )
+
+        # check for groups, add functionality for groups in qlc-file later XXX
+        if 'group' in self.wl.entries:
+            pass
+        else:
+            groups = dict([(k,v) for k,v in csv2list(self.dataset,'groups')])
+        # check for color, add functionality for colors later XXX
+        if 'colors' in self.wl.entries:
+            pass
+        else:
+            colors = dict([(k,v) for k,v in csv2list(self.dataset,'colors')])
+
+        if verbose: LoadDataMessage('coordinates','groups','colors').message('loaded')
+        
+        # load the rc-file XXX add internal loading later
+        try:
+            conf = json.load(open(self.dataset+'.json'))
+        except:
+            pass # XXX add fallback later
+        
+        if verbose: LoadDataMessage('configuration')
+                
+        # calculate all resulting edges, using convex hull as
+        # approximation 
+        geoGraph = nx.Graph()
+        
+        for nA,nB,d in graph.edges(data=True):
+            
+            # get the labels
+            lA = graph.node[nA]['label']
+            lB = graph.node[nB]['label']
+            
+            # first check, whether edge is horizontal
+            if d['label'] == 'horizontal':
+                
+                # if both labels occur in taxa, it is simple
+                if lA in taxa and lB in taxa:
+                    try:
+                        geoGraph.edge[lA][lB]['weight'] += d['weight']
+                    except:
+                        geoGraph.add_edge(lA,lB,weight=d['weight'])
+                
+                # if only one in taxa, we need the convex hull for that node
+                elif lA in taxa or lB in taxa:
+
+                    # check which node is in taxa
+                    if lA in taxa:
+                        this_label = lA
+                        other_nodes = tree.getNodeMatchingName(lB).getTipNames()
+                        other_label = lB
+                    elif lB in taxa:
+                        this_label = lB
+                        other_nodes = tree.getNodeMatchingName(lA).getTipNames()
+                        other_label = lA
+
+                    # get the convex points of others
+                    these_coords = [(round(coords[t][0],5),round(coords[t][1],5)) for t in
+                            other_nodes]
+                    hulls = getConvexHull(these_coords,polygon=False)
+    
+                    # get the hull with the minimal euclidean distance
+                    distances = []
+                    for hull in hulls:
+                        distances.append(linalg.norm(np.array(hull) - np.array(coords[this_label])))
+                    this_hull = hulls[distances.index(min(distances))]
+                    other_label = other_nodes[
+                            these_coords.index(
+                                (
+                                    round(this_hull[0],5),
+                                    round(this_hull[1],5)
+                                    )
+                                )
+                            ]
+    
+                    # append the edge to the graph
+                    try:
+                        geoGraph.edge[this_label][other_label]['weight'] += d['weight']
+                    except:
+                        geoGraph.add_edge(this_label,other_label,weight=d['weight'])
+                    
+                else:
+                    # get the taxa of a and b
+                    taxA = tree.getNodeMatchingName(lA).getTipNames()
+                    taxB = tree.getNodeMatchingName(lB).getTipNames()
+    
+                    # get the convex points
+                    coordsA = [(round(coords[t][0],5),round(coords[t][1],5)) for t in taxA]
+                    coordsB = [(round(coords[t][0],5),round(coords[t][1],5)) for t in taxB]
+                    hullsA = getConvexHull(coordsA,polygon=False)
+                    hullsB = getConvexHull(coordsB,polygon=False)
+    
+                    # get the closest points
+                    distances = []
+                    hulls = []
+                    for i,hullA in enumerate(hullsA):
+                        for j,hullB in enumerate(hullsB):
+                            distances.append(linalg.norm(np.array(hullA)-np.array(hullB)))
+                            hulls.append((hullA,hullB))
+                    minHulls = hulls[distances.index(min(distances))]
+                    
+                    labelA = taxA[coordsA.index((round(minHulls[0][0],5),round(minHulls[0][1],5)))]
+                    labelB = taxB[coordsB.index((round(minHulls[1][0],5),round(minHulls[1][1],5)))]
+                    
+                    # append the edge to the graph
+                    try:
+                        geoGraph.edge[labelA][labelB]['weight'] += d['weight']
+                    except:
+                        geoGraph.add_edge(labelA,labelB,weight=d['weight'])
+
+        # get the weights for the lines
+        weights = []
+        for a,b,d in geoGraph.edges(data=True):
+            weights += [d['weight']]
+        max_weight = max(weights)
+        scale = 256 / max_weight
+        sorted_weights = sorted(set(weights))
+
+        # get a color-function
+        color_dict = np.array(
+                np.linspace(
+                    0,
+                    256,
+                    len(set(weights))
+                    ),
+                dtype='int'
+                )
+
+        # get a line-function
+        line_dict = np.linspace(
+                0.5,
+                conf['linewidth'],
+                len(set(weights))
+                )
+
+        # scale the weights for line-widths
+        linescale = conf['linescale'] / (max_weight-threshold) #XXX
+        # XXX apparently not needed?
+        
+        # determine the maxima of the coordinates
+        latitudes = [i[0] for i in coords.values()]
+        longitudes = [i[1] for i in coords.values()]
+
+        min_lat,max_lat = min(latitudes),max(latitudes)
+        min_lon,max_lon = min(longitudes),max(longitudes)
+
+        # start to initialize the basemap
+        fig = plt.figure()
+        figsp = fig.add_subplot(111)
+        
+        # instantiate the basemap
+        m = bmp.Basemap(
+            llcrnrlon=min_lon + conf['min_lon'],
+            llcrnrlat=min_lat + conf['min_lat'],
+            urcrnrlon=max_lon + conf['max_lon'],
+            urcrnrlat=max_lat + conf['max_lat'],
+            resolution=conf['resolution'],
+            projection=conf['projection']
+            )
+        
+        # draw first values
+        m.drawmapboundary(fill_color=conf['water_color'])
+        m.drawcoastlines(color=conf['continent_color'],linewidth=0.5)
+        m.drawcountries(color=conf['coastline_color'],linewidth=0.5)
+        m.fillcontinents(color=conf['continent_color'],lake_color=conf['water_color'])
+
+        # plot the lines
+        for a,b,d in geoGraph.edges(data=True):
+            
+            # don't draw lines beyond threshold
+            if d['weight'] < threshold:
+                pass
+            else:
+                if a in coords and b in coords and only in [a,b,None]:
+                    w = d['weight']
+
+                    # retrieve the coords
+                    yA,xA = coords[a]
+                    yB,xB = coords[b]
+                    
+                    # get the points on the map
+                    xA,yA = m(xA,yA)
+                    xB,yB = m(xB,yB)
+
+                    # plot the points
+                    plt.plot(
+                            [xA,xB],
+                            [yA,yB],
+                            '-',
+                            color=plt.cm.jet(
+                                color_dict[sorted_weights.index(w)]
+                                ),
+                            alpha = conf['alpha'],
+                            linewidth=line_dict[sorted_weights.index(w)],
+                            zorder = w + 50
+                            )
+
+        # plot the points for the languages
+        cell_text = []
+        legend_check = []
+        for i,(taxon,(lng,lat)) in enumerate(sorted(coords.items(),key=lambda x:x[0])):
+            
+            # retrieve x and y from the map
+            x,y = m(lat,lng)
+            
+            # get the color of the given taxon
+            taxon_color = colors[groups[taxon]]
+            
+            # check for legend
+
+            if groups[taxon] in legend_check:
+                # plot the marker
+                plt.plot(
+                    x,
+                    y,
+                    'o',
+                    markersize = conf['markersize'],
+                    color = taxon_color,
+                    zorder = max_weight+52,
+                    )
+            else:
+                # plot the marker
+                plt.plot(
+                    x,
+                    y,
+                    'o',
+                    markersize = conf['markersize'],
+                    color = taxon_color,
+                    zorder = max_weight+52,
+                    label=groups[taxon]
+                    )
+                legend_check.append(groups[taxon])
+            
+            # add number to celltext
+            cell_text.append([str(i+1),taxon])
+
+            # plot the text
+            plt.text(
+                x,
+                y,
+                str(i+1),
+                size = str(int(conf['markersize'] / 2)),
+                label=taxon,
+                horizontalalignment='center',
+                verticalalignment='center',
+                zorder=max_weight+55
+                )
+
+        # add a colorbar
+        cax = figsp.imshow([[1,2],[1,2]],visible=False)
+        cbar = fig.colorbar(
+                cax,
+                ticks = [
+                    1,
+                    1.25,
+                    1.5,
+                    1.75,
+                    2
+                    ],
+                orientation='vertical',
+                shrink=0.55
+                )
+        cbar.set_clim(1.0)
+        cbar.set_label('Inferred Borrowings')
+        cbar.ax.set_yticklabels(
+                [
+                    str(min(weights)),
+                    '',
+                    str(int(max(weights) / 2)),
+                    '',
+                    str(max(weights))
+                    ]
+                )
+
+        # add the legend
+        this_table = plt.table(
+                cellText = cell_text,
+                colWidths = conf['table.column.width'],
+                loc = conf['table.location'],
+                )
+
+        # adjust the table
+        for line in this_table._cells:
+            this_table._cells[line]._text._horizontalalignment = 'left'
+            this_table._cells[line]._text._fontproperties.set_weight('bold')
+            this_table._cells[line]._text.set_color(conf['table.text.color'])
+            this_table._cells[line].set_height(conf['table.cell.height'])
+            this_table._cells[line]._text._fontproperties.set_size(conf['table.text.size'])
+            this_table._cells[line].set_linewidth(0.0)
+            this_table._cells[line].set_color(conf['table.cell.color'])
+        
+        this_table.set_zorder(100)
+        
+        plt.legend(
+                loc=conf['legend.location'],
+                numpoints=1,
+                prop={
+                    'size':conf['legend.size'],
+                    'weight':'bold'
+                    }
+                )
+
+        plt.subplots_adjust(left=0.05,right=0.95,top=0.95,bottom=0.05)
+
+        plt.savefig(filename+'.'+fileformat)
+        plt.clf()
+        if verbose: FileWriteMessage(filename,fileformat).message('written')
+        return geoGraph
 
 
 
