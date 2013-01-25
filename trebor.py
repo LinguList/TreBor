@@ -1,5 +1,5 @@
-# created: Mo 21 Jan 2013 12:58:47  CET
-# modified: Mo 21 Jan 2013 12:58:47  CET
+# created: 2013-01-21
+# modified: 2013-01-25
 
 __author__ = "Johann-Mattis List"
 __date__ = "2013-01-21"
@@ -15,8 +15,23 @@ import os
 import numpy as np
 import networkx as nx
 import scipy.stats as sps
-import matplotlib.pyplot as plt
-import matplotlib as mpl
+
+# import error classes
+from lingpy.check.exceptions import *
+
+# mpl is only used for specific plots, we can therefor make a safe import
+try:
+    import matplotlib as mpl
+    import matplotlib.pyplot as plt
+except ImportError:
+    print(ThirdPartyModuleError('matplotlib').warning())
+
+# import the geoplot module
+try:
+    import mpl_toolkits.basemaps as bmp
+except ImportError:
+    print(ThirdPartyModuleError('basemap').warning())
+
 
 # lingpy imports
 from lingpy.thirdparty import cogent as cg
@@ -1477,8 +1492,15 @@ class TreBor(object):
                     [xA,xB],
                     [yA,yB],
                     '-',
-                    color='black',
+                    color='0.0',
                     linewidth=5,
+                    )
+            plt.plot(
+                    [xA,xB],
+                    [yA,yB],
+                    '-',
+                    color='0.2',
+                    linewidth=4,
                     )
 
         # draw the nodes
@@ -1538,6 +1560,18 @@ class TreBor(object):
 
         return cbar
 
+    def geoplot_MLN(
+            self,
+            mode_string,
+            verbose=False,
+            filename='pdf',
+            fileformat='pdf'
+            ):
+        """
+        Carry out a geographical plot of a given MLN.
+        """
+    
+        pass
 
 
 
