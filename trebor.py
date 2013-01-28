@@ -118,6 +118,7 @@ class TreBor(object):
         
         # get the paps and the etymological dictionary
         self.paps = self.wl.get_paps(ref=paps)
+        self.etd = self.wl.get_etymdict(ref=paps)
 
         if verbose: print("[i] Created the PAP matrix.")
 
@@ -508,11 +509,26 @@ class TreBor(object):
         # get the minimum score
         minScore = min(tracer)
 
-        # return minimal indices
-        return sorted(
-                [gls_list[i] for i in range(len(tracer)) if tracer[i] == minScore],
-                key = lambda x:len(x)
-                )[0]
+        # push gains down to the root as suggested by Mirkin 2003
+        minimal_gains = [gls_list[i] for i in range(len(tracer)) if tracer[i] == minScore]
+        
+        best_scenario = None
+        old_length_of_tips = len(self.taxa) + 1
+
+        for i,line in enumerate(minimal_gains):
+            
+            # calculate number of tips for the gains of a given scenario
+            new_length_of_tips = 0
+            for taxon,state in line:
+                if state == 1:
+                    new_length_of_tips += len(
+                            self.tree.getNodeMatchingName(taxon).getTipNames()
+                            )
+            if new_length_of_tips < old_length_of_tips:
+                old_length_of_tips = new_length_of_tips
+                best_scenario = i
+
+        return minimal_gains[best_scenario]
 
     def get_GLS(
             self,
@@ -554,21 +570,21 @@ class TreBor(object):
 
         # create a named string for the mode
         if mode == 'weighted':
-            mode_string = 'w-{0[0]}-{0[1]}'.format(ratio)
+            glm = 'w-{0[0]}-{0[1]}'.format(ratio)
         elif mode == 'restriction':
-            mode_string = 'r-{0}'.format(restriction)
+            glm = 'r-{0}'.format(restriction)
         
         # create statistics for this run
-        self.stats[mode_string] = {}
+        self.stats[glm] = {}
 
         # store the statistics
-        self.stats[mode_string]['mode'] = mode
-        self.stats[mode_string]['dataset'] = self.dataset
+        self.stats[glm]['mode'] = mode
+        self.stats[glm]['dataset'] = self.dataset
 
         # attribute stores all gls for each cog
         
-        self.gls[mode_string] = {}
-        #self.stats[mode_string]['gls'] = {}
+        self.gls[glm] = {}
+        #self.stats[glm]['gls'] = {}
 
         for cog in self.cogs:
             if verbose: print("[i] Calculating GLS for COG {0}...".format(cog),end="")
@@ -585,9 +601,9 @@ class TreBor(object):
                         )
 
             noo = sum([t[1] for t in gls])
-            #self.stats[mode_string]['gls'][cog] = sum([t[1] for t in gls])
+            #self.stats[glm]['gls'][cog] = sum([t[1] for t in gls])
             
-            self.gls[mode_string][cog] = (gls,noo)
+            self.gls[glm][cog] = (gls,noo)
 
 
             # attend scenario to gls
@@ -616,25 +632,25 @@ class TreBor(object):
                 os.mkdir(
                         folder+'/gml/'+'{0}-{1}'.format(
                             self.dataset,
-                            mode_string
+                            glm
                             )
                         )
             except:
                 pass
 
             # load the graph
-            self.graph = nx.read_gml(self.dataset+'.gml')
+            self.gml = nx.read_gml(self.dataset+'.gml')
 
             # store the graph
             for cog in self.cogs:
-                gls = self.gls[mode_string][cog][0]
+                gls = self.gls[glm][cog][0]
                 gls2gml(
                         gls,
-                        self.graph,
+                        self.gml,
                         self.tree,
                         filename = folder+'/gml/{0}-{1}/{2}'.format(
                             self.dataset,
-                            mode_string,
+                            glm,
                             cog
                             ),
                         )
@@ -644,20 +660,20 @@ class TreBor(object):
                 os.system(
                         'cd {0}_trebor/gml/ ; tar -pczf {0}-{1}.tar.gz {0}-{1}; cd ..; cd ..'.format(
                             self.dataset,
-                            mode_string
+                            glm
                             )
                         )
-                os.system('rm {0}_trebor/gml/{0}-{1}/*.gml'.format(self.dataset,mode_string))
-                os.system('rmdir {0}_trebor/gml/{0}-{1}'.format(self.dataset,mode_string))
+                os.system('rm {0}_trebor/gml/{0}-{1}/*.gml'.format(self.dataset,glm))
+                os.system('rmdir {0}_trebor/gml/{0}-{1}'.format(self.dataset,glm))
 
 
         # store some statistics as attributes
-        self.stats[mode_string]['ano'] = sum(
-                [v[1] for v in self.gls[mode_string].values()]
-                ) / len(self.gls[mode_string])
-        self.stats[mode_string]['mno'] = max([v[1] for v in self.gls[mode_string].values()])
-        self.stats[mode_string]['ratio'] = ratio 
-        self.stats[mode_string]['restriction'] = restriction
+        self.stats[glm]['ano'] = sum(
+                [v[1] for v in self.gls[glm].values()]
+                ) / len(self.gls[glm])
+        self.stats[glm]['mno'] = max([v[1] for v in self.gls[glm].values()])
+        self.stats[glm]['ratio'] = ratio 
+        self.stats[glm]['restriction'] = restriction
 
         # store statistics and gain-loss-scenarios in textfiles
         # create folder for gls-data
@@ -669,10 +685,10 @@ class TreBor(object):
         if verbose: print("[i] Writing GLS data to file... ",end="")
         
         # write gls-data to folder
-        f = open(folder+'/gls/{0}-{1}.gls'.format(self.dataset,mode_string),'w')
+        f = open(folder+'/gls/{0}-{1}.gls'.format(self.dataset,glm),'w')
         f.write('PAP\tGainLossScenario\tNumberOfOrigins\n')
-        for cog in sorted(self.gls[mode_string]):
-            gls,noo = self.gls[mode_string][cog]
+        for cog in sorted(self.gls[glm]):
+            gls,noo = self.gls[glm][cog]
             f.write(
                     "{0}\t".format(cog)+','.join(
                         ["{0}:{1}".format(a,b) for a,b in gls]
@@ -683,7 +699,7 @@ class TreBor(object):
 
         
         # print out average number of origins
-        if verbose: print("[i] Average Number of Origins: {0:.2f}".format(self.stats[mode_string]['ano']))
+        if verbose: print("[i] Average Number of Origins: {0:.2f}".format(self.stats[glm]['ano']))
 
         # write statistics to stats file
         try:
@@ -691,12 +707,12 @@ class TreBor(object):
         except:
             pass
 
-        f = open(folder+'/stats/{0}-{1}'.format(self.dataset,mode_string),'w')
+        f = open(folder+'/stats/{0}-{1}'.format(self.dataset,glm),'w')
         f.write('Number of PAPs (total): {0}\n'.format(len(self.paps)))
-        f.write('Number of PAPs (non-singletons): {0}\n'.format(len(self.gls[mode_string])))
+        f.write('Number of PAPs (non-singletons): {0}\n'.format(len(self.gls[glm])))
         f.write('Number of Singletons: {0}\n'.format(len(self.singletons)))
-        f.write('Average Number of Origins: {0:.2f}\n'.format(self.stats[mode_string]['ano']))
-        f.write('Maximum Number of Origins: {0}\n'.format(self.stats[mode_string]['mno']))
+        f.write('Average Number of Origins: {0:.2f}\n'.format(self.stats[glm]['ano']))
+        f.write('Maximum Number of Origins: {0}\n'.format(self.stats[glm]['mno']))
         f.write('Mode: {0}\n'.format(mode))
         if mode == 'weighted':
             f.write('Ratio: {0[0]} / {0[1]}\n'.format(ratio))
@@ -748,7 +764,7 @@ class TreBor(object):
 
     def get_AVSD(
             self,
-            mode_string,
+            glm,
             verbose = False
             ):
         """
@@ -769,7 +785,7 @@ class TreBor(object):
                 )
 
         # retrieve scenarios
-        tmp = sorted([(a,b,c) for a,(b,c) in self.gls[mode_string].items()])
+        tmp = sorted([(a,b,c) for a,(b,c) in self.gls[glm].items()])
         cog_list = [t[0] for t in tmp]
         gls_list = [t[1] for t in tmp]
         noo_list = [t[2] for t in tmp]
@@ -816,7 +832,7 @@ class TreBor(object):
         size = [sum([p[i] for p in paps]) for i in range(len(nodes))]
 
         # store the stuff as an attribute
-        self.dists[mode_string] = size
+        self.dists[glm] = size
 
         if verbose: print("[i] Calculated the distributions for ancestral taxa.")
 
@@ -824,7 +840,7 @@ class TreBor(object):
 
     def get_MLN(
             self,
-            mode_string,
+            glm,
             threshold = 1,
             verbose = False
             ):
@@ -835,15 +851,22 @@ class TreBor(object):
         # create the primary graph
         gPrm = nx.Graph()
 
-        # create the template graph XXX add fallback procedure
-        gTpl = nx.read_gml(self.dataset+'.gml')
-
         # make alias for tree and taxa for convenience
         taxa = self.taxa
         tree = self.tree
 
+        # create the template graph XXX add fallback procedure
+        try:
+            gTpl = nx.read_gml(self.dataset+'.gml')
+        except:
+            nwk2gml(self.dataset+'.tre',filename=self.dataset)
+            input("[i] Created GML file from tree. ")
+            gTpl = nx.read_gml(self.dataset+'.gml')
+
+
+
         # make alias for the current gls for convenience
-        scenarios = self.gls[mode_string]
+        scenarios = self.gls[glm]
 
         # create dictionary for inferred lateral events
         ile = {}
@@ -1021,7 +1044,7 @@ class TreBor(object):
         if verbose: print("[i] Writing graph to file...")
 
         # write the graph to file
-        f = open(self.dataset+'_trebor/mln-'+mode_string+'.gml','w')
+        f = open(self.dataset+'_trebor/mln-'+glm+'.gml','w')
         for line in nx.generate_gml(gOut):
             f.write(line+'\n')
         f.close()
@@ -1031,7 +1054,7 @@ class TreBor(object):
         # verbose output
         if verbose: print("[i] Writing Inferred Lateral Events to file...")
 
-        f = open(self.dataset+'_trebor/ile-'+mode_string+'.csv','w')
+        f = open(self.dataset+'_trebor/ile-'+glm+'.csv','w')
         for cog,events in ile.items():
             if events:
                 f.write(
@@ -1049,10 +1072,10 @@ class TreBor(object):
         f.close()
 
         # add gOut to graphattributes
-        self.graph[mode_string] = gOut
+        self.graph[glm] = gOut
 
         # write stats to file
-        f = open(self.dataset+'_trebor/taxa-'+mode_string+'.stats','w')
+        f = open(self.dataset+'_trebor/taxa-'+glm+'.stats','w')
         
         # get the degree
         nodes = tree.getNodeNames()
@@ -1084,7 +1107,7 @@ class TreBor(object):
         if verbose: print("[i] Wrote node degree distributions to file.")
 
         # write edge distributions
-        f = open(self.dataset+'_trebor/edge-'+mode_string+'.stats','w')
+        f = open(self.dataset+'_trebor/edge-'+glm+'.stats','w')
         edges = []
         edges = [g for g in gOut.edges(data=True) if 'weight' in g[2]]
 
@@ -1110,7 +1133,7 @@ class TreBor(object):
 
     def get_PDC(
             self,
-            mode_string,
+            glm,
             verbose = False,
             **keywords
             ):
@@ -1121,7 +1144,7 @@ class TreBor(object):
         patchy = {}
         paps = []
 
-        for key,(gls,noo) in self.gls[mode_string].items():
+        for key,(gls,noo) in self.gls[glm].items():
 
             # get the origins
             oris = [x[0] for x in gls if x[1] == 1]
@@ -1189,12 +1212,16 @@ class TreBor(object):
                 )
 
         # write data to file
-        self.wl.output('csv',filename=self.dataset+'_trebor/wl-'+mode_string)
+        self.wl.output('csv',filename=self.dataset+'_trebor/wl-'+glm)
 
         if verbose: print("[i] Updated the wordlist.")
 
         # write ranking of concepts to file
-        f = open(self.dataset + '_trebor/paps-'+mode_string+'.stats','w')
+        f = open(self.dataset + '_trebor/paps-'+glm+'.stats','w')
+        if 'proto' in self.wl.entries:
+            f.write('COGID\tGLID\tCONCEPT\tORIGINS\tPROTO\tREFLEXES\n')
+        else:
+            f.write('COGID\tGLID\tCONCEPT\tORIGINS\tREFLEXES\n')
         concepts = {}
         for a,b in sorted(paps,key=lambda x:x[1],reverse=True):
             
@@ -1205,13 +1232,21 @@ class TreBor(object):
                 concepts[a3] += [b]
             except:
                 concepts[a3] = [b]
+            
+            # check for number of occurrences
+            l = [k for k in self.etd[a] if k != 0]
 
-            f.write('{0}\t{1}\t{2}\t{3}\n'.format(a1,a2,a3,b))
+            # check for proto
+            if 'proto' in self.wl.entries:
+                proto = self.wl[[k[0] for k in l][0],'proto']
+                f.write('{0}\t{1}\t{2}\t{3}\t{4}\t{5}\n'.format(a1,a2,a3,b,proto,len(l)))
+            else:
+                f.write('{0}\t{1}\t{2}\t{3}\n'.format(a1,a2,a3,b,len(l)))
         f.close()
         if verbose: print("[i] Wrote stats on paps to file.")
 
         # write stats on concepts
-        f = open(self.dataset+'_trebor/concepts-'+mode_string+'.stats','w')
+        f = open(self.dataset+'_trebor/concepts-'+glm+'.stats','w')
         for key in concepts:
             concepts[key] = sum(concepts[key])/len(concepts[key])
 
@@ -1226,8 +1261,10 @@ class TreBor(object):
             verbose = False,
             output_gml = False,
             tar = False,
-            plot_dists = False,
-            usetex = True
+            usetex = True,
+            full_analysis = True,
+            plot_dists = True,
+            **keywords
             ):
         """
         Carry out a full analysis using various parameters.
@@ -1245,21 +1282,19 @@ class TreBor(object):
         # define a default set of runs
         if runs == 'default':
             runs = [
-                    #('weighted',(5,2)),
-                    #('weighted',(79,40)),
-                    #('weighted',(39,20)),
-                    #('weighted',(3,1)),
-                    #('weighted',(2,1)),
-                    #('weighted',(1,1)),
-                    #('weighted',(1,2)),
-                    #('weighted',(1,3)),
-                    #('weighted',(2,5)),
-                    #('weighted',(2,3)),
-                    #('restriction',1),
-                    #('restriction',2),
+                    ('weighted',(3,1)),
+                    ('weighted',(2,1)),
+                    ('weighted',(1,1)),
+                    ('weighted',(1,2)),
+                    ('weighted',(31,16)),
+                    ('weighted',(3,2)),
+                    ('weighted',(7,4)),
+                    ('weighted',(15,8)),
+                    ('restriction',1),
+                    ('restriction',2),
                     ('restriction',3),
-                    #('restriction',4),
-                    #('restriction',5)
+                    ('restriction',4),
+                    ('restriction',5)
                     ]
         
         # carry out the various analyses
@@ -1293,18 +1328,18 @@ class TreBor(object):
     
         # calculate the different distributions
         # start by calculating the contemporary distributions
-        print("[i] Calculating the Contemporary Vocabulary Distributions...")
+        if verbose: print("[i] Calculating the Contemporary Vocabulary Distributions...")
         self.get_CVSD(verbose=verbose)
         
     
         # now calculate the rest of the distributions
-        print("[i] Calculating the Ancestral Vocabulary Distributions...")
+        if verbose: print("[i] Calculating the Ancestral Vocabulary Distributions...")
         modes = list(self.gls.keys())
         for m in modes:
             self.get_AVSD(m,verbose=verbose)
 
         # compare the distributions using mannwhitneyu
-        print("[i] Comparing the distributions...")
+        if verbose: print("[i] Comparing the distributions...")
         
         zp_vsd = []
         for m in modes:
@@ -1316,7 +1351,7 @@ class TreBor(object):
             zp_vsd.append(vsd)
 
         # write results to file
-        print("[i] Writing stats to file.")
+        if verbose: print("[i] Writing stats to file.")
         f = open(self.dataset+'_trebor/'+self.dataset+'.stats','w')
         f.write("Mode\tANO\tMNO\tVSD_z\tVSD_p\n")
         for i in range(len(zp_vsd)):
@@ -1354,6 +1389,7 @@ class TreBor(object):
             # sort the stuff
             dists_vsd = [dists_vsd[i] for i in sorter]
             modes = [modes[i] for i in sorter]
+            mode_strings = [m for m in modes]
 
             # sort the zp-values
             zp_vsd = [zp_vsd[i] for i in sorter]
@@ -1367,8 +1403,9 @@ class TreBor(object):
                         p_vsd.append('p$<${0:.2f}'.format(p))
                     elif p >= 0.05:
                         p_vsd.append(r'\textbf{{p$=${0:.2f}}}'.format(p))
+                        
                         # adjust the modes
-                        modes[i] = r'\textbf{'+modes[i]+'}'
+                        mode_strings[i] = r'\textbf{'+modes[i]+'}'
                     else:
                         p_vsd.append('p$=${0:.2f}'.format(p))
                 
@@ -1397,7 +1434,7 @@ class TreBor(object):
                     ['']+['{0}\n{1}'.format(
                         m,
                         p
-                        ) for m,p in zip(modes,p_vsd)
+                        ) for m,p in zip(mode_strings,p_vsd)
                         ],
                     size=6
                     )
@@ -1406,11 +1443,60 @@ class TreBor(object):
             plt.savefig(self.dataset+'_trebor/vsd.pdf')
             plt.clf()
             
-            print("[i] Plotted the distributions.")
+            if verbose: print("[i] Plotted the distributions.")
+        
+
+        # carry out further analyses if this is specified
+        if full_analysis:
+
+            # determine the best model
+            p_vsd = [p for z,p in zp_vsd]
+            maxP = max(p_vsd)
+            glm = modes[p_vsd.index(maxP)]
+            
+            # check for keywords
+            defaults = {
+                    'threshold':1,
+                    'fileformat':'pdf',
+                    'usetex':True,
+                    'only':[]
+                    }
+
+            for key in defaults:
+                if key not in keywords:
+                    keywords[key] = defaults[key]
+
+            self.get_MLN(
+                glm,
+                verbose = verbose,
+                threshold = keywords['threshold']
+                )
+            self.plot_MLN(
+                    glm,
+                    verbose=verbose,
+                    filename=self.dataset+'_trebor/mln-'+glm,
+                    threshold = keywords['threshold'],
+                    fileformat = keywords['fileformat'],
+                    usetex = keywords['usetex']
+                    )
+            self.plot_MSN(
+                    glm,
+                    verbose=verbose,
+                    filename=self.dataset+'_trebor/msn-'+glm,
+                    fileformat=keywords['fileformat'],
+                    threshold = keywords['threshold'],
+                    only = keywords['only'],
+                    usetex = keywords['usetex']
+                    )
+
+            self.get_PDC(
+                    glm,
+                    verbose = verbose
+                    )
 
     def plot_MLN(
             self,
-            mode_string,
+            glm,
             verbose = False,
             filename = 'pdf',
             threshold = 1,
@@ -1422,7 +1508,7 @@ class TreBor(object):
         """
         
         # get the graph
-        graph = self.graph[mode_string]
+        graph = self.graph[glm]
 
         # store in internal and external nodes
         inodes = []
@@ -1440,7 +1526,7 @@ class TreBor(object):
                 inodes += [(x,y)]
             else:
                 if usetex:
-                    enodes += [(x,y,r'\textbf{'+d['label']+r'}')]
+                    enodes += [(x,y,r'\textbf{'+d['label'].replace('_',r'\_')+r'}')]
                 else:
                     enodes += [(x,y,d['label'])]
         
@@ -1487,7 +1573,7 @@ class TreBor(object):
         plt.axis('equal')
 
         # draw the horizontal edges
-        for xA,xB,yA,yB,f,w in ledges:
+        for xA,xB,yA,yB,f,w in sorted(ledges,key=lambda x:x[-1]):
             plt.plot(
                     [xA,xB],
                     [yA,yB],
@@ -1572,25 +1658,49 @@ class TreBor(object):
 
         return 
 
-    def geoplot_MLN(
+    def plot_MSN(
             self,
-            mode_string,
+            glm,
             verbose=False,
             filename='pdf',
             fileformat='pdf',
-            mode = "basic",
             threshold = 1,
-            only = None
+            only = [],
+            usetex = True
             ):
         """
-        Carry out a geographical plot of a given MLN.
+        Plot the Minimal Spatial Network.
+
+        Parameters
+        ----------
+        glm : str
+            A string that encodes which model should be plotted.
+        filename : str
+            The name of the file to which the plot shall be written.
+        fileformat : str
+            The output format of the plot.
+        threshold : int (default=1)
+            The threshold for the minimal amount of shared links that shall be
+            plotted.
+        only : list (default=[])
+            The list of taxa whose connections with other taxa should be
+            plotted.
+        usetex : bool (default=True)
+            Specify whether LaTeX shall be used for the plot.
+
         """
+        # check for only
+        if not only:
+            only = self.taxa
+
+        # usetex
+        mpl.rc('text',usetex=True)
     
         # redefine taxa and tree for convenience
         taxa,tree = self.taxa,self.tree
 
         # get the graph
-        graph = self.graph[mode_string]
+        graph = self.graph[glm]
 
         # XXX check for coordinates of the taxa, otherwise load them from file and
         # add them to the wordlist XXX add later, we first load it from file
@@ -1769,13 +1879,13 @@ class TreBor(object):
         m.fillcontinents(color=conf['continent_color'],lake_color=conf['water_color'])
 
         # plot the lines
-        for a,b,d in geoGraph.edges(data=True):
+        for a,b,d in sorted(geoGraph.edges(data=True),key=lambda x:x[2]['weight']):
             
             # don't draw lines beyond threshold
             if d['weight'] < threshold:
                 pass
             else:
-                if a in coords and b in coords and only in [a,b,None]:
+                if a in coords and b in coords and a in only or b in only:
                     w = d['weight']
 
                     # retrieve the coords
@@ -1836,7 +1946,10 @@ class TreBor(object):
                 legend_check.append(groups[taxon])
             
             # add number to celltext
-            cell_text.append([str(i+1),taxon])
+            if usetex:
+                cell_text.append([str(i+1),taxon.replace('_',r'\_')])
+            else:
+                cell_text.append([str(i+1),taxon])
 
             # plot the text
             plt.text(
@@ -1909,7 +2022,231 @@ class TreBor(object):
         plt.savefig(filename+'.'+fileformat)
         plt.clf()
         if verbose: FileWriteMessage(filename,fileformat).message('written')
-        return geoGraph
+        return
+
+    def plot_concepts(
+            self,
+            concept,
+            cogA,
+            cogB,
+            labels = {1:'1',2:'2',3:'3',4:'4'},
+            tcolor = {
+                1:'white',
+                2:'black',
+                3:'0.5',
+                4:'0.1'
+                },
+            verbose=False,
+            filename='pdf',
+            fileformat='pdf',
+            threshold = 1,
+            usetex = True
+            ):
+        """
+        Plot the Minimal Spatial Network.
+
+        Parameters
+        ----------
+        glm : str
+            A string that encodes which model should be plotted.
+        filename : str
+            The name of the file to which the plot shall be written.
+        fileformat : str
+            The output format of the plot.
+        threshold : int (default=1)
+            The threshold for the minimal amount of shared links that shall be
+            plotted.
+        only : list (default=[])
+            The list of taxa whose connections with other taxa should be
+            plotted.
+        usetex : bool (default=True)
+            Specify whether LaTeX shall be used for the plot.
+
+        """
+        # usetex
+        mpl.rc('text',usetex=True)
+    
+        # redefine taxa and tree for convenience
+        taxa,tree = self.taxa,self.tree
+
+        # XXX check for coordinates of the taxa, otherwise load them from file and
+        # add them to the wordlist XXX add later, we first load it from file
+        if 'coords' in self.wl.entries:
+            pass
+        
+        else:
+            coords = csv2dict(
+                    self.dataset,
+                    'coords',
+                    dtype=[str,float,float]
+                    )
+
+        # check for groups, add functionality for groups in qlc-file later XXX
+        if 'group' in self.wl.entries:
+            pass
+        else:
+            groups = dict([(k,v) for k,v in csv2list(self.dataset,'groups')])
+        # check for color, add functionality for colors later XXX
+        if 'colors' in self.wl.entries:
+            pass
+        else:
+            colors = dict([(k,v) for k,v in csv2list(self.dataset,'colors')])
+
+        if verbose: LoadDataMessage('coordinates','groups','colors').message('loaded')
+        
+        # load the rc-file XXX add internal loading later
+        try:
+            conf = json.load(open(self.dataset+'.json'))
+        except:
+            pass # XXX add fallback later
+        
+        if verbose: LoadDataMessage('configuration')
+                
+        # get the paps
+        these_taxa = {}
+        for taxon in taxa:
+
+            # get the dictionary and the entry
+            try:
+                cogs = self.wl.get_dict(col=taxon,entry='pap')[concept]
+            except:
+                cogs = []
+            
+            # check for identical cogs and assign them to the 4 categories
+            if cogA in cogs and cogB in cogs:
+                these_taxa[taxon] = 3
+            elif cogA in cogs and cogB not in cogs:
+                these_taxa[taxon] = 1
+            elif cogA not in cogs and cogB in cogs:
+                these_taxa[taxon] = 2
+            else:
+                these_taxa[taxon] = 4
+
+        # determine the maxima of the coordinates
+        latitudes = [i[0] for i in coords.values()]
+        longitudes = [i[1] for i in coords.values()]
+
+        min_lat,max_lat = min(latitudes),max(latitudes)
+        min_lon,max_lon = min(longitudes),max(longitudes)
+
+        # start to initialize the basemap
+        fig = plt.figure()
+        figsp = fig.add_subplot(111)
+        
+        # instantiate the basemap
+        m = bmp.Basemap(
+            llcrnrlon=min_lon + conf['min_lon'],
+            llcrnrlat=min_lat + conf['min_lat'],
+            urcrnrlon=max_lon + conf['max_lon'],
+            urcrnrlat=max_lat + conf['max_lat'],
+            resolution=conf['resolution'],
+            projection=conf['projection']
+            )
+        
+        # draw first values
+        m.drawmapboundary(fill_color=conf['water_color'])
+        m.drawcoastlines(color=conf['continent_color'],linewidth=0.5)
+        m.drawcountries(color=conf['coastline_color'],linewidth=0.5)
+        m.fillcontinents(color=conf['continent_color'],lake_color=conf['water_color'])
+
+        # plot the points for the languages
+        cell_text = []
+        legend_check = []
+        for i,(taxon,(lng,lat)) in enumerate(sorted(coords.items(),key=lambda x:x[0])):
+            
+            # retrieve x and y from the map
+            x,y = m(lat,lng)
+            
+            # get the color of the given taxon
+            taxon_color = colors[groups[taxon]]
+            
+            if these_taxa[taxon] == 4:
+                marker = '*'
+            else:
+                marker = 's'
+
+            # check for legend
+            if labels[these_taxa[taxon]] in legend_check:
+                # check for forth marker
+                # plot the marker
+                plt.plot(
+                    x,
+                    y,
+                    marker,
+                    markersize = conf['markersize'],
+                    color = tcolor[these_taxa[taxon]],
+                    #zorder = 50,
+                    )
+            else:
+                # plot the marker
+                plt.plot(
+                    x,
+                    y,
+                    marker,
+                    markersize = conf['markersize'],
+                    color = tcolor[these_taxa[taxon]],
+                    #zorder = 52,
+                    label=labels[these_taxa[taxon]]
+                    )
+                legend_check.append(labels[these_taxa[taxon]])
+            
+            # add number to celltext
+            if usetex:
+                cell_text.append([str(i+1),taxon.replace('_',r'\_')])
+            else:
+                cell_text.append([str(i+1),taxon])
+
+            # plot the text
+            if tcolor[these_taxa[taxon]] == 'black':
+                textcolor = 'white'
+            else:
+                textcolor='black'
+            
+            plt.text(
+                x,
+                y,
+                str(i+1),
+                size = str(int(conf['markersize'] / 2)),
+                label=taxon,
+                color = textcolor,
+                horizontalalignment='center',
+                verticalalignment='center',
+                )
+
+        this_table = plt.table(
+                cellText = cell_text,
+                colWidths = conf['table.column.width'],
+                loc = conf['table.location'],
+                )
+
+        # adjust the table
+        for line in this_table._cells:
+            this_table._cells[line]._text._horizontalalignment = 'left'
+            this_table._cells[line]._text._fontproperties.set_weight('bold')
+            this_table._cells[line]._text.set_color(conf['table.text.color'])
+            this_table._cells[line].set_height(conf['table.cell.height'])
+            this_table._cells[line]._text._fontproperties.set_size(conf['table.text.size'])
+            this_table._cells[line].set_linewidth(0.0)
+            this_table._cells[line].set_color(conf['table.cell.color'])
+        
+        this_table.set_zorder(100)
+        
+        plt.legend(
+                loc=conf['legend.location'],
+                numpoints=1,
+                prop={
+                    'size':conf['legend.size'],
+                    'weight':'bold'
+                    }
+                )
+
+        plt.subplots_adjust(left=0.05,right=0.95,top=0.95,bottom=0.05)
+
+        plt.savefig(filename+'.'+fileformat)
+        plt.clf()
+        if verbose: FileWriteMessage(filename,fileformat).message('written')
+        return
+            
 
 
 
