@@ -61,6 +61,7 @@ class TreBor(object):
             tree = None,
             paps = 'pap',
             verbose = False,
+            **keywords
             ):
         """
         
@@ -75,6 +76,8 @@ class TreBor(object):
             of an arbitrary integer key and a key for the concept.
 
         """
+        # TODO check for keywords, allow to load trees, etc.
+
         # store the name of the dataset and the identifier for paps
         self.dataset = dataset
         self._pap_string = paps
@@ -536,6 +539,7 @@ class TreBor(object):
             ratio = (1,1),
             restriction = 3,
             output_gml = False,
+            output_plot = False,
             verbose = False,
             tar = False
             ):
@@ -638,13 +642,24 @@ class TreBor(object):
             except:
                 pass
 
+            # make the folder for png
+            try:
+                os.mkdir(
+                        folder+'/gml/'+'{0}-{1}-figures'.format(
+                            self.dataset,
+                            glm
+                            )
+                        )
+            except:
+                pass
+
             # load the graph
             self.gml = nx.read_gml(self.dataset+'.gml')
 
             # store the graph
             for cog in self.cogs:
                 gls = self.gls[glm][cog][0]
-                gls2gml(
+                g = gls2gml(
                         gls,
                         self.gml,
                         self.tree,
@@ -654,6 +669,82 @@ class TreBor(object):
                             cog
                             ),
                         )
+
+                # if plot of gml is chose
+                if output_plot:
+                    nodes = []
+                    
+                    for n,d in g.nodes(data=True):
+                        x = d['graphics']['x']
+                        y = d['graphics']['y']
+                        f = d['graphics']['fill']
+                        o = d['origin']
+                        l = d['label']
+                        
+                        nodes.append((x,y,f,o,l))
+
+                    edges = []
+                    for a,b,d in g.edges(data=True):
+                    
+                        xA = g.node[a]['graphics']['x']
+                        xB = g.node[b]['graphics']['x']
+                        yA = g.node[a]['graphics']['y']
+                        yB = g.node[b]['graphics']['y']
+                    
+                        edges += [(xA,xB,yA,yB)]
+                    
+                    #mpl.rc('text',usetex=keywords['usetex'])
+                    fig = plt.figure()
+                    figsp = fig.add_subplot(111)
+                    ax = plt.axes(frameon=False)
+                    plt.xticks([])
+                    plt.yticks([])
+                    
+                    plt.axis('equal')
+                    
+                    for xA,xB,yA,yB in edges:
+                    
+                        plt.plot(
+                                [xA,xB],
+                                [yA,yB],
+                                '-',
+                                color='black',
+                                linewidth=5
+                                )
+                        plt.plot(
+                                [xA,xB],
+                                [yA,yB],
+                                '-',
+                                color='0.2',
+                                linewidth=4
+                                )
+                    for x,y,f,o,l in nodes:
+                        if f == '#000000':
+                            c = '#ffffff'
+                        else:
+                            c = '#000000'
+                        if o == 1:
+                            size = 20
+                        else:
+                            size = 10
+                        if l.startswith('edge') or l.startswith('root'):
+                            plt.plot(x,y,'o',markersize=size,color=f)
+                        else:
+                            plt.text(
+                                    x,
+                                    y,
+                                    l,
+                                    horizontalalignment='center',
+                                    verticalalignment='center',
+                                    size=8,fontweight='bold',color=c,backgroundcolor=f)
+                    
+                    #plt.subplots_adjust(left=0.02,right=0.98,top=0.98,bottom=0.02)
+                    plt.savefig(folder+'/gml/{0}-{1}-figures/{2}.png'.format(
+                        self.dataset,
+                        glm,
+                        cog
+                        ))
+                    plt.clf()
 
             # if tar is chosen, put it into a tarfile
             if tar:
@@ -1128,6 +1219,36 @@ class TreBor(object):
                     )
         f.close()
         if verbose: print("[i] Wrote edge-weight distributions to file.")
+        
+        # write specific links of taxa to file
+        try:
+            os.mkdir(self.dataset+'_trebor/taxa')
+        except:
+            pass
+
+        for taxon in self.taxa:
+            f = open(self.dataset+'_trebor/taxa/'+taxon+'.csv','w')
+            keys = [n for n in gOut[taxon] if gOut[taxon][n]['label'] == 'horizontal']
+            for key in sorted(keys,key=lambda x:gOut[taxon][x]['weight']):
+                for cog in gOut[taxon][key]['cogs'].split(','):
+                    tmp = [x for x in self.etd[cog] if x != 0]
+                    idx = [x[0] for x in tmp][0]
+                    concept = self.wl[idx,'concept']
+
+                    if 'proto' in self.wl.entries:
+                        proto = cog + '\t'+self.wl[idx,'proto']
+                    else:
+                        proto = cog
+                    if 'note' in self.wl.entries:
+                        proto += '\t'+self.wl[idx,'note']
+
+                    f.write('{0}\t{1}\t{2}\n'.format(
+                        key,
+                        proto,
+                        concept
+                        ))
+            f.close()
+        if verbose: pirnt("[i] Wrote list of edges per taxa to file.")
 
         return 
 
@@ -1264,6 +1385,7 @@ class TreBor(object):
             usetex = True,
             full_analysis = True,
             plot_dists = True,
+            output_plot=False,
             **keywords
             ):
         """
@@ -1311,6 +1433,7 @@ class TreBor(object):
                         verbose = verbose,
                         output_gml = output_gml,
                         tar = tar,
+                        output_plot=output_plot
                         )
             elif mode == 'restriction':
                 print(
@@ -1324,6 +1447,7 @@ class TreBor(object):
                         verbose = verbose,
                         output_gml = output_gml,
                         tar = tar,
+                        output_plot=output_plot
                         )
     
         # calculate the different distributions
