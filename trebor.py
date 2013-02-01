@@ -933,7 +933,8 @@ class TreBor(object):
             self,
             glm,
             threshold = 1,
-            verbose = False
+            verbose = False,
+            colormap = mpl.cm.jet
             ):
         """
         Compute an evolutionary network for a given model.
@@ -953,8 +954,6 @@ class TreBor(object):
             nwk2gml(self.dataset+'.tre',filename=self.dataset)
             input("[i] Created GML file from tree. ")
             gTpl = nx.read_gml(self.dataset+'.gml')
-
-
 
         # make alias for the current gls for convenience
         scenarios = self.gls[glm]
@@ -1036,7 +1035,7 @@ class TreBor(object):
             for i,nodeA in enumerate(oris):
                 for j,nodeB in enumerate(oris):
                     if i < j:
-                        w = 1000000 / int(gPrm.edge[nodeA][nodeB]['weight'])
+                        w = gPrm.edge[nodeA][nodeB]['weight']
                         gWeights.add_edge(
                                 nodeA,
                                 nodeB,
@@ -1045,9 +1044,43 @@ class TreBor(object):
             
             # if the graph is not empty
             if gWeights:
+
+                # check for identical weights and change them according to
+                # tree-distance
+                tmp_weights = {}
+                for a,b,d in gWeights.edges(data=True):
+                    try:
+                        tmp_weights[int(d['weight'])] += [(a,b)]
+                    except:
+                        tmp_weights[int(d['weight'])] = [(a,b)]
+                
+                for w in tmp_weights:
+                    elist = tmp_weights[w]
+                    
+                    # check whether there are more identical weights
+                    if len(elist) > 1:
+                        
+                        # if so, order all stuff according to branch length
+                        branches = []
+                        for a,b in elist:
+                            branch_distance = len(self.tree.getConnectingEdges(a,b))
+                            branches += [(a,b,branch_distance)]
+
+                        # now change the weights according to the order
+                        scaler = 1 / len(branches)
+                        minus = 1 - scaler
+                        branches = sorted(branches,key=lambda x:(x[2],x[1],x[0]),reverse=True)
+                        for a,b,d in branches:
+                            gWeights.edge[a][b]['weight'] += minus
+                            minus -= scaler
+                
+                # change maximum weights to distance weights
+                for a,b,d in sorted(gWeights.edges(data=True),key=lambda x:x[2]['weight']):
+                    w = d['weight']
+                    gWeights.edge[a][b]['weight'] = int(1000 / w)
                 
                 # calculate the MST
-                mst = nx.minimum_spanning_tree(gWeights)
+                mst = nx.minimum_spanning_tree(gWeights,weight='weight')
                 
                 # assign the MST-weights to gMST
                 for nodeA,nodeB in mst.edges():
@@ -1111,7 +1144,7 @@ class TreBor(object):
             w = data['weight']
 
             # get the color for the weight
-            color = mpl.colors.rgb2hex(mpl.cm.jet(cfunc[weights.index(w)]))
+            color = mpl.colors.rgb2hex(colormap(cfunc[weights.index(w)]))
 
             data['graphics'] = {}
             data['graphics']['fill'] = color
@@ -1222,12 +1255,12 @@ class TreBor(object):
         
         # write specific links of taxa to file
         try:
-            os.mkdir(self.dataset+'_trebor/taxa')
+            os.mkdir(self.dataset+'_trebor/taxa-'+glm)
         except:
             pass
 
         for taxon in self.taxa:
-            f = open(self.dataset+'_trebor/taxa/'+taxon+'.csv','w')
+            f = open(self.dataset+'_trebor/taxa-'+glm+'/'+taxon+'.csv','w')
             keys = [n for n in gOut[taxon] if gOut[taxon][n]['label'] == 'horizontal']
             for key in sorted(keys,key=lambda x:gOut[taxon][x]['weight']):
                 for cog in gOut[taxon][key]['cogs'].split(','):
@@ -1401,6 +1434,19 @@ class TreBor(object):
             Specify whether you want to use LaTeX to render plots.
         """
         
+        # set defaults
+        defaults = {
+                "colorbar" : mpl.cm.jet,
+                'threshold':1,
+                'fileformat':'pdf',
+                'usetex':True,
+                'only':[]
+                }
+
+        for key in defaults:
+            if key not in keywords:
+                keywords[key] = defaults[key]
+
         # define a default set of runs
         if runs == 'default':
             runs = [
@@ -1550,7 +1596,14 @@ class TreBor(object):
             ax = fig.add_subplot(111)
 
             # add the boxplots
-            ax.boxplot([dist_vsd]+dists_vsd)
+            b = ax.boxplot([dist_vsd]+dists_vsd)
+            plt.setp(b['medians'],color='black')
+            plt.setp(b['whiskers'],color='black')
+            plt.setp(b['boxes'],color='black')
+
+            # adjust the yticks
+            for tick in ax.yaxis.get_major_ticks():
+                tick.label.set_fontsize(18)
 
             # add the xticks
             plt.xticks(
@@ -1560,7 +1613,7 @@ class TreBor(object):
                         p
                         ) for m,p in zip(mode_strings,p_vsd)
                         ],
-                    size=6
+                    size=18
                     )
 
             # save the figure
@@ -1577,23 +1630,12 @@ class TreBor(object):
             p_vsd = [p for z,p in zp_vsd]
             maxP = max(p_vsd)
             glm = modes[p_vsd.index(maxP)]
-            
-            # check for keywords
-            defaults = {
-                    'threshold':1,
-                    'fileformat':'pdf',
-                    'usetex':True,
-                    'only':[]
-                    }
-
-            for key in defaults:
-                if key not in keywords:
-                    keywords[key] = defaults[key]
 
             self.get_MLN(
                 glm,
                 verbose = verbose,
-                threshold = keywords['threshold']
+                threshold = keywords['threshold'],
+                colormap = keywords['colormap']
                 )
             self.plot_MLN(
                     glm,
@@ -1601,7 +1643,8 @@ class TreBor(object):
                     filename=self.dataset+'_trebor/mln-'+glm,
                     threshold = keywords['threshold'],
                     fileformat = keywords['fileformat'],
-                    usetex = keywords['usetex']
+                    usetex = keywords['usetex'],
+                    colormap = keywords['colormap']
                     )
             self.plot_MSN(
                     glm,
@@ -1610,7 +1653,8 @@ class TreBor(object):
                     fileformat=keywords['fileformat'],
                     threshold = keywords['threshold'],
                     only = keywords['only'],
-                    usetex = keywords['usetex']
+                    usetex = keywords['usetex'],
+                    colormap = keywords['colormap']
                     )
 
             self.get_PDC(
@@ -1625,19 +1669,32 @@ class TreBor(object):
             filename = 'pdf',
             threshold = 1,
             fileformat = 'pdf',
-            usetex = True
+            usetex = True,
+            colormap = mpl.cm.jet,
+            taxon_labels = 'taxon.short_labels'
             ):
         """
         Plot the MLN with help of Matplotlib.
         """
+        # try to load the configuration file
+        try:
+            conf = json.load(open(self.dataset+'.json'))
+        except:
+            conf = {}
         
+        # check for 'taxon.labels' in conf
+        if taxon_labels in conf: #XXX change later
+            tfunc = lambda x:conf[taxon_labels][x]
+        else:
+            tfunc = lambda x:x
+
         # get the graph
         graph = self.graph[glm]
 
         # store in internal and external nodes
         inodes = []
         enodes = []
-        
+
         # get the nodes
         for n,d in graph.nodes(data=True):
             g = d['graphics']
@@ -1649,10 +1706,10 @@ class TreBor(object):
             if d['label'] not in self.taxa:
                 inodes += [(x,y)]
             else:
-                if usetex:
-                    enodes += [(x,y,r'\textbf{'+d['label'].replace('_',r'\_')+r'}')]
-                else:
-                    enodes += [(x,y,d['label'])]
+                #if usetex:
+                #    enodes += [(x,y,r'\textbf{'+tfunc(d['label']).replace('_',r'\_')+r'}')]
+                #else:
+                enodes += [(x,y,tfunc(d['label']))]
         
         # store vertical and lateral edges
         vedges = []
@@ -1720,8 +1777,8 @@ class TreBor(object):
                     [xA,xB],
                     [yA,yB],
                     '-',
-                    color='0.2',
-                    linewidth=4,
+                    color='1.0',
+                    linewidth=2,
                     )
 
         # draw the nodes
@@ -1733,22 +1790,35 @@ class TreBor(object):
                     markersize=10,
                     color='black',
                     )
+            plt.plot(
+                    x,
+                    y,
+                    'o',
+                    markersize=6,
+                    color='white'
+                    )
 
         # draw the leaves
+
         for x,y,t in enodes:
             plt.text(
                     x,
                     y,
                     t,
-                    size = '5',
+                    size = '7',
                     verticalalignment='center',
                     backgroundcolor='black',
                     horizontalalignment='center',
+                    fontweight = 'bold',
                     color='white'
                     )
 
         # add a colorbar
-        cax = figsp.imshow([[1,2],[1,2]],visible=False)
+        cax = figsp.imshow(
+                [[1,2],[1,2]],
+                cmap=colormap,
+                visible=False
+                )
         cbar = fig.colorbar(
                 cax,
                 ticks = [
@@ -1762,7 +1832,7 @@ class TreBor(object):
                 shrink=0.55
                 )
         cbar.set_clim(1.0)
-        cbar.set_label('Inferred Borrowings')
+        cbar.set_label('Inferred Links')
         cbar.ax.set_yticklabels(
                 [
                     str(min(weights)),
@@ -1790,7 +1860,9 @@ class TreBor(object):
             fileformat='pdf',
             threshold = 1,
             only = [],
-            usetex = True
+            usetex = True,
+            external_edges = False,
+            colormap = mpl.cm.jet
             ):
         """
         Plot the Minimal Spatial Network.
@@ -1843,11 +1915,11 @@ class TreBor(object):
             pass
         else:
             groups = dict([(k,v) for k,v in csv2list(self.dataset,'groups')])
-        # check for color, add functionality for colors later XXX
-        if 'colors' in self.wl.entries:
-            pass
-        else:
-            colors = dict([(k,v) for k,v in csv2list(self.dataset,'colors')])
+        ## check for color, add functionality for colors later XXX
+        #if 'colors' in self.wl.entries:
+        #    pass
+        #else:
+        #    colors = dict([(k,v) for k,v in csv2list(self.dataset,'colors')])
 
         if verbose: LoadDataMessage('coordinates','groups','colors').message('loaded')
         
@@ -1878,73 +1950,73 @@ class TreBor(object):
                         geoGraph.edge[lA][lB]['weight'] += d['weight']
                     except:
                         geoGraph.add_edge(lA,lB,weight=d['weight'])
-                
-                # if only one in taxa, we need the convex hull for that node
-                elif lA in taxa or lB in taxa:
+                elif not external_edges:
+                    # if only one in taxa, we need the convex hull for that node
+                    if lA in taxa or lB in taxa:
 
-                    # check which node is in taxa
-                    if lA in taxa:
-                        this_label = lA
-                        other_nodes = tree.getNodeMatchingName(lB).getTipNames()
-                        other_label = lB
-                    elif lB in taxa:
-                        this_label = lB
-                        other_nodes = tree.getNodeMatchingName(lA).getTipNames()
-                        other_label = lA
+                        # check which node is in taxa
+                        if lA in taxa:
+                            this_label = lA
+                            other_nodes = tree.getNodeMatchingName(lB).getTipNames()
+                            other_label = lB
+                        elif lB in taxa:
+                            this_label = lB
+                            other_nodes = tree.getNodeMatchingName(lA).getTipNames()
+                            other_label = lA
 
-                    # get the convex points of others
-                    these_coords = [(round(coords[t][0],5),round(coords[t][1],5)) for t in
-                            other_nodes]
-                    hulls = getConvexHull(these_coords,polygon=False)
+                        # get the convex points of others
+                        these_coords = [(round(coords[t][0],5),round(coords[t][1],5)) for t in
+                                other_nodes]
+                        hulls = getConvexHull(these_coords,polygon=False)
     
-                    # get the hull with the minimal euclidean distance
-                    distances = []
-                    for hull in hulls:
-                        distances.append(linalg.norm(np.array(hull) - np.array(coords[this_label])))
-                    this_hull = hulls[distances.index(min(distances))]
-                    other_label = other_nodes[
-                            these_coords.index(
-                                (
-                                    round(this_hull[0],5),
-                                    round(this_hull[1],5)
+                        # get the hull with the minimal euclidean distance
+                        distances = []
+                        for hull in hulls:
+                            distances.append(linalg.norm(np.array(hull) - np.array(coords[this_label])))
+                        this_hull = hulls[distances.index(min(distances))]
+                        other_label = other_nodes[
+                                these_coords.index(
+                                    (
+                                        round(this_hull[0],5),
+                                        round(this_hull[1],5)
+                                        )
                                     )
-                                )
-                            ]
+                                ]
     
-                    # append the edge to the graph
-                    try:
-                        geoGraph.edge[this_label][other_label]['weight'] += d['weight']
-                    except:
-                        geoGraph.add_edge(this_label,other_label,weight=d['weight'])
-                    
-                else:
-                    # get the taxa of a and b
-                    taxA = tree.getNodeMatchingName(lA).getTipNames()
-                    taxB = tree.getNodeMatchingName(lB).getTipNames()
+                        # append the edge to the graph
+                        try:
+                            geoGraph.edge[this_label][other_label]['weight'] += d['weight']
+                        except:
+                            geoGraph.add_edge(this_label,other_label,weight=d['weight'])
+                        
+                    #else:
+                    #    # get the taxa of a and b
+                    #    taxA = tree.getNodeMatchingName(lA).getTipNames()
+                    #    taxB = tree.getNodeMatchingName(lB).getTipNames()
     
-                    # get the convex points
-                    coordsA = [(round(coords[t][0],5),round(coords[t][1],5)) for t in taxA]
-                    coordsB = [(round(coords[t][0],5),round(coords[t][1],5)) for t in taxB]
-                    hullsA = getConvexHull(coordsA,polygon=False)
-                    hullsB = getConvexHull(coordsB,polygon=False)
+                    #    # get the convex points
+                    #    coordsA = [(round(coords[t][0],5),round(coords[t][1],5)) for t in taxA]
+                    #    coordsB = [(round(coords[t][0],5),round(coords[t][1],5)) for t in taxB]
+                    #    hullsA = getConvexHull(coordsA,polygon=False)
+                    #    hullsB = getConvexHull(coordsB,polygon=False)
     
-                    # get the closest points
-                    distances = []
-                    hulls = []
-                    for i,hullA in enumerate(hullsA):
-                        for j,hullB in enumerate(hullsB):
-                            distances.append(linalg.norm(np.array(hullA)-np.array(hullB)))
-                            hulls.append((hullA,hullB))
-                    minHulls = hulls[distances.index(min(distances))]
-                    
-                    labelA = taxA[coordsA.index((round(minHulls[0][0],5),round(minHulls[0][1],5)))]
-                    labelB = taxB[coordsB.index((round(minHulls[1][0],5),round(minHulls[1][1],5)))]
-                    
-                    # append the edge to the graph
-                    try:
-                        geoGraph.edge[labelA][labelB]['weight'] += d['weight']
-                    except:
-                        geoGraph.add_edge(labelA,labelB,weight=d['weight'])
+                    #    # get the closest points
+                    #    distances = []
+                    #    hulls = []
+                    #    for i,hullA in enumerate(hullsA):
+                    #        for j,hullB in enumerate(hullsB):
+                    #            distances.append(linalg.norm(np.array(hullA)-np.array(hullB)))
+                    #            hulls.append((hullA,hullB))
+                    #    minHulls = hulls[distances.index(min(distances))]
+                    #    
+                    #    labelA = taxA[coordsA.index((round(minHulls[0][0],5),round(minHulls[0][1],5)))]
+                    #    labelB = taxB[coordsB.index((round(minHulls[1][0],5),round(minHulls[1][1],5)))]
+                    #    
+                    #    # append the edge to the graph
+                    #    try:
+                    #        geoGraph.edge[labelA][labelB]['weight'] += d['weight']
+                    #    except:
+                    #        geoGraph.add_edge(labelA,labelB,weight=d['weight'])
 
         # get the weights for the lines
         weights = []
@@ -2025,7 +2097,7 @@ class TreBor(object):
                             [xA,xB],
                             [yA,yB],
                             '-',
-                            color=plt.cm.jet(
+                            color=colormap(
                                 color_dict[sorted_weights.index(w)]
                                 ),
                             alpha = conf['alpha'],
@@ -2036,22 +2108,39 @@ class TreBor(object):
         # plot the points for the languages
         cell_text = []
         legend_check = []
+
+        # check for taxon.labels in conf
+        if 'taxon.labels' in conf:
+            tfunc = lambda x:conf['taxon.labels'][x]
+        else:
+            tfunc = lambda x:x
+        if 'groups.labels' in conf:
+            gfunc = lambda x:conf['groups.labels'][x]
+        else:
+            gfunc = lambda x:x
+
         for i,(taxon,(lng,lat)) in enumerate(sorted(coords.items(),key=lambda x:x[0])):
             
             # retrieve x and y from the map
             x,y = m(lat,lng)
             
             # get the color of the given taxon
-            taxon_color = colors[groups[taxon]]
+            #taxon_color = colors[groups[taxon]]
             
+            # get colors from conf
+            this_group = groups[taxon]
+            taxon_color = conf['groups.colors'][this_group]
+            taxon_marker = conf['groups.markers'][this_group]
+
+
             # check for legend
 
-            if groups[taxon] in legend_check:
+            if gfunc(groups[taxon]) in legend_check:
                 # plot the marker
                 plt.plot(
                     x,
                     y,
-                    'o',
+                    taxon_marker,
                     markersize = conf['markersize'],
                     color = taxon_color,
                     zorder = max_weight+52,
@@ -2061,34 +2150,46 @@ class TreBor(object):
                 plt.plot(
                     x,
                     y,
-                    'o',
+                    taxon_marker,
                     markersize = conf['markersize'],
                     color = taxon_color,
                     zorder = max_weight+52,
-                    label=groups[taxon]
+                    label=gfunc(groups[taxon])
                     )
-                legend_check.append(groups[taxon])
+                legend_check.append(gfunc(groups[taxon]))
             
             # add number to celltext
             if usetex:
-                cell_text.append([str(i+1),taxon.replace('_',r'\_')])
+                cell_text.append([str(i+1),tfunc(taxon).replace('_',r'\_')])
             else:
-                cell_text.append([str(i+1),taxon])
+                cell_text.append([str(i+1),tfunc(taxon)])
 
             # plot the text
+            # check for darkness of color
+            if taxon_color in ['black','gray'] or taxon_color[:3] in ['0.3','0.2','0.1','0.0']:
+                text_color = 'white'
+            else:
+                text_color = 'black'
+
             plt.text(
                 x,
                 y,
                 str(i+1),
                 size = str(int(conf['markersize'] / 2)),
+                color = text_color,
                 label=taxon,
                 horizontalalignment='center',
+                fontweight="bold",
                 verticalalignment='center',
                 zorder=max_weight+55
                 )
 
         # add a colorbar
-        cax = figsp.imshow([[1,2],[1,2]],visible=False)
+        cax = figsp.imshow(
+                [[1,2],[1,2]],
+                visible=False,
+                cmap=colormap
+                )
         cbar = fig.colorbar(
                 cax,
                 ticks = [
@@ -2102,7 +2203,7 @@ class TreBor(object):
                 shrink=0.55
                 )
         cbar.set_clim(1.0)
-        cbar.set_label('Inferred Borrowings')
+        cbar.set_label('Inferred Links')
         cbar.ax.set_yticklabels(
                 [
                     str(min(weights)),
@@ -2119,6 +2220,8 @@ class TreBor(object):
                 colWidths = conf['table.column.width'],
                 loc = conf['table.location'],
                 )
+        this_table.auto_set_font_size(False)
+        this_table.set_fontsize(conf['table.text.size'])
 
         # adjust the table
         for line in this_table._cells:
@@ -2126,7 +2229,7 @@ class TreBor(object):
             this_table._cells[line]._text._fontproperties.set_weight('bold')
             this_table._cells[line]._text.set_color(conf['table.text.color'])
             this_table._cells[line].set_height(conf['table.cell.height'])
-            this_table._cells[line]._text._fontproperties.set_size(conf['table.text.size'])
+            #this_table._cells[line]._text._fontproperties.set_size(conf['table.text.size'])
             this_table._cells[line].set_linewidth(0.0)
             this_table._cells[line].set_color(conf['table.cell.color'])
         
@@ -2141,7 +2244,7 @@ class TreBor(object):
                     }
                 )
 
-        plt.subplots_adjust(left=0.05,right=0.95,top=0.95,bottom=0.05)
+        plt.subplots_adjust(left=0.02,right=0.98,top=0.98,bottom=0.02)
 
         plt.savefig(filename+'.'+fileformat)
         plt.clf()
@@ -2211,10 +2314,10 @@ class TreBor(object):
         else:
             groups = dict([(k,v) for k,v in csv2list(self.dataset,'groups')])
         # check for color, add functionality for colors later XXX
-        if 'colors' in self.wl.entries:
-            pass
-        else:
-            colors = dict([(k,v) for k,v in csv2list(self.dataset,'colors')])
+        #if 'colors' in self.wl.entries:
+        #    pass
+        #else:
+        #    colors = dict([(k,v) for k,v in csv2list(self.dataset,'colors')])
 
         if verbose: LoadDataMessage('coordinates','groups','colors').message('loaded')
         
@@ -2282,7 +2385,7 @@ class TreBor(object):
             x,y = m(lat,lng)
             
             # get the color of the given taxon
-            taxon_color = colors[groups[taxon]]
+            #taxon_color = colors[groups[taxon]]
             
             if these_taxa[taxon] == 4:
                 marker = '*'
