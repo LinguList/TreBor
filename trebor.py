@@ -120,7 +120,7 @@ class TreBor(object):
             if verbose: print("[i] Created entry PAP.")
         
         # get the paps and the etymological dictionary
-        self.paps = self.wl.get_paps(ref=paps)
+        self.paps = self.wl.get_paps(ref=paps,missing=-1)
         self.etd = self.wl.get_etymdict(ref=paps)
 
         if verbose: print("[i] Created the PAP matrix.")
@@ -143,7 +143,7 @@ class TreBor(object):
             self.concepts[key] = concept
 
             # check for singletons
-            if sum(self.paps[key]) == 1:
+            if sum([1 for p in self.paps[key] if p >= 1]) == 1:
                 self.singletons.append(key)
         
         # create a list of keys for faster access when iterating
@@ -198,13 +198,24 @@ class TreBor(object):
         
         # make a dictionary that stores the scenario
         d = {}
+        
+        # get the list of nodes that are not missing
+        taxa,paps = [],[]
+        for i,taxon in enumerate(self.taxa):
+            if pap[i] != -1:
+                taxa += [taxon]
+                paps += [pap[i]]
+
+        # get the subtree of all taxa
+        tree = self.tree.getSubTree(taxa)
 
         # get the subtree containing all taxa that have positive paps
-        tree = self.tree.lowestCommonAncestor(
+        tree = tree.lowestCommonAncestor(
                 [
                     self.taxa[i] for i in range(len(self.taxa)) if pap[i] >= 1
                     ]
                 )
+
         if verbose: print("[i] Subtree is {0}.".format(str(tree)))
 
         # assign the basic (starting) values to the dictionary
@@ -218,8 +229,8 @@ class TreBor(object):
         # leave are treated as retentions, and one assuming multiple origins,
         # where all prsent states in the leaves are treated as origins
         for node in nodes:
-            idx = self.taxa.index(node)
-            if pap[idx] >= 1:
+            idx = taxa.index(node)
+            if paps[idx] >= 1:
                 state = 1
             else:
                 state = 0
@@ -240,7 +251,7 @@ class TreBor(object):
         # counting all leaves that lost the character as single loss events (case
         # 2). In case two, the first gain of the character has to be added
         # additionally
-        maxWeight = min(pap.count(1) * ratio[0], pap.count(0) * ratio[1] + ratio[0])
+        maxWeight = min(paps.count(1) * ratio[0], paps.count(0) * ratio[1] + ratio[0])
 
         # join the nodes successively
         for i,node in enumerate(ordered_nodes):
@@ -1054,6 +1065,7 @@ class TreBor(object):
                     except:
                         tmp_weights[int(d['weight'])] = [(a,b)]
                 
+                # check for identical weights and calculate the tree distance
                 for w in tmp_weights:
                     elist = tmp_weights[w]
                     
