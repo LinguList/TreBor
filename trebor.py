@@ -294,9 +294,54 @@ class TreBor(object):
                         queue += [[subB,counter+1]]
                     else:
                         scenario += [(subB.Name,1)]
+
         # TODO fill the scenario with gaps
-                    
-        return scenario
+        output = []
+        d = {}
+        for i,taxon in enumerate(taxa):
+            if paps[i] >= 1:
+                d[taxon] = 1
+            else:
+                d[taxon] = 0
+
+        for s in scenario:
+            
+            # append scenario to output
+            output += [s]
+
+            # get the subtree
+            subtree = tree.getNodeMatchingName(s[0])
+
+            # check whether subtree is leave
+            if not subtree.Children:
+                pass
+            else:
+                # order the internal nodes according to the number of their leaves
+                ordered_nodes = sorted(
+                        subtree.nontips()+[subtree],key=lambda x:len(x.tips())
+                        )
+
+                # start bottom-up
+                for node in ordered_nodes:
+                    nA,nB = node.Children
+
+                    # get the states
+                    stateA = d[nA.Name]
+                    stateB = d[nB.Name]
+
+                    # compare the states
+                    if stateA == 1 and stateB == 1:
+                        d[node.Name] = 1
+                    elif stateA == 0 and stateB == 0:
+                        d[node.Name] = 0
+                    else:
+                        d[node.Name] = 1
+                        if stateA == 0:
+                            output += [(nA.Name,0)]
+                        elif stateB == 0:
+                            output += [(nB.Name,0)]
+
+        return output
 
         
     def _get_GLS(
@@ -575,20 +620,24 @@ class TreBor(object):
             If set to c{True}, the GML-files will be added to a compressed tar-file.
 
         """
-        if mode not in ['weighted','w','r','restriction']:
+        if mode not in ['weighted','w','r','restriction','t','topdown']:
             raise ValueError("[!] The mode {0} is not available".format(mode))
 
         # define alias for mode
         if mode in ['w','weighted']:
             mode = 'weighted'
-        else:
+        elif mode in ['r','restriction']:
             mode = 'restriction'
+        else:
+            mode = 'topdown'
 
         # create a named string for the mode
         if mode == 'weighted':
             glm = 'w-{0[0]}-{0[1]}'.format(ratio)
         elif mode == 'restriction':
             glm = 'r-{0}'.format(restriction)
+        elif mode == 'topdown':
+            glm = 't-{0}'.format(restriction)
         
         # create statistics for this run
         self.stats[glm] = {}
@@ -614,6 +663,12 @@ class TreBor(object):
                         self.paps[cog],
                         r = restriction,
                         mode = 'r'
+                        )
+
+            if mode == 'topdown':
+                gls = self._get_GLS_top_down(
+                        self.paps[cog],
+                        mode = restriction
                         )
 
             noo = sum([t[1] for t in gls])
@@ -1506,6 +1561,19 @@ class TreBor(object):
                         output_gml = output_gml,
                         tar = tar,
                         output_plot=output_plot
+                        )
+            elif mode == 'topdown':
+                print(
+                        "[i] Analysing dataset with mode {0} ".format(mode)+\
+                                "and restriction {0}...".format(params)
+                                )
+                self.get_GLS(
+                        mode = mode,
+                        restriction = params,
+                        verbose = verbose,
+                        output_gml = output_gml,
+                        tar = tar,
+                        output_plot = output_plot
                         )
     
         # calculate the different distributions
