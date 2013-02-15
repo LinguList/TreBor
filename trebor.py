@@ -186,7 +186,119 @@ class TreBor(object):
 
         # create dictionary for graph attributes
         self.graph = {}
+    
+    def _get_GLS_top_down(
+            self,
+            pap,
+            mode = 1,
+            verbose = False
+            ):
+        """
+        Infer gain-loss scenario using the method by Dagan & Martin (2007).
 
+        """
+        # check for mode
+        try:
+            mode = int(mode)
+        except:
+            raise ValueError("[i] Mode should be an integer.")
+        
+        # get the list of nodes that are not missing
+        taxa,paps = [],[]
+        for i,taxon in enumerate(self.taxa):
+            if pap[i] != -1:
+                taxa += [taxon]
+                paps += [pap[i]]
+
+        # get the subtree of all taxa
+        tree = self.tree.getSubTree(taxa)
+
+        # get list of taxa where pap is 1
+        presents = [self.taxa[i] for i in range(len(self.taxa)) if pap[i] >= 1]
+
+        # get the subtree containing all taxa that have positive paps
+        tree = tree.lowestCommonAncestor(
+                [
+                    self.taxa[i] for i in range(len(self.taxa)) if pap[i] >= 1
+                    ]
+                )
+
+        if verbose: print("[i] Subtree is {0}.".format(str(tree)))
+
+        # assign the basic (starting) values to the dictionary
+        nodes = [t.Name for t in tree.tips()]
+
+        if verbose: print("[i] Nodes are {0}.".format(','.join(nodes)))
+        
+        if mode == 1:
+            return [(tree.Name,1)]
+        
+        # store the scenario
+        scenario = []
+
+        # make the queue
+        queue = [[tree,1]]
+        while queue:
+            
+            # get tree and counter from queue
+            tmp_tree,counter = queue.pop(0)
+
+            # break if counter exceeds the mode
+            if counter >= mode:
+                t = tmp_tree.lowestCommonAncestor([p for p in presents if p in
+                    tmp_tree.getTipNames()])
+                scenario += [(t.Name,1)]
+            else:
+                # get tip names for checking
+                tmp_names = tmp_tree.getTipNames()
+                
+                # get the children
+                childA,childB = tmp_tree.Children
+
+                # get lowest common ancestor
+                subA = childA.lowestCommonAncestor([p for p in presents if p in
+                    childA.getTipNames()])
+                subB = childB.lowestCommonAncestor([p for p in presents if p in
+                    childB.getTipNames()])
+
+                # check for tip names in subtrees
+                if subA.Children:
+                    subAnames = subA.getTipNames()
+                else:
+                    if childA.Name in presents:
+                        subAnames = [childA.Name]
+                    else:
+                        subAnames = []
+                if subB.Children:
+                    subBnames = subB.getTipNames()
+                else:
+                    if childB.Name in presents:
+                        subBnames = [childB.Name]
+                    else:
+                        subBnames = []
+
+                commons = subAnames + subBnames
+
+                # check for identity, if the tips are identical, stop the iteration
+                if set(tmp_names) == set(commons):
+                    scenario += [(tmp_tree.lowestCommonAncestor(presents).Name,1)]
+
+                # if they are not, append the subtrees to the queue
+                else:
+                    if subA.Children:
+                        queue += [[subA,counter+1]]
+                    else:
+                        scenario += [(subA.Name,1)]
+                    
+                    if subB.Children:
+                        queue += [[subB,counter+1]]
+                    else:
+                        scenario += [(subB.Name,1)]
+        # TODO fill the scenario with gaps
+                    
+        return scenario
+
+        
     def _get_GLS(
             self,
             pap,
