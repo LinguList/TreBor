@@ -187,16 +187,17 @@ class TreBor(object):
         # create dictionary for graph attributes
         self.graph = {}
 
-    def get_weighted_GLS(
+    def _get_GLS(
             self,
             pap,
-            ratio = (1,1),
+            mode = 'w',
+            r = (1,1),
             verbose = False
             ):
         """
-        Calculate a weighted gain-loss-scenario (WGLS) for a given PAP.
+        Calculate a gain-loss scenario (GLS) for a given PAP.
+
         """
-        
         # make a dictionary that stores the scenario
         d = {}
         
@@ -252,196 +253,10 @@ class TreBor(object):
         # counting all leaves that lost the character as single loss events (case
         # 2). In case two, the first gain of the character has to be added
         # additionally
-        maxWeight = min(paps.count(1) * ratio[0], paps.count(0) * ratio[1] + ratio[0])
-
-        # join the nodes successively
-        for i,node in enumerate(ordered_nodes):
-            if verbose: print(node.Name)
-            
-            # get the name of the children of the nodes
-            nameA,nameB = [x.Name for x in node.Children]
-
-            # get the nodes with their states from the dictionary
-            nodesA,nodesB = [d[x.Name] for x in node.Children]
-
-            # there might be alternative states, therefore it is important to
-            # iterate over all possible paths
-            newNodes = []
-            for nodeA in nodesA:
-                for nodeB in nodesB:
-                    # if the nodes have the same state, the state is assigned to
-                    # the most recent common ancestor node
-                    if nodeA[0] == nodeB[0]:
-
-                        # combine the rest of the histories of the items
-                        tmp = nodeA[1] + nodeB[1]
-
-                        # add them to the queue only if their weight is less or
-                        # equal to the maxWeight
-                        gl = [k[1] for k in tmp]+[x for x in [nodeA[0]] if x == 1]
-                        weight = gl.count(1) * ratio[0] + gl.count(0) * ratio[1]
-
-                        if weight <= maxWeight:
-                            newNodes.append((nodeA[0],tmp))
-
-                    # if the nodes have different states, we go on with two
-                    # distinct scenarios
-                    else:
-                        
-                        # first scenario assumes retention of nodeB
-                        tmpA = nodeA[1] + nodeB[1] + [(nameA,nodeA[0])]
-
-                        # second scenario assumes retention of nodeA
-                        tmpB = nodeA[1] + nodeB[1] + [(nameB,nodeB[0])]
-
-                        # get the vectors in order to make it easier to retrieve
-                        # the number of losses and gains
-                        glA = [k[1] for k in tmpA] + [x for x in [nodeB[0]] if x == 1]
-                        glB = [k[1] for k in tmpB] + [x for x in [nodeA[0]] if x == 1]
-
-                        # check the gain-loss scores 
-                        weightA = glA.count(1) * ratio[0] + glA.count(0) * ratio[1]
-                        weightB = glB.count(1) * ratio[0] + glB.count(0) * ratio[1]
-                        
-                        # check whether an additional gain is inferred on either of
-                        # the two possible paths. 
-                        # XXX reduce later, this is not efficient XXX
-                        if nodeB[0] == 1 and 1 in [k[1] for k in tmpA]:
-                            noA = True
-                        else:
-                            noA = False
-                        if nodeA[0] == 1 and 1 in [k[1] for k in tmpB]:
-                            noB = True
-                        else:
-                            noB = False
-
-                        newNodeA = nodeB[0],tmpA
-                        newNodeB = nodeA[0],tmpB
-                                            
-                        # if the weights are above the theoretical maximum, discard
-                        # the solution
-                        if weightA <= maxWeight and not noA:
-                            newNodes += [newNodeA]
-                        if weightB <= maxWeight and not noB:
-                            newNodes += [newNodeB]
-
-                d[node.Name] = newNodes
-                if verbose: print("nodelen",len(d[node.Name]))
-        
-        # try to find the best scenario by counting the ratio of gains and losses.
-        # the key idea here is to reduce the number of possible scenarios according
-        # to a given criterion. We choose the criterion of minimal changes as a
-        # first criterion to reduce the possibilities, i.e. we weight both gains
-        # and losses by 1 and select only those scenarios where gains and losses
-        # sum up to a minimal number of gains and losses. This pre-selection of
-        # scenarios can be further reduced by weighting gains and losses
-        # differently. So in a second stage we choose only those scenarios where
-        # there is a minimal amount of gains. 
-        
-        if verbose: print(len(d[tree.Name]))
-
-        # convert the specific format of the d[tree.Name] to simple format
-        gls_list = []
-        for first,last in d[tree.Name]:
-            if first == 1:
-                gls_list.append([(tree.Name,first)]+last)
-            else:
-                gls_list.append(last)
-
-        # the tracer stores all scores
-        tracer = []
-
-        for i,line in enumerate(gls_list):
-            
-            # calculate gains and losses
-            gains = sum([1 for x in line if x[1] == 1])
-            losses = sum([1 for x in line if x[1] == 0])
-
-            # calculate the score
-            score = ratio[0] * gains + ratio[1] * losses
-
-            # append it to the tracer
-            tracer.append(score)
-        
-        # get the minimum score
-        minScore = min(tracer)
-
-        # return the minimal indices, sort them according to the number of
-        # gains inferred, thereby pushing gains to the root, similar to
-        # Mirkin's (2003) suggestion
-        return sorted(
-                [gls_list[i] for i in range(len(tracer)) if tracer[i] == minScore],
-                key = lambda x:sum([i[1] for i in x])
-                )[0]
-
-    def get_weighted_GLS_bifurcating(
-            self,
-            pap,
-            ratio = (1,1),
-            verbose = False
-            ):
-        """
-        Calculate a weighted gain-loss-scenario (WGLS) for a given PAP.
-
-        In contrast to the other modes, bifurcating trees are allowed.
-        """
-        
-        # make a dictionary that stores the scenario
-        d = {}
-        
-        # get the list of nodes that are not missing
-        taxa,paps = [],[]
-        for i,taxon in enumerate(self.taxa):
-            if pap[i] != -1:
-                taxa += [taxon]
-                paps += [pap[i]]
-
-        # get the subtree of all taxa
-        tree = self.tree.getSubTree(taxa)
-
-        # get the subtree containing all taxa that have positive paps
-        tree = tree.lowestCommonAncestor(
-                [
-                    self.taxa[i] for i in range(len(self.taxa)) if pap[i] >= 1
-                    ]
-                )
-
-        if verbose: print("[i] Subtree is {0}.".format(str(tree)))
-
-        # assign the basic (starting) values to the dictionary
-        nodes = [t.Name for t in tree.tips()]
-
-        if verbose: print("[i] Nodes are {0}.".format(','.join(nodes)))
-
-        # get the first state of all nodes and store the state in the
-        # dictionary. note that we start from two distinct scenarios: one
-        # assuming single origin at the root where all present states in the
-        # leave are treated as retentions, and one assuming multiple origins,
-        # where all present states in the leaves are treated as origins
-        for node in nodes:
-            idx = taxa.index(node)
-            if paps[idx] >= 1:
-                state = 1
-            else:
-                state = 0
-            d[node] = [(state,[])]
-
-        # return simple scenario, if the group is single-origin
-        if sum([d[node][0][0] for node in nodes]) == len(nodes):
-            return [(tree.Name,1)]
-
-        # order the internal nodes according to the number of their leaves
-        ordered_nodes = sorted(
-                tree.nontips()+[tree],key=lambda x:len(x.tips())
-                )
-
-        # calculate the general restriction value (maximal weight). This is roughly
-        # spoken simply the minimal value of either all events being counted as
-        # origins (case 1) or assuming origin of the character at the root and
-        # counting all leaves that lost the character as single loss events (case
-        # 2). In case two, the first gain of the character has to be added
-        # additionally
-        maxWeight = min(paps.count(1) * ratio[0], paps.count(0) * ratio[1] + ratio[0])
+        if mode == 'w':
+            RST = min(paps.count(1) * r[0], paps.count(0) * r[1] + r[0])
+        elif mode == 'r':
+            RST = r
 
         # join the nodes successively
         for i,node in enumerate(ordered_nodes):
@@ -474,16 +289,32 @@ class TreBor(object):
                 new_stories = []
                 for x in stories:
                     new_stories += x
-
-                if states_sum == states_len or states_sum == 0:
-
+                
+                # if states are identical and point to gain / presence of chars
+                if states_sum == states_len: 
                     # add the histories to the queue only if their weight is
                     # less or equal to the maxWeight
-                    gl = [k[1] for k in new_stories]+[x for x in [states[0]] if x == 1]
+                    gl = [k[1] for k in new_stories]+[1]
+                    
+                    if mode == 'w':
+                        weight = gl.count(1) * r[0] + gl.count(0) * r[1]
+                    else:
+                        weight = gl.count(1) + 1 # we need to add 1 here
 
-                    weight = gl.count(1) * ratio[0] + gl.count(0) * ratio[1]
-                    if weight <= maxWeight:
-                        newNodes.append((states[0],new_stories))
+                    if weight <= RST:
+                        newNodes.append((1,new_stories))
+                
+                # if states are identical and point to absence of chars
+                elif states_sum == 0:
+                    gl = [k[1] for k in new_stories]
+                    
+                    if mode == 'w':
+                        weight = gl.count(1) * r[0] + gl.count(0) * r[1]
+                    else:
+                        weight = gl.count(1)
+                        
+                    if weight <= RST:
+                        newNodes.append((0,new_stories))
 
                 # if the states are not identical, we check for both scenarios
                 else:
@@ -504,36 +335,30 @@ class TreBor(object):
                     glB = [k[1] for k in tmpB] + [1] # don't forget adding 1 origin
 
                     # check the gain-loss scores
-                    weightA = glA.count(1) * ratio[0] + glA.count(0) * ratio[1]
-                    weightB = glB.count(1) * ratio[0] + glB.count(0) * ratio[1]
+                    if mode == 'w':
+                        weightA = glA.count(1) * r[0] + glA.count(0) * r[1]
+                        weightB = glB.count(1) * r[0] + glB.count(0) * r[1]
+                    else:
+                        weightA = glA.count(1)
+                        weightB = glB.count(1)
 
                     newNodeA = (0,tmpA)
                     newNodeB = (1,tmpB)
+                    
+                    # check for additional gains in the gain-scenario,
+                    # according to the current model, we don't allow for one
+                    # character to be gained twice along a branch, i.e. by an
+                    # ancestor, then get lost, and than be gained anew
+                    if 1 in [k[1] for k in tmpB]:
+                        noB = True
+                    else:
+                        noB = False
 
-                    if weightA <= maxWeight:
+                    if weightA <= RST:
                         newNodes += [newNodeA]
-                    if weightB <= maxWeight:
+                    if weightB <= RST and not noB:
                         newNodes += [newNodeB]
                         
-                        # check whether an additional gain is inferred on either of
-                        # the two possible paths. 
-                        # XXX reduce later, this is not efficient XXX
-                        #if nodeB[0] == 1 and 1 in [k[1] for k in tmpA]:
-                        #    noA = True
-                        #else:
-                        #    noA = False
-                        #if nodeA[0] == 1 and 1 in [k[1] for k in tmpB]:
-                        #    noB = True
-                        #else:
-                        #    noB = False
-              
-                        ## if the weights are above the theoretical maximum, discard
-                        ## the solution
-                        #if weightA <= maxWeight and not noA:
-                        #    newNodes += [newNodeA]
-                        #if weightB <= maxWeight and not noB:
-                        #    newNodes += [newNodeB]
-
                 d[node.Name] = newNodes
                 if verbose: print("nodelen",len(d[node.Name]))
         
@@ -567,7 +392,10 @@ class TreBor(object):
             losses = sum([1 for x in line if x[1] == 0])
 
             # calculate the score
-            score = ratio[0] * gains + ratio[1] * losses
+            if mode == 'w':
+                score = r[0] * gains + r[1] * losses
+            else:
+                score = gains + losses
 
             # append it to the tracer
             tracer.append(score)
@@ -575,166 +403,16 @@ class TreBor(object):
         # get the minimum score
         minScore = min(tracer)
 
-        # return the minimal indices, sort them according to the number of
-        # gains inferred, thereby pushing gains to the root, similar to
-        # Mirkin's (2003) suggestion
-        return sorted(
-                [gls_list[i] for i in range(len(tracer)) if tracer[i] == minScore],
-                key = lambda x:sum([i[1] for i in x])
-                )[0]
+        if mode == 'w':
 
-
-
-    def get_restricted_GLS(
-            self,
-            pap,
-            restriction = 4,
-            verbose = False
-            ):
-        """
-        Calculate a restricted gain-loss-scenario (RGLS) for a given PAP.
-    
-        """
-
-        # make a dictionary that stores the scenario
-        d = {}
-
-        # get the subtree containing all taxa that have positive paps
-        tree = self.tree.lowestCommonAncestor(
-                [self.taxa[i] for i in range(len(self.taxa)) if pap[i] >= 1]
-                )
-
-        # assign the basic (starting) values to the dictionary
-        nodes = [x.Name for x in tree.tips()]
-
-        # get the first state of all nodes and store the state in the dictionary.
-        # note that we start from two distinct scenarios: one assuming single
-        # origin at the root, where all present states in the leave are treated as
-        # retentions, and one assuming multiple origins, where all present states
-        # in the leaves are treated as origins
-        for node in nodes:
-            idx = self.taxa.index(node)
-            if pap[idx] >= 1:
-                state = 1
-            else:
-                state = 0
-            d[node] = [(state,[])]
-
-        # return simple scenario if the group is single-origin
-        if sum([d[node][0][0] for node in nodes]) == len(nodes):
-            return [(tree.Name,1)]
-
-        # order the internal nodes according to the number of their leaves
-        ordered_nodes = sorted(
-                tree.nontips()+[tree],key=lambda x:len(x.tips())
-                )
-
-        # join the nodes successively
-        for i,node in enumerate(ordered_nodes):
-            if verbose: print(node)
-            
-            # get the name of the children of the nodes
-            nameA,nameB = [x.Name for x in node.Children]
-
-            # get the nodes with their states from the dictionary
-            nodesA,nodesB = [d[x.Name] for x in node.Children]
-
-            # there might be alternative states, therefore it is important to
-            # iterate over all possible paths
-            newNodes = []
-            for nodeA in nodesA:
-                for nodeB in nodesB:
-                    # if the nodes have the same state, the state is assigned to
-                    # the most recent common ancestor node
-                    if nodeA[0] == nodeB[0]:
-
-                        # combine the rest of the histories of the items
-                        tmp = nodeA[1] + nodeB[1]
-
-                        # append only if tmp is in concordance with maximal_gains
-                        if len([k for k in tmp if k[1] == 1]) + nodeA[0] <= restriction:
-                            newNodes.append((nodeA[0],tmp))
-
-                    # if the nodes have different states, we go on with two
-                    # distinct scenarios
-                    else:
-                        
-                        # first scenario assumes retention of nodeA
-                        tmpA = nodeA[1] + nodeB[1] + [(nameA,nodeA[0])]
-
-                        # second scenario assumes retention of nodeB
-                        tmpB = nodeA[1] + nodeB[1] + [(nameB,nodeB[0])]
-
-                        newNodeA = nodeB[0],tmpA
-                        newNodeB = nodeA[0],tmpB
-                        
-                        # check whether one of the solutions is already above the
-                        # maximum / best scenario with respect to the gain-loss
-                        # weights as a criterion
-
-                        # first, calculate gains and losses
-                        gainsA = nodeB[0]+sum([k[1] for k in tmpA])
-                        gainsB = nodeA[0]+sum([k[1] for k in tmpB])
-
-                        # check whether an additional gain is inferred on either of
-                        # the two possible paths. 
-                        # XXX reduce later, this is not efficient XXX
-                        if nodeB[0] == 1 and 1 in [k[1] for k in tmpA]:
-                            noA = True
-                        else:
-                            noA = False
-                        if nodeA[0] == 1 and 1 in [k[1] for k in tmpB]:
-                            noB = True
-                        else:
-                            noB = False
-                                            
-                        # if the gains are about the theoretical maximum, discard
-                        # the solution
-                        if gainsA <= restriction and not noA:
-                            newNodes += [newNodeA]
-                        if gainsB <= restriction and not noB:
-                            newNodes += [newNodeB]
-
-                d[node.Name] = newNodes
+            # return the minimal indices, sort them according to the number of
+            # gains inferred, thereby pushing gains to the root, similar to
+            # Mirkin's (2003) suggestion
+            return sorted(
+                    [gls_list[i] for i in range(len(tracer)) if tracer[i] == minScore],
+                    key = lambda x:sum([i[1] for i in x])
+                    )[0]
         
-        # try to find the best scenario by counting the ratio of gains and losses.
-        # the key idea here is to reduce the number of possible scenarios according
-        # to a given criterion. We choose the criterion of minimal changes as a
-        # first criterion to reduce the possibilities, i.e. we weight both gains
-        # and losses by 1 and select only those scenarios where gains and losses
-        # sum up to a minimal number of gains and losses. This pre-selection of
-        # scenarios can be further reduced by weighting gains and losses
-        # differently. So in a second stage we choose only those scenarios where
-        # there is a minimal amount of gains. 
-        
-        if verbose: print(len(d[tree.Name]))
-
-        # convert the specific format of the d[tree.Name] to simple format
-        gls_list = []
-        for first,last in d[tree.Name]:
-            if first == 1:
-                gls_list.append([(tree.Name,first)]+last)
-            else:
-                gls_list.append(last)
-
-        # the tracer stores all scores
-        tracer = []
-
-        for i,line in enumerate(gls_list):
-            
-            # calculate gains and losses
-            gains = sum([1 for x in line if x[1] == 1])
-            losses = sum([1 for x in line if x[1] == 0])
-
-            # calculate the score
-            score = gains + losses
-
-            # append it to the tracer
-            tracer.append(score)
-        
-        # get the minimum score
-        minScore = min(tracer)
-
         # push gains down to the root as suggested by Mirkin 2003
         minimal_gains = [gls_list[i] for i in range(len(tracer)) if tracer[i] == minScore]
         
@@ -753,7 +431,6 @@ class TreBor(object):
             if new_length_of_tips < old_length_of_tips:
                 old_length_of_tips = new_length_of_tips
                 best_scenario = i
-
         return minimal_gains[best_scenario]
 
     def get_GLS(
@@ -786,14 +463,12 @@ class TreBor(object):
             If set to c{True}, the GML-files will be added to a compressed tar-file.
 
         """
-        if mode not in ['weighted','w','r','restriction','bifurcating','b']:
+        if mode not in ['weighted','w','r','restriction']:
             raise ValueError("[!] The mode {0} is not available".format(mode))
 
         # define alias for mode
         if mode in ['w','weighted']:
             mode = 'weighted'
-        elif mode in ['b','bifurcating']:
-            mode = 'bifurcating'
         else:
             mode = 'restriction'
 
@@ -802,8 +477,6 @@ class TreBor(object):
             glm = 'w-{0[0]}-{0[1]}'.format(ratio)
         elif mode == 'restriction':
             glm = 'r-{0}'.format(restriction)
-        elif mode == 'bifurcating':
-            glm = 'b-{0[0]}-{0[1]}'.format(ratio)
         
         # create statistics for this run
         self.stats[glm] = {}
@@ -813,31 +486,25 @@ class TreBor(object):
         self.stats[glm]['dataset'] = self.dataset
 
         # attribute stores all gls for each cog
-        
         self.gls[glm] = {}
-        #self.stats[glm]['gls'] = {}
 
         for cog in self.cogs:
             if verbose: print("[i] Calculating GLS for COG {0}...".format(cog),end="")
             if mode == 'weighted':
-                gls = self.get_weighted_GLS(
+                gls = self._get_GLS(
                         self.paps[cog],
-                        ratio = ratio
+                        r = ratio,
+                        mode = 'w'
                         )
 
             if mode == 'restriction':
-                gls = self.get_restricted_GLS(
+                gls = self._get_GLS(
                         self.paps[cog],
-                        restriction = restriction
-                        )
-            if mode == 'bifurcating':
-                gls = self.get_weighted_GLS_bifurcating(
-                        self.paps[cog],
-                        ratio = ratio
+                        r = restriction,
+                        mode = 'r'
                         )
 
             noo = sum([t[1] for t in gls])
-            #self.stats[glm]['gls'][cog] = sum([t[1] for t in gls])
             
             self.gls[glm][cog] = (gls,noo)
 
@@ -2709,4 +2376,578 @@ class TreBor(object):
             
 
 
+#!depr    def get_weighted_GLS_multi(
+#!depr            self,
+#!depr            pap,
+#!depr            ratio = (1,1),
+#!depr            verbose = False
+#!depr            ):
+#!depr        """
+#!depr        Calculate a weighted gain-loss-scenario (WGLS) for a given PAP.
+#!depr
+#!depr        In contrast to the other modes, bifurcating trees are allowed.
+#!depr        """
+#!depr        
+#!depr        # make a dictionary that stores the scenario
+#!depr        d = {}
+#!depr        
+#!depr        # get the list of nodes that are not missing
+#!depr        taxa,paps = [],[]
+#!depr        for i,taxon in enumerate(self.taxa):
+#!depr            if pap[i] != -1:
+#!depr                taxa += [taxon]
+#!depr                paps += [pap[i]]
+#!depr
+#!depr        # get the subtree of all taxa
+#!depr        tree = self.tree.getSubTree(taxa)
+#!depr
+#!depr        # get the subtree containing all taxa that have positive paps
+#!depr        tree = tree.lowestCommonAncestor(
+#!depr                [
+#!depr                    self.taxa[i] for i in range(len(self.taxa)) if pap[i] >= 1
+#!depr                    ]
+#!depr                )
+#!depr
+#!depr        if verbose: print("[i] Subtree is {0}.".format(str(tree)))
+#!depr
+#!depr        # assign the basic (starting) values to the dictionary
+#!depr        nodes = [t.Name for t in tree.tips()]
+#!depr
+#!depr        if verbose: print("[i] Nodes are {0}.".format(','.join(nodes)))
+#!depr
+#!depr        # get the first state of all nodes and store the state in the
+#!depr        # dictionary. note that we start from two distinct scenarios: one
+#!depr        # assuming single origin at the root where all present states in the
+#!depr        # leave are treated as retentions, and one assuming multiple origins,
+#!depr        # where all present states in the leaves are treated as origins
+#!depr        for node in nodes:
+#!depr            idx = taxa.index(node)
+#!depr            if paps[idx] >= 1:
+#!depr                state = 1
+#!depr            else:
+#!depr                state = 0
+#!depr            d[node] = [(state,[])]
+#!depr
+#!depr        # return simple scenario, if the group is single-origin
+#!depr        if sum([d[node][0][0] for node in nodes]) == len(nodes):
+#!depr            return [(tree.Name,1)]
+#!depr
+#!depr        # order the internal nodes according to the number of their leaves
+#!depr        ordered_nodes = sorted(
+#!depr                tree.nontips()+[tree],key=lambda x:len(x.tips())
+#!depr                )
+#!depr
+#!depr        # calculate the general restriction value (maximal weight). This is roughly
+#!depr        # spoken simply the minimal value of either all events being counted as
+#!depr        # origins (case 1) or assuming origin of the character at the root and
+#!depr        # counting all leaves that lost the character as single loss events (case
+#!depr        # 2). In case two, the first gain of the character has to be added
+#!depr        # additionally
+#!depr        maxWeight = min(paps.count(1) * ratio[0], paps.count(0) * ratio[1] + ratio[0])
+#!depr
+#!depr        # join the nodes successively
+#!depr        for i,node in enumerate(ordered_nodes):
+#!depr            if verbose: print(node.Name)
+#!depr            
+#!depr            # when dealing with multifurcating trees, we have to store all
+#!depr            # possible scenarios, i.e. we need to store the crossproduct of all
+#!depr            # scenarios
+#!depr
+#!depr            # get the names of the children of the nodes
+#!depr            names = [x.Name for x in node.Children]
+#!depr
+#!depr            # get the nodes with their states from the dictionary
+#!depr            tmp_nodes = [d[x.Name] for x in node.Children]
+#!depr
+#!depr            # get the cross-product of the stuff
+#!depr            crossp = itertools.product(*tmp_nodes)
+#!depr            
+#!depr            newNodes = []
+#!depr            
+#!depr            # combine the histories of the items if all have the same value,
+#!depr            # therefore, we first get the states in a simple list
+#!depr            for cross in crossp:
+#!depr                states = [x[0] for x in cross]
+#!depr                stories = [x[1] for x in cross]
+#!depr                states_sum = sum(states)
+#!depr                states_len = len(states)
+#!depr                
+#!depr                # combine the histories
+#!depr                new_stories = []
+#!depr                for x in stories:
+#!depr                    new_stories += x
+#!depr
+#!depr                if states_sum == states_len or states_sum == 0:
+#!depr
+#!depr                    # add the histories to the queue only if their weight is
+#!depr                    # less or equal to the maxWeight
+#!depr                    gl = [k[1] for k in new_stories]+[x for x in [states[0]] if x == 1]
+#!depr
+#!depr                    weight = gl.count(1) * ratio[0] + gl.count(0) * ratio[1]
+#!depr                    if weight <= maxWeight:
+#!depr                        newNodes.append((states[0],new_stories))
+#!depr
+#!depr                # if the states are not identical, we check for both scenarios
+#!depr                else:
+#!depr                    # first scenario (tmpA) assumes origin, that is, for each node
+#!depr                    # that has a 1, we add an origin to new_stories, same is
+#!depr                    # for loss scenario (tmpB)
+#!depr                    tmpA = [x for x in new_stories]
+#!depr                    tmpB = [x for x in new_stories]
+#!depr                    for c,state in enumerate(states):
+#!depr                        if state == 1:
+#!depr                            tmpA += [(names[c],1)]
+#!depr                        else:
+#!depr                            tmpB += [(names[c],0)]
+#!depr
+#!depr                    # get the vectors to make it easier to retrieve the number
+#!depr                    # of losses and gains
+#!depr                    glA = [k[1] for k in tmpA]
+#!depr                    glB = [k[1] for k in tmpB] + [1] # don't forget adding 1 origin
+#!depr
+#!depr                    # check the gain-loss scores
+#!depr                    weightA = glA.count(1) * ratio[0] + glA.count(0) * ratio[1]
+#!depr                    weightB = glB.count(1) * ratio[0] + glB.count(0) * ratio[1]
+#!depr
+#!depr                    newNodeA = (0,tmpA)
+#!depr                    newNodeB = (1,tmpB)
+#!depr
+#!depr                    if 1 in [k[1] for k in tmpB]:
+#!depr                        noB = True
+#!depr                    else:
+#!depr                        noB = False
+#!depr
+#!depr                    if weightA <= maxWeight:
+#!depr                        newNodes += [newNodeA]
+#!depr                    if weightB <= maxWeight and not noB:
+#!depr                        newNodes += [newNodeB]
+#!depr                        
+#!depr                        # check whether an additional gain is inferred on either of
+#!depr                        # the two possible paths. 
+#!depr                        # XXX reduce later, this is not efficient XXX
+#!depr                        #if nodeB[0] == 1 and 1 in [k[1] for k in tmpA]:
+#!depr                        #    noA = True
+#!depr                        #else:
+#!depr                        #    noA = False
+#!depr                        #if nodeA[0] == 1 and 1 in [k[1] for k in tmpB]:
+#!depr                        #    noB = True
+#!depr                        #else:
+#!depr                        #    noB = False
+#!depr              
+#!depr                        ## if the weights are above the theoretical maximum, discard
+#!depr                        ## the solution
+#!depr                        #if weightA <= maxWeight and not noA:
+#!depr                        #    newNodes += [newNodeA]
+#!depr                        #if weightB <= maxWeight and not noB:
+#!depr                        #    newNodes += [newNodeB]
+#!depr
+#!depr                d[node.Name] = newNodes
+#!depr                if verbose: print("nodelen",len(d[node.Name]))
+#!depr        
+#!depr        # try to find the best scenario by counting the ratio of gains and losses.
+#!depr        # the key idea here is to reduce the number of possible scenarios according
+#!depr        # to a given criterion. We choose the criterion of minimal changes as a
+#!depr        # first criterion to reduce the possibilities, i.e. we weight both gains
+#!depr        # and losses by 1 and select only those scenarios where gains and losses
+#!depr        # sum up to a minimal number of gains and losses. This pre-selection of
+#!depr        # scenarios can be further reduced by weighting gains and losses
+#!depr        # differently. So in a second stage we choose only those scenarios where
+#!depr        # there is a minimal amount of gains. 
+#!depr        
+#!depr        if verbose: print(len(d[tree.Name]))
+#!depr
+#!depr        # convert the specific format of the d[tree.Name] to simple format
+#!depr        gls_list = []
+#!depr        for first,last in d[tree.Name]:
+#!depr            if first == 1:
+#!depr                gls_list.append([(tree.Name,first)]+last)
+#!depr            else:
+#!depr                gls_list.append(last)
+#!depr
+#!depr        # the tracer stores all scores
+#!depr        tracer = []
+#!depr
+#!depr        for i,line in enumerate(gls_list):
+#!depr            
+#!depr            # calculate gains and losses
+#!depr            gains = sum([1 for x in line if x[1] == 1])
+#!depr            losses = sum([1 for x in line if x[1] == 0])
+#!depr
+#!depr            # calculate the score
+#!depr            score = ratio[0] * gains + ratio[1] * losses
+#!depr
+#!depr            # append it to the tracer
+#!depr            tracer.append(score)
+#!depr        
+#!depr        # get the minimum score
+#!depr        minScore = min(tracer)
+#!depr
+#!depr        # return the minimal indices, sort them according to the number of
+#!depr        # gains inferred, thereby pushing gains to the root, similar to
+#!depr        # Mirkin's (2003) suggestion
+#!depr        return sorted(
+#!depr                [gls_list[i] for i in range(len(tracer)) if tracer[i] == minScore],
+#!depr                key = lambda x:sum([i[1] for i in x])
+#!depr                )[0]
+#!depr
+#!depr
+#!depr
+#!depr    def get_restricted_GLS(
+#!depr            self,
+#!depr            pap,
+#!depr            restriction = 4,
+#!depr            verbose = False
+#!depr            ):
+#!depr        """
+#!depr        Calculate a restricted gain-loss-scenario (RGLS) for a given PAP.
+#!depr    
+#!depr        """
+#!depr
+#!depr        # make a dictionary that stores the scenario
+#!depr        d = {}
+#!depr
+#!depr        # get the subtree containing all taxa that have positive paps
+#!depr        tree = self.tree.lowestCommonAncestor(
+#!depr                [self.taxa[i] for i in range(len(self.taxa)) if pap[i] >= 1]
+#!depr                )
+#!depr
+#!depr        # assign the basic (starting) values to the dictionary
+#!depr        nodes = [x.Name for x in tree.tips()]
+#!depr
+#!depr        # get the first state of all nodes and store the state in the dictionary.
+#!depr        # note that we start from two distinct scenarios: one assuming single
+#!depr        # origin at the root, where all present states in the leave are treated as
+#!depr        # retentions, and one assuming multiple origins, where all present states
+#!depr        # in the leaves are treated as origins
+#!depr        for node in nodes:
+#!depr            idx = self.taxa.index(node)
+#!depr            if pap[idx] >= 1:
+#!depr                state = 1
+#!depr            else:
+#!depr                state = 0
+#!depr            d[node] = [(state,[])]
+#!depr
+#!depr        # return simple scenario if the group is single-origin
+#!depr        if sum([d[node][0][0] for node in nodes]) == len(nodes):
+#!depr            return [(tree.Name,1)]
+#!depr
+#!depr        # order the internal nodes according to the number of their leaves
+#!depr        ordered_nodes = sorted(
+#!depr                tree.nontips()+[tree],key=lambda x:len(x.tips())
+#!depr                )
+#!depr
+#!depr        # join the nodes successively
+#!depr        for i,node in enumerate(ordered_nodes):
+#!depr            if verbose: print(node)
+#!depr            
+#!depr            # get the name of the children of the nodes
+#!depr            nameA,nameB = [x.Name for x in node.Children]
+#!depr
+#!depr            # get the nodes with their states from the dictionary
+#!depr            nodesA,nodesB = [d[x.Name] for x in node.Children]
+#!depr
+#!depr            # there might be alternative states, therefore it is important to
+#!depr            # iterate over all possible paths
+#!depr            newNodes = []
+#!depr            for nodeA in nodesA:
+#!depr                for nodeB in nodesB:
+#!depr                    # if the nodes have the same state, the state is assigned to
+#!depr                    # the most recent common ancestor node
+#!depr                    if nodeA[0] == nodeB[0]:
+#!depr
+#!depr                        # combine the rest of the histories of the items
+#!depr                        tmp = nodeA[1] + nodeB[1]
+#!depr
+#!depr                        # append only if tmp is in concordance with maximal_gains
+#!depr                        if len([k for k in tmp if k[1] == 1]) + nodeA[0] <= restriction:
+#!depr                            newNodes.append((nodeA[0],tmp))
+#!depr
+#!depr                    # if the nodes have different states, we go on with two
+#!depr                    # distinct scenarios
+#!depr                    else:
+#!depr                        
+#!depr                        # first scenario assumes retention of nodeA
+#!depr                        tmpA = nodeA[1] + nodeB[1] + [(nameA,nodeA[0])]
+#!depr
+#!depr                        # second scenario assumes retention of nodeB
+#!depr                        tmpB = nodeA[1] + nodeB[1] + [(nameB,nodeB[0])]
+#!depr
+#!depr                        newNodeA = nodeB[0],tmpA
+#!depr                        newNodeB = nodeA[0],tmpB
+#!depr                        
+#!depr                        # check whether one of the solutions is already above the
+#!depr                        # maximum / best scenario with respect to the gain-loss
+#!depr                        # weights as a criterion
+#!depr
+#!depr                        # first, calculate gains and losses
+#!depr                        gainsA = nodeB[0]+sum([k[1] for k in tmpA])
+#!depr                        gainsB = nodeA[0]+sum([k[1] for k in tmpB])
+#!depr
+#!depr                        # check whether an additional gain is inferred on either of
+#!depr                        # the two possible paths. 
+#!depr                        # XXX reduce later, this is not efficient XXX
+#!depr                        if nodeB[0] == 1 and 1 in [k[1] for k in tmpA]:
+#!depr                            noA = True
+#!depr                        else:
+#!depr                            noA = False
+#!depr                        if nodeA[0] == 1 and 1 in [k[1] for k in tmpB]:
+#!depr                            noB = True
+#!depr                        else:
+#!depr                            noB = False
+#!depr                                            
+#!depr                        # if the gains are about the theoretical maximum, discard
+#!depr                        # the solution
+#!depr                        if gainsA <= restriction and not noA:
+#!depr                            newNodes += [newNodeA]
+#!depr                        if gainsB <= restriction and not noB:
+#!depr                            newNodes += [newNodeB]
+#!depr
+#!depr                d[node.Name] = newNodes
+#!depr        
+#!depr        # try to find the best scenario by counting the ratio of gains and losses.
+#!depr        # the key idea here is to reduce the number of possible scenarios according
+#!depr        # to a given criterion. We choose the criterion of minimal changes as a
+#!depr        # first criterion to reduce the possibilities, i.e. we weight both gains
+#!depr        # and losses by 1 and select only those scenarios where gains and losses
+#!depr        # sum up to a minimal number of gains and losses. This pre-selection of
+#!depr        # scenarios can be further reduced by weighting gains and losses
+#!depr        # differently. So in a second stage we choose only those scenarios where
+#!depr        # there is a minimal amount of gains. 
+#!depr        
+#!depr        if verbose: print(len(d[tree.Name]))
+#!depr
+#!depr        # convert the specific format of the d[tree.Name] to simple format
+#!depr        gls_list = []
+#!depr        for first,last in d[tree.Name]:
+#!depr            if first == 1:
+#!depr                gls_list.append([(tree.Name,first)]+last)
+#!depr            else:
+#!depr                gls_list.append(last)
+#!depr
+#!depr        # the tracer stores all scores
+#!depr        tracer = []
+#!depr
+#!depr        for i,line in enumerate(gls_list):
+#!depr            
+#!depr            # calculate gains and losses
+#!depr            gains = sum([1 for x in line if x[1] == 1])
+#!depr            losses = sum([1 for x in line if x[1] == 0])
+#!depr
+#!depr            # calculate the score
+#!depr            score = gains + losses
+#!depr
+#!depr            # append it to the tracer
+#!depr            tracer.append(score)
+#!depr        
+#!depr        # get the minimum score
+#!depr        minScore = min(tracer)
+#!depr
+#!depr        # push gains down to the root as suggested by Mirkin 2003
+#!depr        minimal_gains = [gls_list[i] for i in range(len(tracer)) if tracer[i] == minScore]
+#!depr        
+#!depr        best_scenario = None
+#!depr        old_length_of_tips = len(self.taxa) + 1
+#!depr
+#!depr        for i,line in enumerate(minimal_gains):
+#!depr            
+#!depr            # calculate number of tips for the gains of a given scenario
+#!depr            new_length_of_tips = 0
+#!depr            for taxon,state in line:
+#!depr                if state == 1:
+#!depr                    new_length_of_tips += len(
+#!depr                            self.tree.getNodeMatchingName(taxon).getTipNames()
+#!depr                            )
+#!depr            if new_length_of_tips < old_length_of_tips:
+#!depr                old_length_of_tips = new_length_of_tips
+#!depr                best_scenario = i
+#!depr
+#!depr        return minimal_gains[best_scenario]
+
+#!depr    def get_weighted_GLS(
+#!depr            self,
+#!depr            pap,
+#!depr            ratio = (1,1),
+#!depr            verbose = False
+#!depr            ):
+#!depr        """
+#!depr        Calculate a weighted gain-loss-scenario (WGLS) for a given PAP.
+#!depr        """
+#!depr        
+#!depr        # make a dictionary that stores the scenario
+#!depr        d = {}
+#!depr        
+#!depr        # get the list of nodes that are not missing
+#!depr        taxa,paps = [],[]
+#!depr        for i,taxon in enumerate(self.taxa):
+#!depr            if pap[i] != -1:
+#!depr                taxa += [taxon]
+#!depr                paps += [pap[i]]
+#!depr
+#!depr        # get the subtree of all taxa
+#!depr        tree = self.tree.getSubTree(taxa)
+#!depr
+#!depr        # get the subtree containing all taxa that have positive paps
+#!depr        tree = tree.lowestCommonAncestor(
+#!depr                [
+#!depr                    self.taxa[i] for i in range(len(self.taxa)) if pap[i] >= 1
+#!depr                    ]
+#!depr                )
+#!depr
+#!depr        if verbose: print("[i] Subtree is {0}.".format(str(tree)))
+#!depr
+#!depr        # assign the basic (starting) values to the dictionary
+#!depr        nodes = [t.Name for t in tree.tips()]
+#!depr
+#!depr        if verbose: print("[i] Nodes are {0}.".format(','.join(nodes)))
+#!depr
+#!depr        # get the first state of all nodes and store the state in the
+#!depr        # dictionary. note that we start from two distinct scenarios: one
+#!depr        # assuming single origin at the root where all present states in the
+#!depr        # leave are treated as retentions, and one assuming multiple origins,
+#!depr        # where all present states in the leaves are treated as origins
+#!depr        for node in nodes:
+#!depr            idx = taxa.index(node)
+#!depr            if paps[idx] >= 1:
+#!depr                state = 1
+#!depr            else:
+#!depr                state = 0
+#!depr            d[node] = [(state,[])]
+#!depr
+#!depr        # return simple scenario, if the group is single-origin
+#!depr        if sum([d[node][0][0] for node in nodes]) == len(nodes):
+#!depr            return [(tree.Name,1)]
+#!depr
+#!depr        # order the internal nodes according to the number of their leaves
+#!depr        ordered_nodes = sorted(
+#!depr                tree.nontips()+[tree],key=lambda x:len(x.tips())
+#!depr                )
+#!depr
+#!depr        # calculate the general restriction value (maximal weight). This is roughly
+#!depr        # spoken simply the minimal value of either all events being counted as
+#!depr        # origins (case 1) or assuming origin of the character at the root and
+#!depr        # counting all leaves that lost the character as single loss events (case
+#!depr        # 2). In case two, the first gain of the character has to be added
+#!depr        # additionally
+#!depr        maxWeight = min(paps.count(1) * ratio[0], paps.count(0) * ratio[1] + ratio[0])
+#!depr
+#!depr        # join the nodes successively
+#!depr        for i,node in enumerate(ordered_nodes):
+#!depr            if verbose: print(node.Name)
+#!depr            
+#!depr            # get the name of the children of the nodes
+#!depr            nameA,nameB = [x.Name for x in node.Children]
+#!depr
+#!depr            # get the nodes with their states from the dictionary
+#!depr            nodesA,nodesB = [d[x.Name] for x in node.Children]
+#!depr
+#!depr            # there might be alternative states, therefore it is important to
+#!depr            # iterate over all possible paths
+#!depr            newNodes = []
+#!depr            for nodeA in nodesA:
+#!depr                for nodeB in nodesB:
+#!depr                    # if the nodes have the same state, the state is assigned to
+#!depr                    # the most recent common ancestor node
+#!depr                    if nodeA[0] == nodeB[0]:
+#!depr
+#!depr                        # combine the rest of the histories of the items
+#!depr                        tmp = nodeA[1] + nodeB[1]
+#!depr
+#!depr                        # add them to the queue only if their weight is less or
+#!depr                        # equal to the maxWeight
+#!depr                        gl = [k[1] for k in tmp]+[x for x in [nodeA[0]] if x == 1]
+#!depr                        weight = gl.count(1) * ratio[0] + gl.count(0) * ratio[1]
+#!depr
+#!depr                        if weight <= maxWeight:
+#!depr                            newNodes.append((nodeA[0],tmp))
+#!depr
+#!depr                    # if the nodes have different states, we go on with two
+#!depr                    # distinct scenarios
+#!depr                    else:
+#!depr                        
+#!depr                        # first scenario assumes retention of nodeB
+#!depr                        tmpA = nodeA[1] + nodeB[1] + [(nameA,nodeA[0])]
+#!depr
+#!depr                        # second scenario assumes retention of nodeA
+#!depr                        tmpB = nodeA[1] + nodeB[1] + [(nameB,nodeB[0])]
+#!depr
+#!depr                        # get the vectors in order to make it easier to retrieve
+#!depr                        # the number of losses and gains
+#!depr                        glA = [k[1] for k in tmpA] + [x for x in [nodeB[0]] if x == 1]
+#!depr                        glB = [k[1] for k in tmpB] + [x for x in [nodeA[0]] if x == 1]
+#!depr
+#!depr                        # check the gain-loss scores 
+#!depr                        weightA = glA.count(1) * ratio[0] + glA.count(0) * ratio[1]
+#!depr                        weightB = glB.count(1) * ratio[0] + glB.count(0) * ratio[1]
+#!depr                        
+#!depr                        # check whether an additional gain is inferred on either of
+#!depr                        # the two possible paths. 
+#!depr                        # XXX reduce later, this is not efficient XXX
+#!depr                        if nodeB[0] == 1 and 1 in [k[1] for k in tmpA]:
+#!depr                            noA = True
+#!depr                        else:
+#!depr                            noA = False
+#!depr                        if nodeA[0] == 1 and 1 in [k[1] for k in tmpB]:
+#!depr                            noB = True
+#!depr                        else:
+#!depr                            noB = False
+#!depr
+#!depr                        newNodeA = nodeB[0],tmpA
+#!depr                        newNodeB = nodeA[0],tmpB
+#!depr                                            
+#!depr                        # if the weights are above the theoretical maximum, discard
+#!depr                        # the solution
+#!depr                        if weightA <= maxWeight and not noA:
+#!depr                            newNodes += [newNodeA]
+#!depr                        if weightB <= maxWeight and not noB:
+#!depr                            newNodes += [newNodeB]
+#!depr
+#!depr                d[node.Name] = newNodes
+#!depr                if verbose: print("nodelen",len(d[node.Name]))
+#!depr        
+#!depr        # try to find the best scenario by counting the ratio of gains and losses.
+#!depr        # the key idea here is to reduce the number of possible scenarios according
+#!depr        # to a given criterion. We choose the criterion of minimal changes as a
+#!depr        # first criterion to reduce the possibilities, i.e. we weight both gains
+#!depr        # and losses by 1 and select only those scenarios where gains and losses
+#!depr        # sum up to a minimal number of gains and losses. This pre-selection of
+#!depr        # scenarios can be further reduced by weighting gains and losses
+#!depr        # differently. So in a second stage we choose only those scenarios where
+#!depr        # there is a minimal amount of gains. 
+#!depr        
+#!depr        if verbose: print(len(d[tree.Name]))
+#!depr
+#!depr        # convert the specific format of the d[tree.Name] to simple format
+#!depr        gls_list = []
+#!depr        for first,last in d[tree.Name]:
+#!depr            if first == 1:
+#!depr                gls_list.append([(tree.Name,first)]+last)
+#!depr            else:
+#!depr                gls_list.append(last)
+#!depr
+#!depr        # the tracer stores all scores
+#!depr        tracer = []
+#!depr
+#!depr        for i,line in enumerate(gls_list):
+#!depr            
+#!depr            # calculate gains and losses
+#!depr            gains = sum([1 for x in line if x[1] == 1])
+#!depr            losses = sum([1 for x in line if x[1] == 0])
+#!depr
+#!depr            # calculate the score
+#!depr            score = ratio[0] * gains + ratio[1] * losses
+#!depr
+#!depr            # append it to the tracer
+#!depr            tracer.append(score)
+#!depr        
+#!depr        # get the minimum score
+#!depr        minScore = min(tracer)
+#!depr
+#!depr        # return the minimal indices, sort them according to the number of
+#!depr        # gains inferred, thereby pushing gains to the root, similar to
+#!depr        # Mirkin's (2003) suggestion
+#!depr        return sorted(
+#!depr                [gls_list[i] for i in range(len(tracer)) if tracer[i] == minScore],
+#!depr                key = lambda x:sum([i[1] for i in x])
+#!depr                )[0]
+    
 
