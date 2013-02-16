@@ -888,32 +888,24 @@ class TreBor(object):
         Calculate the Contemporary Vocabulary Size Distribution (CVSD).
 
         """
-        # XXX todo: Note that form/meaning distributions are problematic, we have
-        # XXX find a much better way to cope with this
-
         # define taxa and concept as attribute for convenience
         taxa = self.taxa
         concepts = self.wl.concept
 
-        # create list to store the forms and the concepts
-        dist = [] 
-        
         # calculate vocabulary size
-        size = []
+        forms = []
+        meanings = []
         for taxon in taxa:
-            s = len([
-                    x for x in set(
-                        self.wl.get_list(
-                            col=taxon,
-                            entry=self._pap_string,
-                            flat = True
-                            )
-                        ) if x in self.cogs
-                    ])
-            size += [s]
+            f = [x for x in set(
+                self.wl.get_list(col=taxon,entry=self._pap_string,flat=True)
+                ) if x in self.cogs
+                ]
+            m = set([x.split(':')[1] for x in f])
+            forms += [len(f)]
+            meanings += [len(m)]
         
         # store the stuff as an attribute
-        self.dists['contemporary'] = size
+        self.dists['contemporary'] = [x for x,y in zip(forms,meanings)] # XXX
 
         if verbose: print("[i] Calculated the distributions for contemporary taxa.")
         
@@ -927,10 +919,6 @@ class TreBor(object):
         """
         Function retrieves all paps for ancestor languages in a given tree.
         """
-
-        # XXX todo: Note that form/meaning distributions are problematic, we have
-        # XXX find a much better way to cope with this
-
         # define concepts for convenience
         concepts = self.wl.concept
         
@@ -984,12 +972,29 @@ class TreBor(object):
                 # assign this state to all subtree nodes
                 for node in sub_tree_nodes:
                     paps[i][nodes.index(node)] = this_state
-        
-        # get the vocabulary size
-        size = [sum([p[i] for p in paps]) for i in range(len(nodes))]
 
-        # store the stuff as an attribute
-        self.dists[glm] = size
+        # get number of forms and number of meanings
+        # extract cogs instead of numbers, XXX this can actually be done in the
+        # step before, it's just for testing at the moment
+        for i,cog in enumerate(cog_list):
+            for j,t in enumerate(paps[i]):
+                if t == 1:
+                    paps[i][j] = cog
+                else:
+                    pass
+        
+        # get forms and meanings
+        forms = []
+        meanings = []
+        for i in range(len(paps[0])):
+            f = set([x[i] for x in paps if x[i] != 0])
+            m = set([x[i].split(':')[1] for x in paps if x[i] != 0])
+            forms += [len(f)]
+            meanings += [len(m)]
+
+        # store the number of forms as an attribute
+        self.dists[glm] = [x for x,y in zip(forms,meanings)] # XXX
+
 
         if verbose: print("[i] Calculated the distributions for ancestral taxa.")
 
