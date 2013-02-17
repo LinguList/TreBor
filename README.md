@@ -28,6 +28,8 @@ This is surely not the most economic solution, and we will try to reduce the num
 * file.json: A file containing specific format-parameters for the output of the plots. For all details of this format, check the example files provided in the test directory.
 * file.tre: A file containing the reference tree in Newick format.
 
+# Testing the Code
 
-
+For the testing of the code, we provide a short dataset in the test-directory (https://github.com/LinguList/TreBor/tree/master/test). 
+See the instructions in https://github.com/LinguList/TreBor/blob/master/test/README.md on how to run the test.
 
