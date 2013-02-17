@@ -1,0 +1,1179 @@
+# Wordlist
+ID	DOCULECT	TAXONID	CONCEPT	GLOSSID	MANDARIN	ORDER	IPA	COUNTERPART	COGID	NOTE	PARTOFSPEECH	BASIC	PROTO
+#
+1	Shanghai	01	sun	1	太阳	0	tʰa³⁴⁻³³ɦiã¹³⁻⁴⁴	太阳	2287	-	noun	basic_word	太阳
+2	Shanghai	01	sun	1	太阳	1	ȵjɪʔ¹⁻¹¹dɤ¹³⁻²³	日头	2288	-	noun	basic_word	日头
+3	Suzhou	02	sun	1	太阳	0	ȵiəʔ³dʏ¹³⁻²¹	热头	2289	-	noun	basic_word	热头
+4	Suzhou	02	sun	1	太阳	1	tʰɑ⁵¹³⁻⁵⁵ɦiã¹³⁻²¹	太阳	2287	-	noun	basic_word	太阳
+5	Hangzhou	03	sun	1	太阳	0	tʰᴇ⁴⁴⁵ɦiɑŋ²¹³⁻³¹	太阳	2287	-	noun	basic_word	太阳
+6	Wenzhou	04	sun	1	太阳	0	tʰa⁴²⁻²²ji	太阳	2287	-	noun	basic_word	太阳
+7	Wenzhou	04	sun	1	太阳	1	ȵi²¹³⁻²²dɤu	日头	2288	-	noun	basic_word	日头
+8	Wenzhou	04	sun	1	太阳	2	ȵi²¹³⁻²¹dɤu³¹⁻³⁵vai²¹³⁻¹³	日头佛	2296	-	noun	basic_word	日头佛
+9	Guangzhou	05	sun	1	太阳	0	jit²tʰɐu²¹⁻³⁵	热头	2289	-	noun	basic_word	热头
+10	Guangzhou	05	sun	1	太阳	1	tʰai³³jœŋ²¹	太阳	2287	-	noun	basic_word	太阳
+11	Nanning	06	sun	1	太阳	0	jɐt²²tʰɐu²¹	日头	2288	-	noun	basic_word	日头
+12	Nanning	06	sun	1	太阳	1	jit²²tʰɐu²¹	热头	2289	-	noun	basic_word	热头
+13	Xianggang	07	sun	1	太阳	0	jɐt²tʰɐu²¹⁻³⁵	日头	2288	-	noun	basic_word	日头
+14	Xianggang	07	sun	1	太阳	1	tʰai³³jœŋ²¹	太阳	2287	-	noun	basic_word	太阳
+15	Xiamen	08	sun	1	太阳	0	lit⁵⁻²¹tʰau	日头	2288	-	noun	basic_word	日头
+16	Xiamen	08	sun	1	太阳	1	tʰai²¹⁻⁵³iɔŋ³⁵	太阳	2287	-	noun	basic_word	太阳
+17	Fuzhou	09	sun	1	太阳	0	niʔ⁵⁻⁴⁴tʰau⁵³	日头	2288	-	noun	basic_word	日头
+18	Jian'ou	10	sun	1	太阳	0	mi³³tʰe³³	日头	2288	-	noun	basic_word	日头
+19	Shantou	11	sun	1	太阳	0	zik⁵	日	2290	-	noun	basic_word	日
+20	Shantou	11	sun	1	太阳	1	zik⁵⁻²tʰau⁵⁵	日头	2288	-	noun	basic_word	日头
+21	Haikou	12	sun	1	太阳	0	zit³	日	2290	-	noun	basic_word	日
+22	Haikou	12	sun	1	太阳	1	zit³hau³¹	日头	2288	-	noun	basic_word	日头
+23	Taibei	13	sun	1	太阳	0	tʰai¹¹⁻⁵³iɔŋ²⁴	太阳	2287	-	noun	basic_word	太阳
+24	Taibei	13	sun	1	太阳	1	lit⁴⁴⁻³²tʰau²⁴	日头	2288	-	noun	basic_word	日头
+25	Meixian	14	sun	1	太阳	0	ŋit¹tʰeu¹¹	日头	2288	-	noun	basic_word	日头
+26	Taoyuan	15	sun	1	太阳	0	tʰɑi⁵⁵ʒoŋ¹¹	太阳	2287	-	noun	basic_word	太阳
+27	Taoyuan	15	sun	1	太阳	1	ŋit²²tʰeu¹¹	日头	2288	-	noun	basic_word	日头
+28	Nanchang	16	sun	1	太阳	0	tʰai²¹³iŋ⁰⁴	太阳	2287	-	noun	basic_word	太阳
+29	Nanchang	16	sun	1	太阳	1	ȵiʔ⁵tʰu⁰²	日头	2288	-	noun	basic_word	日头
+30	Changsha	17	sun	1	太阳	0	tʰai⁵⁵ian¹³	太阳	2287	-	noun	basic_word	太阳
+31	Changsha	17	sun	1	太阳	1	ʐʅ²⁴təu	日头	2288	-	noun	basic_word	日头
+32	Xiangtan	18	sun	1	太阳	0	tʰai⁵⁵ian¹²	太阳	2287	-	noun	basic_word	太阳
+33	Xiangtan	18	sun	1	太阳	1	i²⁴dəɯ¹²	日头	2288	-	noun	basic_word	日头
+34	Shexian	19	sun	1	太阳	0	ni²²tʰiu⁴⁴	日头	2288	-	noun	basic_word	日头
+35	Shexian	19	sun	1	太阳	1	tʰa³²⁴⁻³²ia⁴⁴	太阳	2287	-	noun	basic_word	太阳
+36	Tunxi	20	sun	1	太阳	0	ȵie¹¹tʰiu⁴⁴	日头	2288	-	noun	basic_word	日头
+37	Tunxi	20	sun	1	太阳	1	tʰa⁴²⁻¹¹iau⁴⁴	太阳	2287	-	noun	basic_word	太阳
+38	Taiyuan	21	sun	1	太阳	0	iɒ̃¹¹pʰɒ̃¹¹	阳婆	2292	-	noun	basic_word	阳婆
+39	Taiyuan	21	sun	1	太阳	1	tai⁴⁵iɒ̃¹¹⁻⁵³	太阳	2287	-	noun	basic_word	太阳
+40	Pingyao	22	sun	1	太阳	0	ʐʌʔ⁵³təu¹³⁻⁵³iᴇ¹³⁻³¹	日头爷	2291	-	noun	basic_word	日头爷
+41	Pingyao	22	sun	1	太阳	1	iᴇ¹³iᴇ¹³	爷爷	2295	-	noun	basic_word	爷爷
+42	Huhehaote	23	sun	1	太阳	0	tʰɛ⁵⁵iɑ̃³¹	太阳	2287	-	noun	basic_word	太阳
+43	Huhehaote	23	sun	1	太阳	1	ʐʅ⁵⁵tʰəu³¹	日头	2288	-	noun	basic_word	日头
+44	Huhehaote	23	sun	1	太阳	2	iɑ̃³¹pʰaʔ	阳婆	2292	-	noun	basic_word	阳婆
+45	Beijing	24	sun	1	太阳	0	tʰai⁵¹iɑŋ¹	太阳	2287	-	noun	basic_word	太阳
+46	Beijing	24	sun	1	太阳	1	lɑu²¹⁴⁻²¹ir³⁵	老爷儿	2293	-	noun	basic_word	老爷
+47	Beijing	24	sun	1	太阳	2	ʐʅ⁵¹tʰou¹	日头	2288	-	noun	basic_word	日头
+48	Tianjin	25	sun	1	太阳	0	tʰai⁵³iɑŋ⁴⁵	太阳	2287	-	noun	basic_word	太阳
+49	Jinan	26	sun	1	太阳	0	tʰɛ²¹iaŋ	太阳	2287	-	noun	basic_word	太阳
+50	Jinan	26	sun	1	太阳	1	lɔ⁵⁵iə⁴²iər⁴²	老爷爷儿	2294	(用于冬季)	noun	basic_word	老爷爷
+51	Jinan	26	sun	1	太阳	2	ʐʅ²¹⁻⁵⁴⁴tʰou	日头	2288	(用于有的熟语)	noun	basic_word	日头
+52	Qingdao	27	sun	1	太阳	0	i⁴²tʰou	日头	2288	-	noun	basic_word	日头
+53	Qingdao	27	sun	1	太阳	1	tʰɛ²¹³iaŋ⁴²	太阳	2287	-	noun	basic_word	太阳
+54	Nanjing	28	sun	1	太阳	0	tʰae⁴⁴iaŋ	太阳	2287	-	noun	basic_word	太阳
+55	Hefei	29	sun	1	太阳	0	tʰᴇ⁵³iɑ̃	太阳	2287	-	noun	basic_word	太阳
+56	Hefei	29	sun	1	太阳	1	ʐəʔ⁵tʰɯ	日头	2288	-	noun	basic_word	日头
+57	Zhengzhou	30	sun	1	太阳	0	ʐʅ²⁴tʰou	日头	2288	-	noun	basic_word	日头
+58	Zhengzhou	30	sun	1	太阳	1	tʰai³¹²⁻³¹iaŋ	太阳	2287	-	noun	basic_word	太阳
+59	Wuhan	31	sun	1	太阳	0	tʰai³⁵iaŋ	太阳	2287	-	noun	basic_word	太阳
+60	Wuhan	31	sun	1	太阳	1	ɯ²¹³⁻²¹tʰəu	日头	2288	-	noun	basic_word	日头
+61	Chengdu	32	sun	1	太阳	0	tʰai¹³iaŋ³¹	太阳	2287	-	noun	basic_word	太阳
+62	Guiyang	33	sun	1	太阳	0	tʰai²¹³iaŋ²¹	太阳	2287	-	noun	basic_word	太阳
+63	Kunming	34	sun	1	太阳	0	tʰæ²¹²iᴀ̃³¹	太阳	2287	-	noun	basic_word	太阳
+64	Kunming	34	sun	1	太阳	1	ʐə³¹tʰəu³¹⁻⁴⁴	热头	2289	-	noun	basic_word	热头
+65	Haerbin	35	sun	1	太阳	0	tʰai⁵³iaŋ	太阳	2287	-	noun	basic_word	太阳
+66	Haerbin	35	sun	1	太阳	1	ʐʅ⁵³tʰou	日头	2288	-	noun	basic_word	日头
+67	Xi'an	36	sun	1	太阳	0	ər²¹tʰou	日头	2288	OLD:老	noun	basic_word	日头
+68	Xi'an	36	sun	1	太阳	1	tʰai⁴⁴iaŋ	太阳	2287	-	noun	basic_word	太阳
+69	Yinchuan	37	sun	1	太阳	0	ʐʅ¹³⁻¹¹tʰəu	日头	2288	-	noun	basic_word	日头
+70	Yinchuan	37	sun	1	太阳	1	tʰɛ¹³⁻¹¹iɑŋ	太阳	2287	-	noun	basic_word	太阳
+71	Lanzhou	38	sun	1	太阳	0	ʐʅ¹³⁻¹¹tʰou¹³	日头	2288	-	noun	basic_word	日头
+72	Lanzhou	38	sun	1	太阳	1	tʰɛ¹³⁻¹¹iɑ̃⁵³	太阳	2287	-	noun	basic_word	太阳
+73	Xining	39	sun	1	太阳	0	ʐɛ⁴⁴⁻²¹tʰɯ²⁴⁻²¹ɛ²⁴⁻⁵³	热头儿	2289	-	noun	basic_word	热头
+74	Wulumuqi	40	sun	1	太阳	0	tʰai²¹³⁻¹³iɑŋ	太阳	2287	-	noun	basic_word	太阳
+#
+75	Shanghai	01	moon	2	月亮	2	ɦyɪʔ¹⁻¹¹liã¹³⁻²³	月亮	1734	-	noun	basic_word	月亮
+76	Shanghai	01	moon	2	月亮	3	ɦyɪʔ¹⁻¹¹kuɑ̃⁵³⁻²³	月光	1736	-	noun	basic_word	月光
+77	Suzhou	02	moon	2	月亮	2	ŋəʔ²liã³¹⁻²¹	月亮	1734	-	noun	basic_word	月亮
+78	Hangzhou	03	moon	2	月亮	1	ɦyəʔ²liɑŋ¹³	月亮	1734	-	noun	basic_word	月亮
+79	Wenzhou	04	moon	2	月亮	3	ȵy²¹³⁻²¹kuɔ³³	月光	1736	-	noun	basic_word	月光
+80	Wenzhou	04	moon	2	月亮	4	ȵy²¹³⁻²¹kuɔ³³⁻³⁵vai²¹³⁻¹³	月光佛	1745	-	noun	basic_word	月光佛
+81	Guangzhou	05	moon	2	月亮	2	jyt²kwɔŋ⁵⁵	月光	1736	-	noun	basic_word	月光
+82	Guangzhou	05	moon	2	月亮	3	jyt²lœŋ²²	月亮	1734	-	noun	basic_word	月亮
+83	Nanning	06	moon	2	月亮	2	yt²²kɔŋ⁵⁵	月光	1736	-	noun	basic_word	月光
+84	Xianggang	07	moon	2	月亮	2	jyt²kwɔŋ⁵⁵	月光	1736	-	noun	basic_word	月光
+85	Xianggang	07	moon	2	月亮	3	jyt²lœŋ²²	月亮	1734	-	noun	basic_word	月亮
+86	Xiamen	08	moon	2	月亮	2	geʔ⁵⁻²¹	月	1735	-	noun	basic_word	月
+87	Xiamen	08	moon	2	月亮	3	geʔ⁵⁻²¹niu³⁵	月娘	1739	-	noun	basic_word	月娘
+88	Fuzhou	09	moon	2	月亮	1	ŋuoʔ⁵	月	1735	-	noun	basic_word	月
+89	Jian'ou	10	moon	2	月亮	1	ŋyɛ⁴²ni⁴⁴nai³³	月呢奶	1737	-	noun	basic_word	月呢奶
+90	Shantou	11	moon	2	月亮	2	gueʔ⁵	月	1735	-	noun	basic_word	月
+91	Shantou	11	moon	2	月亮	3	gueʔ⁵⁻²niõ⁵⁵	月娘	1739	-	noun	basic_word	月娘
+92	Haikou	12	moon	2	月亮	2	vue³³	月	1735	-	noun	basic_word	月
+93	Haikou	12	moon	2	月亮	3	vue³³nio³¹	月娘	1739	-	noun	basic_word	月娘
+94	Taibei	13	moon	2	月亮	2	geʔ⁴⁴⁻³²liũ²⁴	月娘	1739	-	noun	basic_word	月娘
+95	Meixian	14	moon	2	月亮	1	ŋiat⁵kuoŋ⁴⁴	月光	1736	-	noun	basic_word	月光
+96	Taoyuan	15	moon	2	月亮	2	ŋiet⁵⁵koŋ²⁴⁻³³	月光	1736	-	noun	basic_word	月光
+97	Nanchang	16	moon	2	月亮	2	ȵyɵʔ²kuɔŋ⁴²	月光	1736	-	noun	basic_word	月光
+98	Changsha	17	moon	2	月亮	2	ye²⁴lian¹¹	月亮	1734	-	noun	basic_word	月亮
+99	Changsha	17	moon	2	月亮	3	ye²⁴lian⁵⁵pu¹³sa²⁴	月亮菩萨	1742	-	noun	basic_word	月亮菩萨
+100	Changsha	17	moon	2	月亮	4	ye²⁴lian⁵⁵pa³³pa	月亮巴巴	1746	-	noun	basic_word	月亮巴巴
+101	Xiangtan	18	moon	2	月亮	2	yæ²⁴nian⁵⁵	月亮	1734	-	noun	basic_word	月亮
+102	Xiangtan	18	moon	2	月亮	3	yæ²⁴kɔn³³	月光	1736	JML: Vowel in 光 not clear from source.	noun	basic_word	月光
+103	Shexian	19	moon	2	月亮	2	ue²²lia²²	月亮	1734	-	noun	basic_word	月亮
+104	Tunxi	20	moon	2	月亮	2	ȵyɛ¹¹⁻²¹kau	月光	1736	-	noun	basic_word	月光
+105	Tunxi	20	moon	2	月亮	3	ȵyɛ¹¹⁻²¹liau¹¹	月亮	1734	-	noun	basic_word	月亮
+106	Taiyuan	21	moon	2	月亮	2	yəʔ²⁻⁵⁴mi⁴⁵	月明	1740	-	noun	basic_word	月明
+107	Taiyuan	21	moon	2	月亮	3	yəʔ²liɒ̃⁴⁵	月亮	1734	-	noun	basic_word	月亮
+108	Pingyao	22	moon	2	月亮	2	yʌʔ⁵³mi¹³⁻⁵³iᴇ¹³⁻³¹	月明爷	1738	-	noun	basic_word	月明爷
+109	Pingyao	22	moon	2	月亮	3	xəu³⁵tʰiᴇ¹³⁻³¹iᴇ¹³⁻³¹	后天爷	1744	-	noun	basic_word	后天爷
+110	Huhehaote	23	moon	2	月亮	3	yaʔ⁴³⁻²¹liɑ̃⁵⁵	月亮	1734	-	noun	basic_word	月亮
+111	Beijing	24	moon	2	月亮	3	yɛ⁵¹liɑŋ¹	月亮	1734	-	noun	basic_word	月亮
+112	Tianjin	25	moon	2	月亮	1	ye⁵³liɑŋ¹	月亮	1734	-	noun	basic_word	月亮
+113	Jinan	26	moon	2	月亮	3	yə²¹⁻⁵⁴⁴liaŋ	月亮	1734	-	noun	basic_word	月亮
+114	Qingdao	27	moon	2	月亮	2	yə⁴²liaŋ	月亮	1734	-	noun	basic_word	月亮
+115	Qingdao	27	moon	2	月亮	3	yə⁴²miŋ	月明	1740	-	noun	basic_word	月明
+116	Nanjing	28	moon	2	月亮	1	yeʔ⁵liaŋ	月亮	1734	-	noun	basic_word	月亮
+117	Hefei	29	moon	2	月亮	2	yɐʔ⁵liɑ̃⁵³	月亮	1734	-	noun	basic_word	月亮
+118	Zhengzhou	30	moon	2	月亮	2	yɛ²⁴nai⁵³nai⁵³⁻²⁴	月奶奶	1741	-	noun	basic_word	月奶奶
+119	Zhengzhou	30	moon	2	月亮	3	yɛ²⁴liaŋ	月亮	1734	-	noun	basic_word	月亮
+120	Wuhan	31	moon	2	月亮	2	ye²¹³⁻²¹niaŋ	月亮	1734	-	noun	basic_word	月亮
+121	Chengdu	32	moon	2	月亮	1	ye³¹niaŋ¹³	月亮	1734	-	noun	basic_word	月亮
+122	Guiyang	33	moon	2	月亮	1	iɛ²¹liaŋ²¹³	月亮	1734	-	noun	basic_word	月亮
+123	Kunming	34	moon	2	月亮	2	iɛ³¹liᴀ̃²¹²	月亮	1734	-	noun	basic_word	月亮
+124	Kunming	34	moon	2	月亮	3	tʰæ²¹²ĩ⁴⁴	太阴	1743	-	noun	basic_word	太阴
+125	Haerbin	35	moon	2	月亮	2	yɛ⁵³liaŋ	月亮	1734	-	noun	basic_word	月亮
+126	Xi'an	36	moon	2	月亮	2	yɛ²¹liaŋ	月亮	1734	-	noun	basic_word	月亮
+127	Yinchuan	37	moon	2	月亮	2	ye¹³⁻¹¹liɑŋ	月亮	1734	-	noun	basic_word	月亮
+128	Lanzhou	38	moon	2	月亮	2	yə¹³⁻²²liɑ̃¹³	月亮	1734	-	noun	basic_word	月亮
+129	Xining	39	moon	2	月亮	1	yu⁴⁴liɔ̃⁵³	月亮	1734	-	noun	basic_word	月亮
+130	Wulumuqi	40	moon	2	月亮	1	yɤ²¹³⁻¹³liɑŋ	月亮	1734	-	noun	basic_word	月亮
+#
+131	Shanghai	01	star	3	星星	4	ɕiŋ⁵³	星	2259	-	noun	basic_word	星
+132	Suzhou	02	star	3	星星	3	sin⁵⁵	星	2259	-	noun	basic_word	星
+133	Hangzhou	03	star	3	星星	2	ɕin³³	星	2259	-	noun	basic_word	星
+134	Wenzhou	04	star	3	星星	5	seŋ³³	星	2259	-	noun	basic_word	星
+135	Guangzhou	05	star	3	星星	4	seŋ⁵⁵	星	2259	-	noun	basic_word	星
+136	Nanning	06	star	3	星星	3	tʰin⁵⁵ɬɛŋ⁵⁵	天星	2261	-	noun	basic_word	天星
+137	Xianggang	07	star	3	星星	4	siŋ⁵⁵	星	2259	-	noun	basic_word	星
+138	Xiamen	08	star	3	星星	4	ʦʰĩ⁵⁵	星	2259	-	noun	basic_word	星
+139	Fuzhou	09	star	3	星星	2	siŋ⁴⁴	星	2259	-	noun	basic_word	星
+140	Jian'ou	10	star	3	星星	2	saiŋ⁵⁴siu³³	星宿	2260	-	noun	basic_word	星宿
+141	Shantou	11	star	3	星星	4	ʦʰẽ³³	星	2259	-	noun	basic_word	星
+142	Haikou	12	star	3	星星	4	sɛ²³	星	2259	-	noun	basic_word	星
+143	Taibei	13	star	3	星星	3	tʰĩ⁴⁴⁻³³ʦʰĩ⁴⁴	天星	2261	-	noun	basic_word	天星
+144	Meixian	14	star	3	星星	2	sen⁴⁴⁻³⁵ne	星儿	2259	-	noun	basic_word	星
+145	Taoyuan	15	star	3	星星	3	sen²⁴e³¹	星仔	2262	-	noun	basic_word	星仔
+146	Nanchang	16	star	3	星星	3	siɑŋ⁴²ʦɿ⁰²	星子	2259	-	noun	basic_word	星
+147	Changsha	17	star	3	星星	5	sin³³ʦɿ	星子	2259	-	noun	basic_word	星
+148	Xiangtan	18	star	3	星星	4	sin³³ʦɿ	星子	2259	-	noun	basic_word	星
+149	Shexian	19	star	3	星星	3	tʰe³¹siʌ̃³¹	天星	2261	-	noun	basic_word	天星
+150	Tunxi	20	star	3	星星	4	sɛ¹¹	星	2259	-	noun	basic_word	星
+151	Taiyuan	21	star	3	星星	4	ɕi¹¹ɕiəu⁴⁵	星宿	2260	-	noun	basic_word	星宿
+152	Taiyuan	21	star	3	星星	5	ɕiəŋ¹¹ɕiəŋ¹¹⁻⁴⁵	星星	2258	-	noun	basic_word	星星
+153	Pingyao	22	star	3	星星	4	sei¹³ɕiəu³⁵⁻¹³	星宿	2260	-	noun	basic_word	星宿
+154	Huhehaote	23	star	3	星星	4	ɕĩŋ³¹ɕĩŋ³¹⁻⁵⁵	星星	2258	-	noun	basic_word	星星
+155	Huhehaote	23	star	3	星星	5	ɕĩŋ³¹ɕiəu⁵⁵	星宿	2260	-	noun	basic_word	星宿
+156	Beijing	24	star	3	星星	4	ɕiŋ⁵⁵ɕiŋ²	星星	2258	-	noun	basic_word	星星
+157	Tianjin	25	star	3	星星	2	ɕiŋ²¹ɕiŋ¹	星星	2258	-	noun	basic_word	星星
+158	Jinan	26	star	3	星星	4	ɕiŋ²¹³	星	2259	-	noun	basic_word	星
+159	Jinan	26	star	3	星星	5	ɕiŋ²¹³⁻²¹ɕiŋ	星星	2258	-	noun	basic_word	星星
+160	Qingdao	27	star	3	星星	4	siŋr²¹³	星儿	2259	-	noun	basic_word	星
+161	Nanjing	28	star	3	星星	2	sin³¹	星	2259	-	noun	basic_word	星
+162	Hefei	29	star	3	星星	3	ɕin²¹	星	2259	-	noun	basic_word	星
+163	Zhengzhou	30	star	3	星星	4	sei¹³ɕiəu³⁵⁻¹³	星宿	2260	-	noun	basic_word	星宿
+164	Wuhan	31	star	3	星星	3	ɕin⁵⁵	星	2259	-	noun	basic_word	星
+165	Wuhan	31	star	3	星星	4	ɕin⁵⁵təu	星斗	2263	-	noun	basic_word	星斗
+166	Chengdu	32	star	3	星星	2	ɕin⁵⁵ɕir⁵⁵	星星儿	2258	-	noun	basic_word	星星
+167	Chengdu	32	star	3	星星	3	ɕin⁵⁵ɕir¹³	星宿儿	2260	-	noun	basic_word	星宿
+168	Guiyang	33	star	3	星星	2	ɕin⁵⁵ɕiu²¹³	星宿	2260	-	noun	basic_word	星宿
+169	Kunming	34	star	3	星星	4	ɕĩ⁴⁴ɕiəu²¹²	星宿	2260	-	noun	basic_word	星宿
+170	Haerbin	35	star	3	星星	3	ɕiŋ⁴⁴ɕiŋ	星星	2258	-	noun	basic_word	星星
+171	Xi'an	36	star	3	星星	3	ɕiŋ²¹ɕiŋ	星星	2258	-	noun	basic_word	星星
+172	Yinchuan	37	star	3	星星	3	ɕiŋ⁴⁴	星	2259	-	noun	basic_word	星
+173	Yinchuan	37	star	3	星星	4	ɕiŋ⁴⁴ɕiŋ	星星	2258	-	noun	basic_word	星星
+174	Yinchuan	37	star	3	星星	5	ɕiŋ⁴⁴ɕiəu	星宿	2260	-	noun	basic_word	星宿
+175	Lanzhou	38	star	3	星星	3	ɕĩn³¹ɕiou²¹	星宿	2260	-	noun	basic_word	星宿
+176	Xining	39	star	3	星星	2	ɕiə̃⁴⁴ɕiɯ⁴⁴	星宿	2260	-	noun	basic_word	星宿
+177	Xining	39	star	3	星星	3	ɕiə̃⁴⁴ɕiə̃⁴⁴	星星	2258	-	noun	basic_word	星星
+178	Wulumuqi	40	star	3	星星	2	ɕiŋ⁴⁴ɕiɤ	星宿	2260	-	noun	basic_word	星宿
+179	Wulumuqi	40	star	3	星星	3	ɕiŋ⁴⁴ɕiŋ	星星	2258	-	noun	basic_word	星星
+#
+180	Shanghai	01	thunder	4	打雷	5	le¹³⁻²²ɕiã³⁴⁻⁴⁴	雷响	2551	-	verb	-	雷响
+181	Shanghai	01	thunder	4	打雷	6	tã³⁵⁻⁴⁴le²³	打雷	2542	-	verb	-	打雷
+182	Suzhou	02	thunder	4	打雷	4	lᴇ¹³ɕiã⁵¹⁻³³	雷响	2551	-	verb	-	雷响
+183	Hangzhou	03	thunder	4	打雷	3	tɑ⁵³lei²¹³	打雷	2542	-	verb	-	打雷
+184	Wenzhou	04	thunder	4	打雷	6	tiɛ³⁵⁻²¹lai³¹	打雷	2542	-	verb	-	打雷
+185	Wenzhou	04	thunder	4	打雷	7	ɕi³⁵⁻²¹lai³¹	响雷	2546	-	verb	-	响雷
+186	Guangzhou	05	thunder	4	打雷	5	haŋ²¹løy²¹	行雷	2544	-	verb	-	行雷
+187	Nanning	06	thunder	4	打雷	4	ta³⁵lui²¹	打雷	2542	-	verb	-	打雷
+188	Xianggang	07	thunder	4	打雷	5	haŋ²¹løy²¹	行雷	2544	-	verb	-	行雷
+189	Xiamen	08	thunder	4	打雷	5	tan³⁵⁻²²lui	陈雷	2553	-	verb	-	陈雷
+190	Xiamen	08	thunder	4	打雷	6	lui³⁵⁻²²kɔŋ⁵⁵tan³⁵	雷公陈	2560	-	verb	-	雷公陈
+191	Xiamen	08	thunder	4	打雷	7	lui³⁵⁻²²tan³⁵	雷陈	2563	-	verb	-	雷陈
+192	Fuzhou	09	thunder	4	打雷	3	pʰaʔ²³⁻²¹liaŋ⁴⁴niɑŋ²¹²	拍亮线	2543	-	verb	-	拍亮线
+193	Jian'ou	10	thunder	4	打雷	3	xiŋ²¹so³³	响雷	2546	-	verb	-	响雷
+194	Shantou	11	thunder	4	打雷	5	hiaŋ⁵³⁻²⁴lui⁵⁵	响雷	2546	-	verb	-	响雷
+195	Shantou	11	thunder	4	打雷	6	kʰa²¹³⁻⁵⁵lui⁵⁵	扣雷	2558	-	verb	-	扣雷
+196	Haikou	12	thunder	4	打雷	5	fa⁵⁵lui³¹	拍雷	2545	-	verb	-	拍雷
+197	Haikou	12	thunder	4	打雷	6	lui³¹hau²¹³	雷吼	2557	-	verb	-	雷吼
+198	Haikou	12	thunder	4	打雷	7	lui³¹koŋ²³hau²¹³	雷公吼	2562	-	verb	-	雷公吼
+199	Taibei	13	thunder	4	打雷	4	tan²⁴⁻¹¹lui²⁴	陈雷	2553	-	verb	-	陈雷
+200	Meixian	14	thunder	4	打雷	3	hioŋ³¹lui¹¹kuŋ⁴⁴	响雷公	2548	-	verb	-	响雷公
+201	Taoyuan	15	thunder	4	打雷	4	tɑ³¹lui¹¹	打雷	2542	-	verb	-	打雷
+202	Nanchang	16	thunder	4	打雷	4	hɛn²¹lui⁴⁵	恨雷	2549	-	verb	-	恨雷
+203	Nanchang	16	thunder	4	打雷	5	tɑ²¹³lui⁴⁵	打雷	2542	-	verb	-	打雷
+204	Changsha	17	thunder	4	打雷	6	ta⁴¹lei¹³	打雷	2542	-	verb	-	打雷
+205	Xiangtan	18	thunder	4	打雷	5	ta⁴¹lei¹³	打雷	2542	-	verb	-	打雷
+206	Shexian	19	thunder	4	打雷	4	ta³⁵pʰɛ²¹lɛ	打霹雳	2552	-	verb	-	打霹雳
+207	Shexian	19	thunder	4	打雷	5	ta³⁵tʰe³¹lɛ⁴⁴	打天雷	2559	-	verb	-	打天雷
+208	Tunxi	20	thunder	4	打雷	5	ta³¹⁻⁵lə⁴⁴	打雷	2542	-	verb	-	打雷
+209	Taiyuan	21	thunder	4	打雷	6	xiɒ̃⁵³xuəʔ²⁻⁵⁴luei¹¹	响忽雷	2554	-	verb	-	响忽雷
+210	Pingyao	22	thunder	4	打雷	5	ɕiɑŋ⁵³luæ¹³	响雷	2546	-	verb	-	响雷
+211	Huhehaote	23	thunder	4	打雷	6	ta⁵³luei³¹	打雷	2542	-	verb	-	打雷
+212	Huhehaote	23	thunder	4	打雷	7	ɕiɑ̃⁵³luei³¹	响雷	2546	-	verb	-	响雷
+213	Beijing	24	thunder	4	打雷	5	ta²¹⁴⁻²¹lei³⁵	打雷	2542	-	verb	-	打雷
+214	Tianjin	25	thunder	4	打雷	3	tɑ¹³lei⁴⁵	打雷	2542	-	verb	-	打雷
+215	Jinan	26	thunder	4	打雷	6	ta⁵⁵luei⁴²	打雷	2542	-	verb	-	打雷
+216	Qingdao	27	thunder	4	打雷	5	ta⁵⁵xu²¹³⁻³¹le	打呼雷	2550	-	verb	-	打呼雷
+217	Nanjing	28	thunder	4	打雷	3	tɑ²¹²⁻¹¹luəi²⁴	打雷	2542	-	verb	-	打雷
+218	Nanjing	28	thunder	4	打雷	4	ɕiaŋ²¹²⁻¹¹luəi²⁴	响雷	2546	-	verb	-	响雷
+219	Hefei	29	thunder	4	打雷	4	ta²⁴le⁵⁵	打雷	2542	-	verb	-	打雷
+220	Zhengzhou	30	thunder	4	打雷	5	ta⁵³luei⁴²	打雷	2542	-	verb	-	打雷
+221	Zhengzhou	30	thunder	4	打雷	6	ta⁵³xu²⁴luei	打忽雷	2561	-	verb	-	打忽雷
+222	Wuhan	31	thunder	4	打雷	5	ta⁴²nei²¹³	打雷	2542	-	verb	-	打雷
+223	Chengdu	32	thunder	4	打雷	4	ta⁵³nuei³¹	打雷	2542	-	verb	-	打雷
+224	Chengdu	32	thunder	4	打雷	5	ɕiaŋ⁵³nuei³¹	响雷	2546	-	verb	-	响雷
+225	Guiyang	33	thunder	4	打雷	3	ta⁴²luei²¹	打雷	2542	-	verb	-	打雷
+226	Guiyang	33	thunder	4	打雷	4	xəu⁴²luei²¹	吼雷	2556	-	verb	-	吼雷
+227	Kunming	34	thunder	4	打雷	5	ʂə̃⁴⁴luei³¹	升雷	2547	-	verb	-	升雷
+228	Haerbin	35	thunder	4	打雷	4	ta²¹³⁻²¹lei²⁴	打雷	2542	-	verb	-	打雷
+229	Xi'an	36	thunder	4	打雷	4	ɕiaŋ⁵³luei²⁴	响雷	2546	-	verb	-	响雷
+230	Yinchuan	37	thunder	4	打雷	6	ɕiɑŋ⁵³luei⁵³	响雷	2546	-	verb	-	响雷
+231	Yinchuan	37	thunder	4	打雷	7	ta⁵³luei⁵³	打雷	2542	-	verb	-	打雷
+232	Lanzhou	38	thunder	4	打雷	4	ta⁴⁴²luei⁵³	打雷	2542	-	verb	-	打雷
+233	Xining	39	thunder	4	打雷	4	luɨ²⁴⁻²¹ɕiɔ̃⁵³t͡ʂɛ	雷响者	2555	-	verb	-	雷响者
+234	Wulumuqi	40	thunder	4	打雷	4	ta⁴⁴²luei⁵³	打雷	2542	-	verb	-	打雷
+#
+235	Shanghai	01	lightning	5	闪电	7	hoʔ⁵⁻³ɕi³⁵⁻⁴⁴	霍险	1600	-	verb	-	霍险
+236	Shanghai	01	lightning	5	闪电	8	sø³⁵⁻³³di¹³⁻⁴⁴	闪电	1591	-	verb	-	闪电
+237	Suzhou	02	lightning	5	闪电	5	hoʔ⁵ɕiɪ⁵¹⁻²¹	霍险	1600	-	verb	-	霍险
+238	Hangzhou	03	lightning	5	闪电	4	huoʔ⁵sʮõ⁵³	霍闪	1597	-	verb	-	霍闪
+239	Wenzhou	04	lightning	5	闪电	8	ɕa²¹³⁻²¹di²²	烁电	1602	-	verb	-	烁电
+240	Wenzhou	04	lightning	5	闪电	9	ɕa²¹³⁻²²liɛ³¹⁻¹²	烁龙	1609	-	verb	-	烁龙
+241	Guangzhou	05	lightning	5	闪电	6	sim³⁵tin²²	闪电	1591	-	verb	-	闪电
+242	Guangzhou	05	lightning	5	闪电	7	sip³tin²²	摄电	1606	-	verb	-	摄电
+243	Nanning	06	lightning	5	闪电	5	sim³⁵tin²²	闪电	1591	-	verb	-	闪电
+244	Xianggang	07	lightning	5	闪电	6	sim³⁵tin²²	闪电	1591	-	verb	-	闪电
+245	Fuzhou	09	lightning	5	闪电	4	liaŋ⁴⁴niɑŋ²¹²	亮线	1594	-	verb	-	亮线
+246	Jian'ou	10	lightning	5	闪电	4	iaŋ⁴⁴tau⁵⁴	焰刀	1598	-	verb	-	焰刀
+247	Haikou	12	lightning	5	闪电	8	koŋ²³iam³³	公闪	1596	(焱)	verb	-	公闪
+248	Taibei	13	lightning	5	闪电	5	siam⁵³⁻⁵⁵tian³³	闪电	1591	-	verb	-	闪电
+249	Nanchang	16	lightning	5	闪电	6	tɑ²¹³fɔʔ⁵sɛn⁰²	打霍闪	1599	-	verb	-	打霍闪
+250	Changsha	17	lightning	5	闪电	7	t͡ʂʰʅ⁴¹ʂə̃⁴¹	扯闪	1592	-	verb	-	扯闪
+251	Xiangtan	18	lightning	5	闪电	6	t͡ʂʰɒ⁴²ɒ²⁴ɕyẽ⁴²	扯发闪	1604	-	verb	-	扯发闪
+252	Shexian	19	lightning	5	闪电	6	ta³⁵ne²²ɕye³²⁴	打热闪	1601	-	verb	-	打热闪
+253	Shexian	19	lightning	5	闪电	7	ta³⁵ɕye³²⁴⁻³⁵tʰe²²	打闪电	1608	-	verb	-	打闪电
+254	Shexian	19	lightning	5	闪电	8	ʨʰia³⁵ne²²ɕye³²⁴	扯热闪	1611	-	verb	-	扯热闪
+255	Tunxi	20	lightning	5	闪电	6	ɕiɛ³¹⁻⁵tiɛ¹¹	闪电	1591	-	verb	-	闪电
+256	Taiyuan	21	lightning	5	闪电	7	ta⁵³⁻¹¹sæ̃⁵³	打闪	1595	-	verb	-	打闪
+257	Pingyao	22	lightning	5	闪电	6	tɑ⁵³⁻³⁵ʂɑŋ⁵³⁻⁴²³	打闪	1595	-	verb	-	打闪
+258	Huhehaote	23	lightning	5	闪电	8	ta⁵³⁻³¹sæ̃⁵³	打闪	1595	-	verb	-	打闪
+259	Beijing	24	lightning	5	闪电	6	ʂan²¹⁴⁻²¹tian⁵¹	闪电	1591	-	verb	-	闪电
+260	Tianjin	25	lightning	5	闪电	4	tɑ¹³⁻⁴⁵ʂan¹³	打闪	1595	-	verb	-	打闪
+261	Tianjin	25	lightning	5	闪电	5	tɑ¹³⁻⁴⁵san¹³	打闪	1595	-	verb	-	打闪
+262	Jinan	26	lightning	5	闪电	7	ta⁵⁵⁻⁴²ʂã⁵⁵	打闪	1595	-	verb	-	打闪
+263	Qingdao	27	lightning	5	闪电	6	ta⁵⁵⁻³¹ʃã⁵⁵	打闪	1595	-	verb	-	打闪
+264	Nanjing	28	lightning	5	闪电	5	tɑ²¹²⁻¹²ʂaŋ²¹²	打闪	1595	-	verb	-	打闪
+265	Hefei	29	lightning	5	闪电	5	ta²⁴ʂən²⁴	打闪	1595	-	verb	-	打闪
+266	Zhengzhou	30	lightning	5	闪电	7	ta⁵³⁻⁴²ʂan⁵³	打闪	1595	-	verb	-	打闪
+267	Zhengzhou	30	lightning	5	闪电	8	ta⁵³xu²⁴ʂan	打忽闪	1610	-	verb	-	打忽闪
+268	Wuhan	31	lightning	5	闪电	6	ʦʰɤ⁴²xuo²¹³	扯霍	1603	-	verb	-	扯霍
+269	Chengdu	32	lightning	5	闪电	6	xo⁵³san⁵³	火闪	1593	-	verb	-	火闪
+270	Guiyang	33	lightning	5	闪电	5	xo⁴²san⁴²	火闪	1593	-	verb	-	火闪
+271	Guiyang	33	lightning	5	闪电	6	ʦʰei⁴²xo⁴²san⁴²	扯火闪	1607	-	verb	-	扯火闪
+272	Kunming	34	lightning	5	闪电	6	t͡ʂʰə⁵³ʂᴀ̃⁵³	扯闪	1592	-	verb	-	扯闪
+273	Haerbin	35	lightning	5	闪电	5	ta²¹³⁻²⁴ʂan²¹³	打闪	1595	-	verb	-	打闪
+274	Xi'an	36	lightning	5	闪电	5	ʂã⁵³tiã⁴⁴	闪电	1591	-	verb	-	闪电
+275	Yinchuan	37	lightning	5	闪电	8	ta⁵³ʂan⁵³	打闪	1595	-	verb	-	打闪
+276	Lanzhou	38	lightning	5	闪电	5	ta⁴⁴²⁻⁵³ʂɛ̃n⁴⁴²	打闪	1595	-	verb	-	打闪
+277	Xining	39	lightning	5	闪电	5	ʂã⁵³tiã²¹³⁻²¹t͡ʂɛ⁵³	闪电者	1605	-	verb	-	闪电者
+278	Wulumuqi	40	lightning	5	闪电	5	ʂan⁵¹tian²¹³	闪电	1591	-	verb	-	闪电
+#
+279	Shanghai	01	rain	6	下雨	9	loʔ¹⁻¹ɦy²³	落雨	2054	-	verb	basic_word	落雨
+280	Suzhou	02	rain	6	下雨	6	loʔ³ɦy³¹	落雨	2054	-	verb	basic_word	落雨
+281	Hangzhou	03	rain	6	下雨	5	loʔ²ʮ⁵³	落雨	2054	-	verb	basic_word	落雨
+282	Wenzhou	04	rain	6	下雨	10	lo²¹³⁻²¹vu³⁵	落雨	2054	-	verb	basic_word	落雨
+283	Guangzhou	05	rain	6	下雨	8	lɔk²jy²³	落雨	2054	-	verb	basic_word	落雨
+284	Nanning	06	rain	6	下雨	6	lɔk²²y²⁴	落雨	2054	-	verb	basic_word	落雨
+285	Xianggang	07	rain	6	下雨	7	lɔk²jy¹³	落雨	2054	-	verb	basic_word	落雨
+286	Xiamen	08	rain	6	下雨	9	loʔ⁵⁻²¹hɔ²²	落雨	2054	-	verb	basic_word	落雨
+287	Fuzhou	09	rain	6	下雨	5	touŋ²⁴²⁻⁵³ŋy³²	逿雨	2055	-	verb	basic_word	逿雨
+288	Jian'ou	10	rain	6	下雨	5	lɔ⁴²xy⁴⁴	落雨	2054	-	verb	basic_word	落雨
+289	Shantou	11	rain	6	下雨	8	loʔ⁵⁻²hou³⁵	落雨	2054	-	verb	basic_word	落雨
+290	Haikou	12	rain	6	下雨	11	lo³³hɔu³³	落雨	2054	-	verb	basic_word	落雨
+291	Taibei	13	rain	6	下雨	6	lɔʔ⁴⁴⁻³²hɔ³³	落雨	2054	-	verb	basic_word	落雨
+292	Meixian	14	rain	6	下雨	5	lok⁵i³¹	落雨	2054	-	verb	basic_word	落雨
+293	Taoyuan	15	rain	6	下雨	6	lok⁵⁵ʃui³¹	落水	2056	-	verb	basic_word	落水
+294	Taoyuan	15	rain	6	下雨	7	lok⁵⁵ʒï³¹	落雨	2054	-	verb	basic_word	落雨
+295	Nanchang	16	rain	6	下雨	7	lɔʔ²y²¹³	落雨	2054	-	verb	basic_word	落雨
+296	Changsha	17	rain	6	下雨	8	lo²⁴y⁴¹	落雨	2054	-	verb	basic_word	落雨
+297	Xiangtan	18	rain	6	下雨	7	lo²⁴y⁴¹	落雨	2054	-	verb	basic_word	落雨
+298	Shexian	19	rain	6	下雨	9	lɔ²²y³⁵	落雨	2054	-	verb	basic_word	落雨
+299	Tunxi	20	rain	6	下雨	7	lo¹¹y²⁴	落雨	2054	-	verb	basic_word	落雨
+300	Taiyuan	21	rain	6	下雨	8	xa⁴⁵y⁵³	下雨	2053	-	verb	basic_word	下雨
+301	Pingyao	22	rain	6	下雨	7	xɑ³⁵y⁵³⁻⁴²³	下雨	2053	-	verb	basic_word	下雨
+302	Huhehaote	23	rain	6	下雨	9	ɕia⁵⁵y⁵³	下雨	2053	-	verb	basic_word	下雨
+303	Beijing	24	rain	6	下雨	7	ɕia⁵¹y²¹⁴	下雨	2053	-	verb	basic_word	下雨
+304	Tianjin	25	rain	6	下雨	6	ɕiɑ⁵³y	下雨	2053	-	verb	basic_word	下雨
+305	Tianjin	25	rain	6	下雨	7	tiɑu⁵³tiɑr¹³	掉点儿	2057	-	verb	basic_word	掉点
+306	Jinan	26	rain	6	下雨	8	ɕia²¹y⁵⁵	下雨	2053	-	verb	basic_word	下雨
+307	Qingdao	27	rain	6	下雨	7	ɕia⁴²⁻³¹y⁵⁵	下雨	2053	-	verb	basic_word	下雨
+308	Nanjing	28	rain	6	下雨	6	ɕiɑ⁴⁴y²¹²	下雨	2053	-	verb	basic_word	下雨
+309	Hefei	29	rain	6	下雨	6	ɕia⁵³zʮ²⁴	下雨	2053	-	verb	basic_word	下雨
+310	Zhengzhou	30	rain	6	下雨	9	ɕia³¹²⁻³¹y⁵³	下雨	2053	-	verb	basic_word	下雨
+311	Wuhan	31	rain	6	下雨	7	ɕia³⁵y⁴²	下雨	2053	-	verb	basic_word	下雨
+312	Wuhan	31	rain	6	下雨	8	nuo²¹³⁻²¹y⁴²	落雨	2054	-	verb	basic_word	落雨
+313	Chengdu	32	rain	6	下雨	7	ɕia¹³y⁵³	下雨	2053	-	verb	basic_word	下雨
+314	Chengdu	32	rain	6	下雨	8	no³¹y⁵³	落雨	2054	-	verb	basic_word	落雨
+315	Guiyang	33	rain	6	下雨	7	ɕia²¹³i⁴²	下雨	2053	-	verb	basic_word	下雨
+316	Guiyang	33	rain	6	下雨	8	lo²¹i⁴²	落雨	2054	(少)	verb	basic_word	落雨
+317	Kunming	34	rain	6	下雨	7	ɕiᴀ²¹²i⁵³	下雨	2053	-	verb	basic_word	下雨
+318	Haerbin	35	rain	6	下雨	6	ɕia⁵³y²¹³	下雨	2053	-	verb	basic_word	下雨
+319	Xi'an	36	rain	6	下雨	6	ɕia⁴⁴y⁵³	下雨	2053	-	verb	basic_word	下雨
+320	Yinchuan	37	rain	6	下雨	9	ɕia¹³y⁵³	下雨	2053	-	verb	basic_word	下雨
+321	Yinchuan	37	rain	6	下雨	10	luə¹³⁻¹¹y⁵³	落雨	2054	-	verb	basic_word	落雨
+322	Lanzhou	38	rain	6	下雨	6	ɕia¹³⁻¹¹y⁴⁴²	下雨	2053	-	verb	basic_word	下雨
+323	Xining	39	rain	6	下雨	6	ɕia²¹³y⁵³	下雨	2053	-	verb	basic_word	下雨
+324	Wulumuqi	40	rain	6	下雨	6	xa²¹³⁻¹³y⁵¹	下雨	2053	-	verb	basic_word	下雨
+#
+325	Shanghai	01	snow	7	下雪	10	loʔ¹⁻¹ɕiɪʔ⁵⁻²³	落雪	2155	-	verb	basic_word	落雪
+326	Suzhou	02	snow	7	下雪	7	loʔ³siəʔ⁵	落雪	2155	-	verb	basic_word	落雪
+327	Hangzhou	03	snow	7	下雪	6	loʔ²ɕiəʔ⁵	落雪	2155	-	verb	basic_word	落雪
+328	Wenzhou	04	snow	7	下雪	11	lo²¹³⁻²¹ɕy²¹³⁻¹³	落雪	2155	-	verb	basic_word	落雪
+329	Guangzhou	05	snow	7	下雪	9	lɔk²syt³	落雪	2155	-	verb	basic_word	落雪
+330	Nanning	06	snow	7	下雪	7	lɔk²²ɬyt³³	落雪	2155	-	verb	basic_word	落雪
+331	Xianggang	07	snow	7	下雪	8	lɔk²syt³	落雪	2155	-	verb	basic_word	落雪
+332	Xiamen	08	snow	7	下雪	10	loʔ⁵⁻²¹seʔ³²	落雪	2155	-	verb	basic_word	落雪
+333	Fuzhou	09	snow	7	下雪	6	touŋ²⁴²⁻⁵³suɔʔ²⁴	逿雪	2156	-	verb	basic_word	逿雪
+334	Fuzhou	09	snow	7	下雪	7	loʔ⁵⁻⁵³suɔʔ²⁴	落雪	2155	-	verb	basic_word	落雪
+335	Jian'ou	10	snow	7	下雪	6	lɔ⁴²suɛ²⁴	落雪	2155	-	verb	basic_word	落雪
+336	Shantou	11	snow	7	下雪	9	loʔ⁵⁻²soʔ²	落雪	2155	-	verb	basic_word	落雪
+337	Haikou	12	snow	7	下雪	12	lo³³te⁵⁵	落雪	2155	-	verb	basic_word	落雪
+338	Taibei	13	snow	7	下雪	7	lɔʔ⁴⁴⁻³²seʔ³²	落雪	2155	-	verb	basic_word	落雪
+339	Meixian	14	snow	7	下雪	6	lok⁵siet¹	落雪	2155	-	verb	basic_word	落雪
+340	Taoyuan	15	snow	7	下雪	8	lok⁵⁵siet²²	落雪	2155	-	verb	basic_word	落雪
+341	Nanchang	16	snow	7	下雪	8	lɔʔ²ɕyɵʔ⁵	落雪	2155	-	verb	basic_word	落雪
+342	Changsha	17	snow	7	下雪	9	lo²⁴sie²⁴	落雪	2155	-	verb	basic_word	落雪
+343	Xiangtan	18	snow	7	下雪	8	lo²⁴sie²⁴	落雪	2155	-	verb	basic_word	落雪
+344	Shexian	19	snow	7	下雪	10	lɔ²²ɕyeʔ²¹	落雪	2155	-	verb	basic_word	落雪
+345	Tunxi	20	snow	7	下雪	8	lo¹¹siɛ⁵	落雪	2155	-	verb	basic_word	落雪
+346	Taiyuan	21	snow	7	下雪	9	xa⁴⁵ɕyəʔ²	下雪	2154	-	verb	basic_word	下雪
+347	Pingyao	22	snow	7	下雪	8	xɑ³⁵⁻¹³ɕyʌʔ¹³	下雪	2154	-	verb	basic_word	下雪
+348	Huhehaote	23	snow	7	下雪	10	ɕia⁵⁵ɕyaʔ⁴³⁻²¹	下雪	2154	-	verb	basic_word	下雪
+349	Beijing	24	snow	7	下雪	8	ɕia⁵¹ɕyɛ²¹⁴	下雪	2154	-	verb	basic_word	下雪
+350	Tianjin	25	snow	7	下雪	8	ɕiɑ⁵³⁻⁴⁵ɕye²¹	下雪	2154	-	verb	basic_word	下雪
+351	Jinan	26	snow	7	下雪	9	ɕia²¹ɕyə²¹³	下雪	2154	-	verb	basic_word	下雪
+352	Jinan	26	snow	7	下雪	10	luə²¹ɕyə²¹³	落雪	2155	-	verb	basic_word	落雪
+353	Qingdao	27	snow	7	下雪	8	ɕia⁴²⁻³¹syə⁵⁵	下雪	2154	-	verb	basic_word	下雪
+354	Nanjing	28	snow	7	下雪	7	ɕiɑ⁴⁴⁻⁴²syeʔ⁵	下雪	2154	-	verb	basic_word	下雪
+355	Hefei	29	snow	7	下雪	7	ɕia⁵³ɕyɐʔ⁵	下雪	2154	-	verb	basic_word	下雪
+356	Zhengzhou	30	snow	7	下雪	10	ɕia³¹²⁻³¹syɛ²⁴	下雪	2154	-	verb	basic_word	下雪
+357	Wuhan	31	snow	7	下雪	9	ɕia³⁵ɕie²¹³	下雪	2154	-	verb	basic_word	下雪
+358	Wuhan	31	snow	7	下雪	10	nuo²¹³⁻²¹ɕie²¹³	落雪	2155	-	verb	basic_word	落雪
+359	Chengdu	32	snow	7	下雪	9	ɕia¹³ɕye³¹	下雪	2154	-	verb	basic_word	下雪
+360	Chengdu	32	snow	7	下雪	10	no³¹ɕye³¹	落雪	2155	-	verb	basic_word	落雪
+361	Guiyang	33	snow	7	下雪	9	ɕia²¹³ɕiɛ²¹	下雪	2154	-	verb	basic_word	下雪
+362	Kunming	34	snow	7	下雪	8	ɕiᴀ²¹²ɕiɛ³¹	下雪	2154	-	verb	basic_word	下雪
+363	Haerbin	35	snow	7	下雪	7	ɕia⁵³ɕyɛ²¹³	下雪	2154	-	verb	basic_word	下雪
+364	Xi'an	36	snow	7	下雪	7	ɕia⁴⁴ɕyɛ²¹	下雪	2154	-	verb	basic_word	下雪
+365	Yinchuan	37	snow	7	下雪	11	ɕia¹³ɕye¹³	下雪	2154	-	verb	basic_word	下雪
+366	Yinchuan	37	snow	7	下雪	12	luə¹³ɕye¹³	落雪	2155	-	verb	basic_word	落雪
+367	Lanzhou	38	snow	7	下雪	7	ɕia¹³⁻²²ɕyə¹³	下雪	2154	-	verb	basic_word	下雪
+368	Xining	39	snow	7	下雪	7	ɕia²¹³ɕyu⁴⁴	下雪	2154	-	verb	basic_word	下雪
+369	Wulumuqi	40	snow	7	下雪	7	xa²¹³⁻¹³ɕyɤ²¹³	下雪	2154	-	verb	basic_word	下雪
+#
+370	Shanghai	01	hail	8	冰雹	11	piŋ⁵³⁻⁵⁵bɔ³⁻²¹	冰雹	1030	-	noun	-	冰雹
+371	Suzhou	02	hail	8	冰雹	8	pin⁵⁵bɑ¹³⁻²¹	冰排	1036	-	noun	-	冰排
+372	Hangzhou	03	hail	8	冰雹	7	pin³³bɔ²¹³⁻³³	冰雹	1030	-	noun	-	冰雹
+373	Wenzhou	04	hail	8	冰雹	12	liɛ³¹⁻³⁵bu²¹³⁻¹³	龙雹	1033	-	noun	-	龙雹
+374	Guangzhou	05	hail	8	冰雹	10	pɔk²	雹	1029	-	noun	-	雹
+375	Guangzhou	05	hail	8	冰雹	11	syt³ʦy⁵⁵	雪珠	1041	-	noun	-	雪珠
+376	Nanning	06	hail	8	冰雹	8	peŋ⁵⁵pʰau⁵⁵	冰雹	1030	-	noun	-	冰雹
+377	Xianggang	07	hail	8	冰雹	9	pɔk²	雹	1029	-	noun	-	雹
+378	Xiamen	08	hail	8	冰雹	11	pʰauʔ⁵	雹	1029	-	noun	-	雹
+379	Fuzhou	09	hail	8	冰雹	8	pʰøyʔ⁵	雹	1029	-	noun	-	雹
+380	Jian'ou	10	hail	8	冰雹	7	lyŋ³³pʰau⁴⁴	龙雹	1033	-	noun	-	龙雹
+381	Shantou	11	hail	8	冰雹	10	pʰak⁵	雹	1029	-	noun	-	雹
+382	Taibei	13	hail	8	冰雹	8	piŋ⁴⁴⁻³³pʰauʔ⁴⁴	冰雹	1030	-	noun	-	冰雹
+383	Meixian	14	hail	8	冰雹	7	pʰok⁵	雹	1029	-	noun	-	雹
+384	Taoyuan	15	hail	8	冰雹	9	pen²⁴⁻²²pʰok⁵⁵	冰雹	1030	-	noun	-	冰雹
+385	Nanchang	16	hail	8	冰雹	9	pʰɔʔ²ʦɿ⁰²	雹子	1029	-	noun	-	雹
+386	Changsha	17	hail	8	冰雹	10	pin³³pʰau⁵⁵	冰雹	1030	-	noun	-	冰雹
+387	Xiangtan	18	hail	8	冰雹	9	sie²⁴ʦɿ⁴²ʦɿ³³	雪籽子	1037	-	noun	-	雪籽
+388	Xiangtan	18	hail	8	冰雹	10	pin³³kəɯ⁵⁵ʦɿ³³	冰构子	1044	-	noun	-	冰构
+389	Shexian	19	hail	8	冰雹	11	piʌ̃³¹pʰɔ²²	冰雹	1030	-	noun	-	冰雹
+390	Tunxi	20	hail	8	冰雹	9	pɛ¹¹⁻²¹po¹¹	冰雹	1030	-	noun	-	冰雹
+391	Taiyuan	21	hail	8	冰雹	10	ləŋ⁵³tæ̃⁴⁵ʦəʔ	冷弹子	1035	-	noun	-	冷弹
+392	Pingyao	22	hail	8	冰雹	9	ləŋ⁵³tɑŋ³⁵⁻³¹ʦʌʔ¹³⁻³⁵	冷弹子	1035	-	noun	-	冷弹
+393	Pingyao	22	hail	8	冰雹	10	ləŋ⁵³ʦʌʔ¹³	冷子	1032	-	noun	-	冷
+394	Huhehaote	23	hail	8	冰雹	11	lə̃ŋ⁵³ʦəʔ	冷子	1032	-	noun	-	冷
+395	Huhehaote	23	hail	8	冰雹	12	lə̃ŋ⁵³tæ̃⁵⁵əʔ	冷弹子	1035	-	noun	-	冷弹
+396	Beijing	24	hail	8	冰雹	9	pɑu³⁵ʦɿ³	雹子	1029	-	noun	-	雹
+397	Tianjin	25	hail	8	冰雹	9	pɑu⁴⁵ʦə³	雹子	1029	-	noun	-	雹
+398	Jinan	26	hail	8	冰雹	11	pa⁴²⁻⁵⁵ʦɿ	雹子	1029	-	noun	-	雹
+399	Jinan	26	hail	8	冰雹	12	ləŋ⁵⁵⁻²¹³ʦɿ	冷子	1032	-	noun	-	冷
+400	Qingdao	27	hail	8	冰雹	9	pa⁴²⁻⁵⁵ʦɿ	雹子	1029	-	noun	-	雹
+401	Nanjing	28	hail	8	冰雹	8	pin³¹poʔ⁵	冰雹	1030	-	noun	-	冰雹
+402	Hefei	29	hail	8	冰雹	8	iɪ̃⁵⁵tɯ⁵³ʦə	盐豆子	1031	-	noun	-	盐豆
+403	Zhengzhou	30	hail	8	冰雹	11	liou⁴²litar³¹²	琉璃蛋儿	1039	-	noun	-	琉璃蛋
+404	Zhengzhou	30	hail	8	冰雹	12	piŋ²⁴pau²⁴	冰雹	1030	-	noun	-	冰雹
+405	Zhengzhou	30	hail	8	冰雹	13	ləŋ⁵³	冷	1032	-	noun	-	冷
+406	Wuhan	31	hail	8	冰雹	11	pin⁵⁵pau³⁵	冰雹	1030	-	noun	-	冰雹
+407	Chengdu	32	hail	8	冰雹	11	pin⁵⁵pau¹³ʦɿ⁵³	冰雹子	1030	-	noun	-	冰雹
+408	Chengdu	32	hail	8	冰雹	12	pin⁵⁵tan¹³ʦɿ⁵³	冰弹子	1040	-	noun	-	冰弹
+409	Chengdu	32	hail	8	冰雹	13	ɕye³¹tan¹³ʦɿ⁵³	雪弹子	1043	-	noun	-	雪弹
+410	Guiyang	33	hail	8	冰雹	10	pin⁵⁵pao	冰雹	1030	-	noun	-	冰雹
+411	Guiyang	33	hail	8	冰雹	11	pɛ²¹i⁴²	白雨	1042	-	noun	-	白雨
+412	Kunming	34	hail	8	冰雹	9	pĩ⁴⁴pɔ²¹²	冰雹	1030	-	noun	-	冰雹
+413	Kunming	34	hail	8	冰雹	10	ɕiɛ³¹tᴀ̃²¹²ʦɿ	雪弹子	1043	-	noun	-	雪弹
+414	Kunming	34	hail	8	冰雹	11	ɕiɛ³¹po³¹ʦɿ⁵³	雪薄子	1046	-	noun	-	雪薄
+415	Haerbin	35	hail	8	冰雹	8	pau²⁴ʦɿ	雹子	1029	-	noun	-	雹
+416	Xi'an	36	hail	8	冰雹	8	ləŋ⁵³ʦɿ	冷子	1032	-	noun	-	冷
+417	Yinchuan	37	hail	8	冰雹	13	leŋ⁵³⁻³⁵ʦɿ	冷子	1032	-	noun	-	冷
+418	Yinchuan	37	hail	8	冰雹	14	piŋ⁴⁴pɔ⁴⁴	冰雹	1030	-	noun	-	冰雹
+419	Lanzhou	38	hail	8	冰雹	8	tɛ̃n¹³⁻¹¹tɛ̃n⁵³ʦɿ²¹	蛋蛋子	1034	-	noun	-	蛋蛋
+420	Xining	39	hail	8	冰雹	8	y⁵³tã²¹³⁻²¹tã²¹³⁻⁵³	雨蛋蛋	1038	-	noun	-	雨蛋蛋
+421	Xining	39	hail	8	冰雹	9	ku²¹³y⁵³tã²¹³⁻²¹tã²¹³⁻⁵³	过雨蛋蛋	1045	-	noun	-	过雨蛋蛋
+422	Xining	39	hail	8	冰雹	10	pɔ⁴⁴ʦɿ	雹子	1029	-	noun	-	雹
+423	Wulumuqi	40	hail	8	冰雹	8	piŋ⁴⁴pɔ²¹³	冰雹	1030	-	noun	-	冰雹
+#
+424	Shanghai	01	freeze	9	结冰	12	ʨiɪʔ⁵⁻⁴piŋ⁵³	结冰	895	-	verb	-	结冰
+425	Suzhou	02	freeze	9	结冰	9	ʨiəʔ⁵pin⁵	结冰	895	-	verb	-	结冰
+426	Hangzhou	03	freeze	9	结冰	8	ʨiəʔ⁵pin³³	结冰	895	-	verb	-	结冰
+427	Wenzhou	04	freeze	9	结冰	13	ʨi²¹³⁻²¹peŋ³³	结冰	895	-	verb	-	结冰
+428	Wenzhou	04	freeze	9	结冰	14	peŋ³³toŋ⁴²ʦʰɿ³⁵⁻²¹	冰冻起	907	-	verb	-	冰冻起
+429	Guangzhou	05	freeze	9	结冰	12	kit³peŋ⁵⁵	结冰	895	-	verb	-	结冰
+430	Nanning	06	freeze	9	结冰	9	kit³³peŋ⁵⁵	结冰	895	-	verb	-	结冰
+431	Xianggang	07	freeze	9	结冰	10	kit³piŋ⁵⁵	结冰	895	-	verb	-	结冰
+432	Xiamen	08	freeze	9	结冰	12	kiat³²⁻⁵piŋ⁵⁵	结冰	895	-	verb	-	结冰
+433	Xiamen	08	freeze	9	结冰	13	kian⁵⁵⁻²²piŋ⁵⁵	坚冰	908	-	verb	-	坚冰
+434	Fuzhou	09	freeze	9	结冰	9	kieʔ²⁴⁻²¹piŋ⁴⁴	结冰	895	-	verb	-	结冰
+435	Jian'ou	10	freeze	9	结冰	8	ke³³paiŋ⁵⁴	结冰	895	-	verb	-	结冰
+436	Shantou	11	freeze	9	结冰	11	kak²⁻⁵piã³³	结冰	895	-	verb	-	结冰
+437	Haikou	12	freeze	9	结冰	14	kit⁵ʔbeŋ²³	结冰	895	-	verb	-	结冰
+438	Taibei	13	freeze	9	结冰	9	kiet³²⁻⁴⁴piŋ⁴⁴	结冰	895	-	verb	-	结冰
+439	Meixian	14	freeze	9	结冰	8	kiat¹pen⁴⁴	结冰	895	-	verb	-	结冰
+440	Taoyuan	15	freeze	9	结冰	10	kiet²²pen²⁴	结冰	895	-	verb	-	结冰
+441	Nanchang	16	freeze	9	结冰	10	ʨiɛʔ⁵pin⁴²	结冰	895	-	verb	-	结冰
+442	Nanchang	16	freeze	9	结冰	11	lɛn²¹tɑu⁰²liɛu⁰²	凌到了	906	冻住了	verb	-	凌到了
+443	Changsha	17	freeze	9	结冰	11	ɕia¹¹lin¹¹	下凌	896	-	verb	-	下凌
+444	Changsha	17	freeze	9	结冰	12	kəu⁵⁵lin¹¹	构凌	903	-	verb	-	构凌
+445	Xiangtan	18	freeze	9	结冰	11	ʨie²⁴kəɯ⁵⁵	结构	901	-	verb	-	结构
+446	Xiangtan	18	freeze	9	结冰	12	kəɯ⁵⁵ʨʰi⁴²	构起	909	-	verb	-	构起
+447	Shexian	19	freeze	9	结冰	12	tʌ̃³²⁴piʌ̃³¹⁻⁵³	冻冰	897	-	verb	-	冻冰
+448	Tunxi	20	freeze	9	结冰	10	tan⁴²pɛ¹¹	冻冰	897	-	verb	-	冻冰
+449	Tunxi	20	freeze	9	结冰	11	ʨia⁵pɛ¹¹	结冰	895	-	verb	-	结冰
+450	Taiyuan	21	freeze	9	结冰	11	tuəŋ⁴⁵piəŋ¹¹	冻冰	897	-	verb	-	冻冰
+451	Pingyao	22	freeze	9	结冰	11	²tuŋ³⁵xɑ⁵³tuŋ³⁵⁻³¹li³⁵lɑ⁵³	冻下冻凌了	900	-	verb	-	冻下冻凌了
+452	Huhehaote	23	freeze	9	结冰	13	sɑ̃⁵⁵tũŋ⁵⁵	上冻	898	-	verb	-	上冻
+453	Huhehaote	23	freeze	9	结冰	14	tũŋ⁵⁵laʔ	冻了	905	-	verb	-	冻了
+454	Huhehaote	23	freeze	9	结冰	15	tũŋ⁵⁵pĩŋ³¹laʔ	冻冰了	910	-	verb	-	冻冰了
+455	Huhehaote	23	freeze	9	结冰	16	ʨiaʔ⁴³pĩŋ³¹⁻³³lĩŋ³¹	结冰棱	911	-	verb	-	结冰棱
+456	Beijing	24	freeze	9	结冰	10	ʨiɛ⁵⁵piŋ⁵⁵	结冰	895	-	verb	-	结冰
+457	Tianjin	25	freeze	9	结冰	10	ʂɑŋ⁵³⁻²¹tuŋ⁵³	上冻	898	-	verb	-	上冻
+458	Jinan	26	freeze	9	结冰	13	tuŋ²¹³⁻²¹tuŋ	冻冻	899	-	verb	-	冻冻
+459	Qingdao	27	freeze	9	结冰	10	ʃaŋ⁴²⁻³¹təŋ⁴²	上冻	898	-	verb	-	上冻
+460	Nanjing	28	freeze	9	结冰	9	toŋ⁴⁴pin³¹	冻冰	897	-	verb	-	冻冰
+461	Nanjing	28	freeze	9	结冰	10	ʨieʔ⁵pin³¹	结冰	895	-	verb	-	结冰
+462	Hefei	29	freeze	9	结冰	9	ʨiʔ⁵pin²¹	结冰	895	-	verb	-	结冰
+463	Zhengzhou	30	freeze	9	结冰	14	ʂaŋ³¹²⁻²⁴tuŋ³¹²	上冻	898	-	verb	-	上冻
+464	Zhengzhou	30	freeze	9	结冰	15	ʨiɛ²⁴piŋ²⁴	结冰	895	-	verb	-	结冰
+465	Wuhan	31	freeze	9	结冰	12	ʨie²¹³⁻²¹pin⁵⁵	结冰	895	-	verb	-	结冰
+466	Chengdu	32	freeze	9	结冰	14	ʨie³¹pin⁵⁵	结冰	895	-	verb	-	结冰
+467	Guiyang	33	freeze	9	结冰	12	ʨiɛ²¹pin	结冰	895	-	verb	-	结冰
+468	Guiyang	33	freeze	9	结冰	13	ʨʰi⁴²lin²¹³pin⁵⁵	起凌冰	904	-	verb	-	起凌冰
+469	Kunming	34	freeze	9	结冰	12	ʨiɛ³¹pĩ⁴⁴	结冰	895	-	verb	-	结冰
+470	Haerbin	35	freeze	9	结冰	9	tuŋ⁵³piŋ⁴⁴	冻冰	897	-	verb	-	冻冰
+471	Xi'an	36	freeze	9	结冰	9	tuŋ⁴⁴piŋ²¹	冻冰	897	-	verb	-	冻冰
+472	Yinchuan	37	freeze	9	结冰	15	ʨie¹³piŋ⁴⁴	结冰	895	-	verb	-	结冰
+473	Yinchuan	37	freeze	9	结冰	16	tuŋ¹³⁻¹¹piŋ⁴⁴	冻冰	897	-	verb	-	冻冰
+474	Lanzhou	38	freeze	9	结冰	9	tũn¹³⁻¹¹pĩn³¹	冻冰	897	-	verb	-	冻冰
+475	Xining	39	freeze	9	结冰	11	piə̃⁴⁴tuə̃²¹³⁻²¹xa²¹³⁻⁵³li	冰冻下了	902	-	verb	-	冰冻下了
+476	Wulumuqi	40	freeze	9	结冰	9	ʨiɤ²¹³piŋ⁴⁴	结冰	895	-	verb	-	结冰
+477	Wulumuqi	40	freeze	9	结冰	10	tuŋ²¹³piŋ⁴⁴	冻冰	897	-	verb	-	冻冰
+#
+478	Shanghai	01	blow	10	刮风	13	ʨʰi³⁵⁻³³foŋ⁵³⁻⁴⁴	起风	270	-	verb	blow	起风
+479	Shanghai	01	blow	10	刮风	14	kuaʔ⁵⁻⁴foŋ⁵³	刮风	269	-	verb	blow	刮风
+480	Suzhou	02	blow	10	刮风	10	ʦʰʮ⁵⁵foŋ⁵⁵	吹风	273	-	verb	blow	吹风
+481	Suzhou	02	blow	10	刮风	11	ʨʰi⁵¹foŋ⁵⁵	起风	270	-	verb	blow	起风
+482	Hangzhou	03	blow	10	刮风	9	ʨʰi⁵³foŋ³³	起风	270	-	verb	blow	起风
+483	Hangzhou	03	blow	10	刮风	10	kuɑʔ⁵foŋ³³	刮风	269	-	verb	blow	刮风
+484	Wenzhou	04	blow	10	刮风	15	tiɛ³⁵⁻²¹hoŋ³³	打风	275	-	verb	blow	打风
+485	Wenzhou	04	blow	10	刮风	16	jau³⁵⁻²¹hoŋ³³	有风	277	-	verb	blow	有风
+486	Guangzhou	05	blow	10	刮风	13	fan⁵³foŋ⁵³	翻风	272	-	verb	blow	翻风
+487	Guangzhou	05	blow	10	刮风	14	ta³⁵foŋ⁵³	打风	275	刮台风	verb	blow	打风
+488	Nanning	06	blow	10	刮风	10	fan⁵⁵fuŋ⁵⁵	翻风	272	-	verb	blow	翻风
+489	Xianggang	07	blow	10	刮风	11	fan⁵⁵fuŋ⁵⁵	翻风	272	-	verb	blow	翻风
+490	Xianggang	07	blow	10	刮风	12	ta³⁵fuŋ⁵⁵	打风	275	刮台风	verb	blow	打风
+491	Xiamen	08	blow	10	刮风	14	kʰi⁵³⁻⁵⁵hɔŋ⁵⁵	起风	270	-	verb	blow	起风
+492	Fuzhou	09	blow	10	刮风	10	pʰaʔ²⁴⁻⁴⁴huŋ⁴⁴	拍风	271	-	verb	blow	拍风
+493	Fuzhou	09	blow	10	刮风	11	kʰi³²⁻²¹huŋ⁴⁴	起风	270	-	verb	blow	起风
+494	Jian'ou	10	blow	10	刮风	9	kʰi²¹xɔŋ⁵⁴	起风	270	-	verb	blow	起风
+495	Shantou	11	blow	10	刮风	12	tʰau²¹³⁻⁵⁵huaŋ³³	透风	274	-	verb	blow	透风
+496	Haikou	12	blow	10	刮风	15	hau³⁵huaŋ²³	透风	274	-	verb	blow	透风
+497	Haikou	12	blow	10	刮风	16	xi²¹³huaŋ²³	起风	270	-	verb	blow	起风
+498	Taibei	13	blow	10	刮风	10	ki⁵³⁻⁴⁴hɔŋ⁴⁴	起风	270	-	verb	blow	起风
+499	Meixian	14	blow	10	刮风	9	hi³¹fuŋ⁴⁴	起风	270	-	verb	blow	起风
+500	Taoyuan	15	blow	10	刮风	11	hi³¹fuŋ²⁴	起风	270	-	verb	blow	起风
+501	Nanchang	16	blow	10	刮风	12	ʨʰi²¹³fuŋ⁴²	起风	270	-	verb	blow	起风
+502	Changsha	17	blow	10	刮风	13	ʨʰi⁴¹xoŋ³³	起风	270	-	verb	blow	起风
+503	Changsha	17	blow	10	刮风	14	fa²⁴xoŋ³³	发风	276	-	verb	blow	发风
+504	Xiangtan	18	blow	10	刮风	13	ʨʰi⁴²ɸən³³	起风	270	-	verb	blow	起风
+505	Xiangtan	18	blow	10	刮风	14	ɸɒ²⁴ɸən³³	发风	276	-	verb	blow	发风
+506	Shexian	19	blow	10	刮风	13	ʨʰi³⁵fʌ̃³¹	起风	270	-	verb	blow	起风
+507	Shexian	19	blow	10	刮风	14	fa²¹fʌ̃³¹⁻⁵³	发风	276	-	verb	blow	发风
+508	Tunxi	20	blow	10	刮风	12	kuːə⁵fan	刮风	269	-	verb	blow	刮风
+509	Tunxi	20	blow	10	刮风	13	fuːə⁵fan¹¹	发风	276	-	verb	blow	发风
+510	Tunxi	20	blow	10	刮风	14	ʨʰi³¹⁻⁵fan¹¹	起风	270	-	verb	blow	起风
+511	Taiyuan	21	blow	10	刮风	12	kuaʔ²⁻⁴⁵fəŋ¹¹	刮风	269	-	verb	blow	刮风
+512	Pingyao	22	blow	10	刮风	12	kuʌʔ¹³xuŋ¹³	刮风	269	-	verb	blow	刮风
+513	Huhehaote	23	blow	10	刮风	17	ʨʰi⁵³fə̃ŋ³¹	起风	270	-	verb	blow	起风
+514	Huhehaote	23	blow	10	刮风	18	kuaʔ⁴³fə̃ŋ³¹	刮风	269	-	verb	blow	刮风
+515	Beijing	24	blow	10	刮风	11	kua⁵⁵fəŋ⁵⁵	刮风	269	-	verb	blow	刮风
+516	Tianjin	25	blow	10	刮风	11	kuɑ¹³fŋ²¹	刮风	269	-	verb	blow	刮风
+517	Jinan	26	blow	10	刮风	14	kua²¹³⁻²³fəŋ²¹³	刮风	269	-	verb	blow	刮风
+518	Qingdao	27	blow	10	刮风	11	kua⁵⁵fəŋ²¹³	刮风	269	-	verb	blow	刮风
+519	Nanjing	28	blow	10	刮风	11	kuɑʔ⁵fən³¹	刮风	269	-	verb	blow	刮风
+520	Nanjing	28	blow	10	刮风	12	ʨʰi²¹²⁻¹²fən³¹	起风	270	-	verb	blow	起风
+521	Hefei	29	blow	10	刮风	10	ʦʰɿ²⁴fəŋ²¹	起风	270	-	verb	blow	起风
+522	Zhengzhou	30	blow	10	刮风	16	kua²⁴fəŋ²⁴	刮风	269	-	verb	blow	刮风
+523	Wuhan	31	blow	10	刮风	14	kua²¹³⁻²¹foŋ⁵⁵	刮风	269	-	verb	blow	刮风
+524	Wuhan	31	blow	10	刮风	15	ʨʰi⁴²foŋ⁵⁵	起风	270	-	verb	blow	起风
+525	Chengdu	32	blow	10	刮风	15	kua³¹foŋ⁵⁵	刮风	269	-	verb	blow	刮风
+526	Chengdu	32	blow	10	刮风	16	ʨʰi⁵³foŋ⁵⁵	起风	270	-	verb	blow	起风
+527	Chengdu	32	blow	10	刮风	17	ʦʰuei⁵⁵foŋ⁵⁵	吹风	273	-	verb	blow	吹风
+528	Guiyang	33	blow	10	刮风	14	ʦʰuei⁵⁵foŋ⁵⁵	吹风	273	-	verb	blow	吹风
+529	Kunming	34	blow	10	刮风	13	kuᴀ³¹foŋ⁴⁴	刮风	269	-	verb	blow	刮风
+530	Kunming	34	blow	10	刮风	14	ʨʰi⁵³foŋ⁴⁴	起风	270	-	verb	blow	起风
+531	Haerbin	35	blow	10	刮风	10	kua²¹³⁻²¹fəŋ⁴⁴	刮风	269	-	verb	blow	刮风
+532	Xi'an	36	blow	10	刮风	10	kua²¹⁻²⁴fəŋ²¹	刮风	269	-	verb	blow	刮风
+533	Yinchuan	37	blow	10	刮风	17	kua¹³fəŋ⁴⁴	刮风	269	-	verb	blow	刮风
+534	Yinchuan	37	blow	10	刮风	18	ʨʰi⁵³fəŋ⁴⁴	起风	270	-	verb	blow	起风
+535	Lanzhou	38	blow	10	刮风	10	kua¹³⁻¹¹fə̃n³¹	刮风	269	-	verb	blow	刮风
+536	Xining	39	blow	10	刮风	12	kua⁴⁴fə̃⁴⁴	刮风	269	-	verb	blow	刮风
+537	Xining	39	blow	10	刮风	13	t͡ʂʰu⁴⁴⁻²⁴fə̃⁴⁴	吹风	273	-	verb	blow	吹风
+538	Wulumuqi	40	blow	10	刮风	11	kua²¹³fɤŋ⁴⁴	刮风	269	-	verb	blow	刮风
+539	Wulumuqi	40	blow	10	刮风	12	ʨʰi⁵¹fɤŋ⁴⁴	起风	270	-	verb	blow	起风
+#
+540	Shanghai	01	rainbow	11	虹	15	hɤ³⁵	鲎	2062	-	noun	-	鲎
+541	Shanghai	01	rainbow	11	虹	16	ʦʰe³⁵⁻³³ɦoŋ¹³⁻⁴⁴	彩虹	2063	-	noun	-	彩虹
+542	Suzhou	02	rainbow	11	虹	12	hʏ⁵¹³	鱟	2059	-	noun	-	鱟
+543	Hangzhou	03	rainbow	11	虹	11	hei⁴⁴⁵	鱟	2059	-	noun	-	鱟
+544	Wenzhou	04	rainbow	11	虹	17	hau⁴²	鱟	2059	-	noun	-	鱟
+545	Guangzhou	05	rainbow	11	虹	15	hoŋ²¹	虹	2058	-	noun	-	虹
+546	Nanning	06	rainbow	11	虹	11	kɔŋ³³	虹	2058	-	noun	-	虹
+547	Xianggang	07	rainbow	11	虹	13	ʦʰɔi³⁵huŋ²¹	彩虹	2063	-	noun	-	彩虹
+548	Xiamen	08	rainbow	11	虹	15	kʰiŋ²²	虹	2058	-	noun	-	虹
+549	Fuzhou	09	rainbow	11	虹	12	kʰøyŋ²⁴²	虹	2058	-	noun	-	虹
+550	Jian'ou	10	rainbow	11	虹	10	kɔŋ³³	虹	2058	-	noun	-	虹
+551	Shantou	11	rainbow	11	虹	13	kʰeŋ³⁵	虹	2058	-	noun	-	虹
+552	Haikou	12	rainbow	11	虹	17	xiaŋ³³	虹	2058	-	noun	-	虹
+553	Taibei	13	rainbow	11	虹	11	hɔŋ²⁴	虹	2058	-	noun	-	虹
+554	Meixian	14	rainbow	11	虹	10	tʰien⁴⁴kiuŋ⁴⁴	天弓	2061	-	noun	-	天弓
+555	Taoyuan	15	rainbow	11	虹	12	tʰien²⁴⁻²²kioŋ²⁴	天弓	2061	-	noun	-	天弓
+556	Nanchang	16	rainbow	11	虹	13	kɔŋ⁴⁵	虹	2058	-	noun	-	虹
+557	Changsha	17	rainbow	11	虹	15	kan⁵⁵	虹	2058	-	noun	-	虹
+558	Xiangtan	18	rainbow	11	虹	15	kɔn⁵⁵	虹	2058	-	noun	-	虹
+559	Shexian	19	rainbow	11	虹	15	ka³²⁴	虹	2058	-	noun	-	虹
+560	Shexian	19	rainbow	11	虹	16	ʦʰɛ³⁵ka³²⁴	彩虹	2063	-	noun	-	彩虹
+561	Tunxi	20	rainbow	11	虹	15	kau⁴²	虹	2058	-	noun	-	虹
+562	Taiyuan	21	rainbow	11	虹	13	ʨiɒ̃⁵³	虹	2058	-	noun	-	虹
+563	Pingyao	22	rainbow	11	虹	13	ʨyə³⁵	虹	2058	-	noun	-	虹
+564	Huhehaote	23	rainbow	11	虹	19	ʨiɑ̃⁵⁵	虹	2058	-	noun	-	虹
+565	Beijing	24	rainbow	11	虹	12	ʨiɑŋ⁵¹	虹	2058	-	noun	-	虹
+566	Beijing	24	rainbow	11	虹	13	kaŋ⁵¹	虹	2058	-	noun	-	虹
+567	Beijing	24	rainbow	11	虹	14	xuŋ³⁵	虹	2058	-	noun	-	虹
+568	Tianjin	25	rainbow	11	虹	12	ʨiɑŋ⁵³	虹	2058	-	noun	-	虹
+569	Jinan	26	rainbow	11	虹	15	ʨiaŋ²¹	虹	2058	-	noun	-	虹
+570	Qingdao	27	rainbow	11	虹	12	ʦiaŋ⁴²	虹	2058	-	noun	-	虹
+571	Qingdao	27	rainbow	11	虹	13	ʦiaŋ²¹³	虹	2058	-	noun	-	虹
+572	Nanjing	28	rainbow	11	虹	13	kaŋ⁴⁴	虹	2058	-	noun	-	虹
+573	Hefei	29	rainbow	11	虹	11	ʨiɑ̃⁵³	虹	2058	-	noun	-	虹
+574	Zhengzhou	30	rainbow	11	虹	17	ʦiaŋ³¹²	虹	2058	-	noun	-	虹
+575	Wuhan	31	rainbow	11	虹	16	kaŋ³⁵	虹	2058	-	noun	-	虹
+576	Wuhan	31	rainbow	11	虹	17	xoŋ²¹³	虹	2058	-	noun	-	虹
+577	Chengdu	32	rainbow	11	虹	18	xoŋ³¹	虹	2058	-	noun	-	虹
+578	Chengdu	32	rainbow	11	虹	19	ʦʰai⁵³xoŋ³¹	彩虹	2063	-	noun	-	彩虹
+579	Chengdu	32	rainbow	11	虹	20	tʰian⁵⁵ʨʰiau³¹	天桥	2064	-	noun	-	天桥
+580	Guiyang	33	rainbow	11	虹	15	kaŋ²¹³	虹	2058	-	noun	-	虹
+581	Kunming	34	rainbow	11	虹	15	kᴀ̃²¹²	虹	2058	-	noun	-	虹
+582	Haerbin	35	rainbow	11	虹	11	kaŋ⁵³	虹	2058	-	noun	-	虹
+583	Haerbin	35	rainbow	11	虹	12	xuŋ²⁴	虹	2058	-	noun	-	虹
+584	Xi'an	36	rainbow	11	虹	11	ʨiaŋ⁴⁴	虹	2058	-	noun	-	虹
+585	Yinchuan	37	rainbow	11	虹	19	kɑŋ¹³	虹	2058	-	noun	-	虹
+586	Lanzhou	38	rainbow	11	虹	11	kɑ̃¹³	杠	2060	-	noun	-	杠
+587	Xining	39	rainbow	11	虹	14	kɔ̃²¹³	虹	2058	-	noun	-	虹
+588	Wulumuqi	40	rainbow	11	虹	13	kɑŋ²¹³	虹	2058	-	noun	-	虹
+589	Wulumuqi	40	rainbow	11	虹	14	xuŋ⁵¹	虹	2058	-	noun	-	虹
+#
+590	Shanghai	01	Dragon Boat Festival	12	端午节	17	tø⁵³⁻⁵⁵ɦŋ̍¹³⁻²¹	端午	3	-	preposition	-	端午
+591	Shanghai	01	Dragon Boat Festival	12	端午节	18	tø⁵³⁻⁵⁵ɦŋ̍¹³⁻³³ʨiɪʔ⁵⁻²¹	端午节	2	-	preposition	-	端午节
+592	Suzhou	02	Dragon Boat Festival	12	端午节	13	tø⁵⁵ŋ̍³¹ʦiəʔ⁵⁻²	端午节	2	-	preposition	-	端午节
+593	Hangzhou	03	Dragon Boat Festival	12	端午节	12	tuõ³³ʔu⁵³⁻³³	端午	3	-	preposition	-	端午
+594	Wenzhou	04	Dragon Boat Festival	12	端午节	18	ʥyɔ³¹⁻⁴²ŋ̍³⁵	重五	10	-	preposition	-	重五
+595	Guangzhou	05	Dragon Boat Festival	12	端午节	16	ŋ̍²³jyt²ʦit³	五月节	1	-	preposition	-	五月节
+596	Guangzhou	05	Dragon Boat Festival	12	端午节	17	tyn⁵³ŋ̍²³	端午	3	-	preposition	-	端午
+597	Nanning	06	Dragon Boat Festival	12	端午节	12	ŋ̍²⁴yt²²ʦʰɔ⁵⁵ŋ̍²⁴	五月初五	8	-	preposition	-	五月初五
+598	Xianggang	07	Dragon Boat Festival	12	端午节	14	ŋ̍¹³jyt²ʦit³	五月节	1	-	preposition	-	五月节
+599	Xianggang	07	Dragon Boat Festival	12	端午节	15	tyn⁵⁵ŋ̍¹³	端午	3	-	preposition	-	端午
+600	Xiamen	08	Dragon Boat Festival	12	端午节	16	gɔ²²⁻²¹geʔ⁵⁻²¹ʦueʔ	五月节	1	-	preposition	-	五月节
+601	Xiamen	08	Dragon Boat Festival	12	端午节	17	tuan⁵⁵⁻²²ŋɔ⁵³⁻⁵⁵ʦiat³²	端午节	2	-	preposition	-	端午节
+602	Xiamen	08	Dragon Boat Festival	12	端午节	18	tuan⁵⁵⁻²²ŋɔ⁵³⁻⁵⁵ʦueʔ³²	端午节	2	-	preposition	-	端午节
+603	Fuzhou	09	Dragon Boat Festival	12	端午节	13	ŋu²⁴²⁻²¹ŋuoʔ⁵⁻⁵³ʦɑiʔ²⁴	五月节	1	-	preposition	-	五月节
+604	Fuzhou	09	Dragon Boat Festival	12	端午节	14	ŋu²⁴²⁻²¹niʔ⁵⁻⁵³ʦɑiʔ²⁴	五日节	9	-	preposition	-	五日节
+605	Jian'ou	10	Dragon Boat Festival	12	端午节	11	kua³³ʦai²⁴	过节	4	-	preposition	-	过节
+606	Jian'ou	10	Dragon Boat Festival	12	端午节	12	ŋu⁴²ŋyɛ⁴²ʦai²⁴	五月节	1	-	preposition	-	五月节
+607	Shantou	11	Dragon Boat Festival	12	端午节	14	ŋõu³⁵⁻³¹gueʔ⁵⁻²ʦoiʔ²	五月节	1	-	preposition	-	五月节
+608	Haikou	12	Dragon Boat Festival	12	端午节	18	ŋɔu³³vue³³ʦe⁵⁵	五月节	1	-	preposition	-	五月节
+609	Haikou	12	Dragon Boat Festival	12	端午节	19	ŋɔu³³vue³³sɔu²³ŋɔu³³	五月初五	8	(特指)	preposition	-	五月初五
+610	Taibei	13	Dragon Boat Festival	12	端午节	12	gɔ³³⁻¹¹lit⁴⁴⁻³²ʦieʔ³²	五日节	9	-	preposition	-	五日节
+611	Taibei	13	Dragon Boat Festival	12	端午节	13	gɔ³³⁻¹¹geʔ⁴⁴⁻³²ʦieʔ³²	五月节	1	-	preposition	-	五月节
+612	Meixian	14	Dragon Boat Festival	12	端午节	11	n̩³¹ŋiat⁵ʦiet¹	五月节	1	-	preposition	-	五月节
+613	Taoyuan	15	Dragon Boat Festival	12	端午节	13	ŋ̍³¹ŋiet⁵⁵ʦiet²²	五月节	1	-	preposition	-	五月节
+614	Nanchang	16	Dragon Boat Festival	12	端午节	14	ʨiɛʔ⁵	节	7	-	preposition	-	节
+615	Nanchang	16	Dragon Boat Festival	12	端午节	15	tɵn⁴²u²¹³	端午	3	tɵn⁴²u²¹³(ʨiɛʔ⁵̃)	preposition	-	端午
+616	Nanchang	16	Dragon Boat Festival	12	端午节	16	tɵn⁴²iɔŋ⁴⁵	端阳	12	tɵn⁴²iɔŋ⁴⁵(ʨiɛʔ⁵)	preposition	-	端阳
+617	Changsha	17	Dragon Boat Festival	12	端午节	16	tõ³³u⁴¹ʦie²⁴	端午节	2	-	preposition	-	端午节
+618	Xiangtan	18	Dragon Boat Festival	12	端午节	16	tɔn³³u⁴²i²⁴	端午日	11	-	preposition	-	端午日
+619	Xiangtan	18	Dragon Boat Festival	12	端午节	17	tɔn³³ian¹²ʦie²⁴	端阳节	13	-	preposition	-	端阳节
+620	Shexian	19	Dragon Boat Festival	12	端午节	17	to³¹u³⁵ʦeʔ²¹	端午节	2	-	preposition	-	端午节
+621	Tunxi	20	Dragon Boat Festival	12	端午节	16	tuːə¹¹n̩	端午	3	-	preposition	-	端午
+622	Tunxi	20	Dragon Boat Festival	12	端午节	17	tuːə¹¹n̩²⁴ʦiɛ⁵	端午节	2	-	preposition	-	端午节
+623	Taiyuan	21	Dragon Boat Festival	12	端午节	14	vu⁵³yəʔ²tuæ̃¹¹vu⁵³	五月端午	5	-	preposition	-	五月端午
+624	Pingyao	22	Dragon Boat Festival	12	端午节	14	u⁵³yʌʔ⁵³tuɑŋ¹³⁻³¹u⁵³	五月端午	5	-	preposition	-	五月端午
+625	Huhehaote	23	Dragon Boat Festival	12	端午节	20	tuæ̃³¹⁻³³vu	端午	3	-	preposition	-	端午
+626	Huhehaote	23	Dragon Boat Festival	12	端午节	21	vu⁵³yaʔ⁴³⁻²¹tuæ̃³¹⁻³³vu	五月端午	5	-	preposition	-	五月端午
+627	Beijing	24	Dragon Boat Festival	12	端午节	15	u²¹⁴⁻²¹yɛ⁵¹ʨiɛ³⁵	五月节	1	-	preposition	-	五月节
+628	Beijing	24	Dragon Boat Festival	12	端午节	16	tuan⁵⁵u²ʨiɛ³⁵	端午节	2	-	preposition	-	端午节
+629	Tianjin	25	Dragon Boat Festival	12	端午节	13	u¹³ye³ʨie⁴⁵	五月节	1	-	preposition	-	五月节
+630	Jinan	26	Dragon Boat Festival	12	端午节	16	u⁵⁵⁻²¹³yətuã²¹³⁻²¹u	五月端午	5	-	preposition	-	五月端午
+631	Jinan	26	Dragon Boat Festival	12	端午节	17	tuã²¹³u⁵⁵	端午	3	-	preposition	-	端午
+632	Qingdao	27	Dragon Boat Festival	12	端午节	14	vu⁵⁵⁻⁴⁵yətã²¹³⁻³¹vu	五月端午	5	-	preposition	-	五月端午
+633	Nanjing	28	Dragon Boat Festival	12	端午节	14	u²¹²⁻¹¹yeʔʦieʔ⁵	五月节	1	-	preposition	-	五月节
+634	Nanjing	28	Dragon Boat Festival	12	端午节	15	tuaŋ³¹u²¹²⁻¹¹ʦieʔ	端午节	2	-	preposition	-	端午节
+635	Nanjing	28	Dragon Boat Festival	12	端午节	16	uɑr²⁴ʦieʔ⁵	娃儿节	14	-	preposition	-	娃儿节
+636	Hefei	29	Dragon Boat Festival	12	端午节	12	t̃²¹u²⁴ʨiɐʔ⁵	端午节	2	-	preposition	-	端午节
+637	Zhengzhou	30	Dragon Boat Festival	12	端午节	18	u⁵³yɛtuaŋ²⁴ur	五月端午儿	5	-	preposition	-	五月端午
+638	Zhengzhou	30	Dragon Boat Festival	12	端午节	19	tuan²⁴u⁵³ʦiɛ²⁴	端午节	2	-	preposition	-	端午节
+639	Wuhan	31	Dragon Boat Festival	12	端午节	18	tan⁵⁵u	端午	3	-	preposition	-	端午
+640	Wuhan	31	Dragon Boat Festival	12	端午节	19	tan⁵⁵iaŋ	端阳	12	-	preposition	-	端阳
+641	Chengdu	32	Dragon Boat Festival	12	端午节	21	tuan⁵⁵u⁵³ʨie³¹	端午节	2	-	preposition	-	端午节
+642	Chengdu	32	Dragon Boat Festival	12	端午节	22	tuan⁵⁵u⁵³	端午	3	-	preposition	-	端午
+643	Chengdu	32	Dragon Boat Festival	12	端午节	23	tuan⁵⁵iaŋ³¹	端阳	12	-	preposition	-	端阳
+644	Guiyang	33	Dragon Boat Festival	12	端午节	16	tuan⁵⁵u⁴²	端午	3	-	preposition	-	端午
+645	Guiyang	33	Dragon Boat Festival	12	端午节	17	tuan⁵⁵iaŋ²¹	端阳	12	-	preposition	-	端阳
+646	Kunming	34	Dragon Boat Festival	12	端午节	16	u⁵³iɛ³¹⁻⁴⁴tuᴀ̃⁴⁴u⁵³	五月端午	5	-	preposition	-	五月端午
+647	Haerbin	35	Dragon Boat Festival	12	端午节	13	u²¹³⁻²¹yɛ⁵³ʨiɛ²¹³	五月节	1	-	preposition	-	五月节
+648	Xi'an	36	Dragon Boat Festival	12	端午节	12	u⁵³yɛ²¹⁻²⁴ʨiɛ²¹	五月节	1	-	preposition	-	五月节
+649	Yinchuan	37	Dragon Boat Festival	12	端午节	20	tan⁴⁴vu	端午	3	-	preposition	-	端午
+650	Yinchuan	37	Dragon Boat Festival	12	端午节	21	tan⁴⁴vuʨie¹³	端午节	2	-	preposition	-	端午节
+651	Yinchuan	37	Dragon Boat Festival	12	端午节	22	vu⁵³⁻³⁵itan⁴⁴vu	五月端午	5	i(<ye)	preposition	-	五月端午
+652	Lanzhou	38	Dragon Boat Festival	12	端午节	12	tɑ̃³¹vu²¹	当午	6	-	preposition	-	当午
+653	Lanzhou	38	Dragon Boat Festival	12	端午节	13	tuɛ̃n³¹iɑ̃²¹	端阳	12	-	preposition	-	端阳
+654	Xining	39	Dragon Boat Festival	12	端午节	15	tɔ̃⁴⁴v̩⁵³	端午	3	-	preposition	-	端午
+655	Xining	39	Dragon Boat Festival	12	端午节	16	v̩⁵³yutɔ̃⁴⁴v̩⁵³	五月端午	5	-	preposition	-	五月端午
+656	Wulumuqi	40	Dragon Boat Festival	12	端午节	15	tuan⁴⁴yɤ	端午	3	-	preposition	-	端午
+657	Wulumuqi	40	Dragon Boat Festival	12	端午节	16	vu⁵¹⁻¹³yɤtuan⁴⁴	五月端午	5	-	preposition	-	五月端午
+#
+658	Shanghai	01	Mid-autumn Festival	13	中秋节	19	ʦoŋ⁵³⁻⁵⁵ʨʰiɤ⁵³⁻²¹	中秋	22	-	preposition	-	中秋
+659	Shanghai	01	Mid-autumn Festival	13	中秋节	20	ʦoŋ⁵³⁻⁵⁵ʨʰiɤ⁵³⁻³³ʨiɪʔ⁵⁻²¹	中秋节	21	-	preposition	-	中秋节
+660	Suzhou	02	Mid-autumn Festival	13	中秋节	14	po⁵ŋəʔ³pø⁵¹³⁻²¹	八月半	24	-	preposition	-	八月半
+661	Suzhou	02	Mid-autumn Festival	13	中秋节	15	ʦoŋ⁵⁵ʦʰʏ⁵⁵ʦiəʔ⁵	中秋节	21	-	preposition	-	中秋节
+662	Hangzhou	03	Mid-autumn Festival	13	中秋节	13	pɑʔ⁵ɦyəʔ²⁻⁵puõ⁴⁴⁵⁻³³	八月半	24	-	preposition	-	八月半
+663	Wenzhou	04	Mid-autumn Festival	13	中秋节	19	po²¹³⁻²¹ȵy²¹³⁻²¹zai²¹³⁻²¹ŋ	八月十五	23	-	preposition	-	八月十五
+664	Wenzhou	04	Mid-autumn Festival	13	中秋节	20	ʨoŋ³³⁻²¹ʨʰɤu³³⁻³⁵ʨi²¹³⁻¹³	中秋节	21	-	preposition	-	中秋节
+665	Guangzhou	05	Mid-autumn Festival	13	中秋节	18	ʦoŋ⁵⁵ʦʰɐu⁵⁵	中秋	22	-	preposition	-	中秋
+666	Guangzhou	05	Mid-autumn Festival	13	中秋节	19	pat³jyt²sɐp²m̩²³	八月十五	23	m̩²³<ŋ̍²³	preposition	-	八月十五
+667	Nanning	06	Mid-autumn Festival	13	中秋节	13	pɛt³³yt²²sɐp²²m̩²⁴	八月十五	23	-	preposition	-	八月十五
+668	Xianggang	07	Mid-autumn Festival	13	中秋节	16	ʦuŋ⁵⁵ʦʰɐu⁵⁵	中秋	22	-	preposition	-	中秋
+669	Xianggang	07	Mid-autumn Festival	13	中秋节	17	pat³jyt²sɐp²m̩¹³	八月十五	23	m̩¹³(<ŋ̍¹³)	preposition	-	八月十五
+670	Xiamen	08	Mid-autumn Festival	13	中秋节	19	tiɔŋ⁵⁵⁻²²ʦʰiu⁵⁵⁻²²ʦiat³²	中秋节	21	-	preposition	-	中秋节
+671	Xiamen	08	Mid-autumn Festival	13	中秋节	20	tiɔŋ⁵⁵⁻²²ʦʰiu⁵⁵⁻²²ʦueʔ³²	中秋节	21	-	preposition	-	中秋节
+672	Xiamen	08	Mid-autumn Festival	13	中秋节	21	tiɔŋ⁵⁵⁻²²ʦʰiu⁵⁵⁻²²	中秋	22	-	preposition	-	中秋
+673	Xiamen	08	Mid-autumn Festival	13	中秋节	22	pueʔ³²⁻⁵³geʔ⁵⁻²¹ʦueʔ³²	八月节	20	-	preposition	-	八月节
+674	Fuzhou	09	Mid-autumn Festival	13	中秋节	15	tyŋ⁴⁴ʒieu⁴⁴	中秋	22	-	preposition	-	中秋
+675	Fuzhou	09	Mid-autumn Festival	13	中秋节	16	pɛiʔ²⁴⁻²¹ŋuoʔ⁵sɛiʔ⁵⁻²¹ŋou²⁴²	八月十五	23	-	preposition	-	八月十五
+676	Jian'ou	10	Mid-autumn Festival	13	中秋节	13	kua³³tœyŋ⁵⁴ʦʰiu⁵⁴	过中秋	25	-	preposition	-	过中秋
+677	Jian'ou	10	Mid-autumn Festival	13	中秋节	14	pai²⁴ŋyɛ⁴²tœyŋ⁵⁴ʦʰiu⁵⁴	八月中秋	27	-	preposition	-	八月中秋
+678	Shantou	11	Mid-autumn Festival	13	中秋节	15	toŋ³³ʦʰiu³³	中秋	22	-	preposition	-	中秋
+679	Haikou	12	Mid-autumn Festival	13	中秋节	20	ʔbi⁵⁵vue³³ʦe⁵⁵	八月节	20	-	preposition	-	八月节
+680	Haikou	12	Mid-autumn Festival	13	中秋节	21	ʔbi⁵⁵vue³³tap³ŋɔu³³	八月十五	23	(特指)	preposition	-	八月十五
+681	Haikou	12	Mid-autumn Festival	13	中秋节	22	toŋ²³siu²³	中秋	22	-	preposition	-	中秋
+682	Taibei	13	Mid-autumn Festival	13	中秋节	14	tiɔŋ⁴⁴⁻³³ʦʰiu⁴⁴⁻³³ʦieʔ³²	中秋节	21	-	preposition	-	中秋节
+683	Meixian	14	Mid-autumn Festival	13	中秋节	12	ʦuŋ⁴⁴ʦʰiu⁴⁴⁻³⁵ʦiet¹	中秋节	21	-	preposition	-	中秋节
+684	Taoyuan	15	Mid-autumn Festival	13	中秋节	14	pɑt²²ŋiet⁵⁵pɑn⁵⁵	八月半	24	-	preposition	-	八月半
+685	Nanchang	16	Mid-autumn Festival	13	中秋节	17	ʦuŋ⁴²ʨʰiu⁴²	中秋	22	-	preposition	-	中秋
+686	Nanchang	16	Mid-autumn Festival	13	中秋节	18	ʦuŋ⁴²ʨʰiu⁴²ʨiɛʔ⁵	中秋节	21	-	preposition	-	中秋节
+687	Changsha	17	Mid-autumn Festival	13	中秋节	17	t͡ʂoŋ³³ʦʰiəu³³ʦie²⁴	中秋节	21	-	preposition	-	中秋节
+688	Xiangtan	18	Mid-autumn Festival	13	中秋节	18	t͡ʂən³³ʦʰiəɯ³³i²⁴	中秋日	26	-	preposition	-	中秋日
+689	Xiangtan	18	Mid-autumn Festival	13	中秋节	19	t͡ʂən³³ʦʰiəɯ³³ʦie²⁴	中秋节	21	-	preposition	-	中秋节
+690	Shexian	19	Mid-autumn Festival	13	中秋节	18	ts̃ʌ³¹ʦʰiu³¹ʦeʔ²¹	中秋节	21	-	preposition	-	中秋节
+691	Shexian	19	Mid-autumn Festival	13	中秋节	19	tʌ̃³¹ʦʰiu³¹ʦeʔ²¹	登秋节	28	-	preposition	-	登秋节
+692	Shexian	19	Mid-autumn Festival	13	中秋节	20	tʰo⁴⁴ue⁴⁴ʦeʔ²¹	团圆节	29	-	preposition	-	团圆节
+693	Tunxi	20	Mid-autumn Festival	13	中秋节	18	ʦan¹¹⁻²¹ʦʰiu	中秋	22	-	preposition	-	中秋
+694	Tunxi	20	Mid-autumn Festival	13	中秋节	19	ʦan¹¹⁻²¹ʦʰiu¹¹ʦiɛ⁵	中秋节	21	-	preposition	-	中秋节
+695	Taiyuan	21	Mid-autumn Festival	13	中秋节	15	paʔ²⁻⁵⁴yəʔ²səʔ⁵⁴⁻²vu⁵³	八月十五	23	-	preposition	-	八月十五
+696	Pingyao	22	Mid-autumn Festival	13	中秋节	15	pʌʔ¹³⁻³¹yʌʔ⁵³ʂʌʔ⁵³⁻³⁵u⁵³	八月十五	23	-	preposition	-	八月十五
+697	Huhehaote	23	Mid-autumn Festival	13	中秋节	22	paʔ⁴³yaʔ⁴³⁻²¹səʔ⁴³vu⁵³	八月十五	23	-	preposition	-	八月十五
+698	Huhehaote	23	Mid-autumn Festival	13	中秋节	23	ʦũŋ³¹⁻³³ʨʰiəu³¹	中秋	22	-	preposition	-	中秋
+699	Beijing	24	Mid-autumn Festival	13	中秋节	17	pa⁵⁵⁻³⁵yɛ⁵¹ʨiɛ³⁵	八月节	20	-	preposition	-	八月节
+700	Beijing	24	Mid-autumn Festival	13	中秋节	18	t͡ʂuŋ⁵⁵ʨʰiou⁵⁵ʨiɛ³⁵	中秋节	21	-	preposition	-	中秋节
+701	Tianjin	25	Mid-autumn Festival	13	中秋节	14	pɑ⁴⁵ye³ʨie	八月节	20	-	preposition	-	八月节
+702	Tianjin	25	Mid-autumn Festival	13	中秋节	15	pɑ⁴⁵ye³ʂ⁴⁵u¹³	八月十五	23	-	preposition	-	八月十五
+703	Jinan	26	Mid-autumn Festival	13	中秋节	18	pa²¹³⁻²¹yəʂʅ⁴²⁻⁵⁵u	八月十五	23	-	preposition	-	八月十五
+704	Jinan	26	Mid-autumn Festival	13	中秋节	19	pa²¹³⁻²¹yəʨiə²¹³	八月节	20	-	preposition	-	八月节
+705	Jinan	26	Mid-autumn Festival	13	中秋节	20	t͡ʂuŋ²¹³⁻²³ʨʰiou²¹³	中秋	22	-	preposition	-	中秋
+706	Qingdao	27	Mid-autumn Festival	13	中秋节	15	pa⁵⁵⁻⁴⁵yəʃɿ⁴²⁻⁵⁵u	八月十五	23	-	preposition	-	八月十五
+707	Nanjing	28	Mid-autumn Festival	13	中秋节	17	pɑʔ⁵yeʔʦieʔ⁵	八月节	20	-	preposition	-	八月节
+708	Nanjing	28	Mid-autumn Festival	13	中秋节	18	t͡ʂoŋ³¹⁻³³ʦʰiəɯ³¹ʦieʔ⁵	中秋节	21	-	preposition	-	中秋节
+709	Nanjing	28	Mid-autumn Festival	13	中秋节	19	tʰuaŋ²⁴yen²⁴ʦieʔ⁵	团圆节	29	-	preposition	-	团圆节
+710	Hefei	29	Mid-autumn Festival	13	中秋节	13	t͡ʂəŋ²¹⁻²⁴ʨʰiɯ²¹ʨiɐʔ⁵	中秋节	21	-	preposition	-	中秋节
+711	Zhengzhou	30	Mid-autumn Festival	13	中秋节	20	pa²⁴⁻⁴²yɛʂʅ⁴²u	八月十五	23	-	preposition	-	八月十五
+712	Zhengzhou	30	Mid-autumn Festival	13	中秋节	21	t͡ʂuŋ²⁴ʦʰiou²⁴ʦiɛ²⁴	中秋节	21	-	preposition	-	中秋节
+713	Wuhan	31	Mid-autumn Festival	13	中秋节	20	ʦoŋ⁵⁵ʨʰiəu⁵⁵	中秋	22	-	preposition	-	中秋
+714	Wuhan	31	Mid-autumn Festival	13	中秋节	21	pa²¹³⁻²¹yepan³⁵	八月半	24	-	preposition	-	八月半
+715	Chengdu	32	Mid-autumn Festival	13	中秋节	24	ʦoŋ⁵⁵ʨʰiəu⁵⁵ʨie³¹	中秋节	21	-	preposition	-	中秋节
+716	Chengdu	32	Mid-autumn Festival	13	中秋节	25	pa³¹ye³¹sɿ³¹u⁵³	八月十五	23	-	preposition	-	八月十五
+717	Chengdu	32	Mid-autumn Festival	13	中秋节	26	pa³¹ye³¹ʦoŋ⁵⁵ʨʰiəu⁵⁵	八月中秋	27	-	preposition	-	八月中秋
+718	Guiyang	33	Mid-autumn Festival	13	中秋节	18	pa²¹iɛ²¹sɿ²¹u⁴²	八月十五	23	-	preposition	-	八月十五
+719	Kunming	34	Mid-autumn Festival	13	中秋节	17	t͡ʂoŋ⁴⁴ʨʰiəu⁴⁴ʨiɛ	中秋节	21	-	preposition	-	中秋节
+720	Kunming	34	Mid-autumn Festival	13	中秋节	18	pᴀ³¹iɛ³¹⁻⁴⁴ʂʅ³¹u⁵³	八月十五	23	-	preposition	-	八月十五
+721	Haerbin	35	Mid-autumn Festival	13	中秋节	14	pa⁴⁴⁻²⁴yɛ⁵³ʨiɛ²¹³	八月节	20	-	preposition	-	八月节
+722	Xi'an	36	Mid-autumn Festival	13	中秋节	13	pa²¹yɛ²¹⁻²⁴ʨiɛ²¹	八月节	20	-	preposition	-	八月节
+723	Yinchuan	37	Mid-autumn Festival	13	中秋节	23	t͡ʂuŋ⁴⁴ʨʰiəu⁴⁴ʨie¹³	中秋节	21	-	preposition	-	中秋节
+724	Yinchuan	37	Mid-autumn Festival	13	中秋节	24	pa¹³əʂʅ¹³vu⁵³	八月十五	23	-	preposition	-	八月十五
+725	Lanzhou	38	Mid-autumn Festival	13	中秋节	14	pa¹³⁻²²yə¹³ʂʅ¹³⁻¹¹vu⁴⁴²	八月十五	23	-	preposition	-	八月十五
+726	Lanzhou	38	Mid-autumn Festival	13	中秋节	15	pa¹³⁻²²yə¹³ʨiə⁴⁴²	八月节	20	-	preposition	-	八月节
+727	Xining	39	Mid-autumn Festival	13	中秋节	17	pa⁴⁴yu⁴⁴ʂʅ²⁴⁻²¹v̩⁵³	八月十五	23	-	preposition	-	八月十五
+728	Wulumuqi	40	Mid-autumn Festival	13	中秋节	17	t͡ʂuŋ⁴⁴ʨʰiɤu⁴⁴	中秋	22	-	preposition	-	中秋
+729	Wulumuqi	40	Mid-autumn Festival	13	中秋节	18	pa²¹³⁻¹³ɤʂʅ⁵¹⁻⁴⁴vu	八月十五	23	-	preposition	-	八月十五
+#
+730	Shanghai	01	New Year's Eve	14	除夕	21	du¹³⁻²²ȵi¹³⁻⁵⁵ɦia¹³⁻²¹	大年夜	47	-	preposition	-	大年夜
+731	Suzhou	02	New Year's Eve	14	除夕	16	dəu³¹⁻¹³iɪ¹³iã⁵¹³⁻²¹	大年夜	47	-	preposition	-	大年夜
+732	Hangzhou	03	New Year's Eve	14	除夕	14	ȵiᴇ̃²¹³⁻²¹sᴇ̃³³zəʔ²⁻⁵fᴇ̃⁵³zɑŋ¹³⁻	年三十晚上	32	-	preposition	-	年三十晚上
+733	Hangzhou	03	New Year's Eve	14	除夕	16	do¹³ȵiᴇ̃²¹³⁻⁵³ɦi¹³⁻³¹	大年夜	47	-	preposition	-	大年夜
+734	Wenzhou	04	New Year's Eve	14	除夕	21	sa³³⁻²¹zai²¹³⁻³⁵ȵai²¹³⁻¹³ɦa³¹⁻²²ɕy	三十日黄昏	51	ai²¹³⁻³⁵[zai²¹³⁻³⁵]	preposition	-	三十日黄昏
+735	Wenzhou	04	New Year's Eve	14	除夕	22	ȵi²²⁻²¹ʨau³⁵⁻⁴²ji²²	廿九夜	61	-	preposition	-	廿九夜
+736	Guangzhou	05	New Year's Eve	14	除夕	20	nin²¹sa⁵³³man²³	年卅晚	34	-	preposition	-	年卅晚
+737	Nanning	06	New Year's Eve	14	除夕	14	nin²¹ɬam⁵⁵sɐp²²man²⁴	年三十晚	44	-	preposition	-	年三十晚
+738	Xianggang	07	New Year's Eve	14	除夕	18	nin²¹sa⁵⁵man¹³	年卅晚	34	-	preposition	-	年卅晚
+739	Xiamen	08	New Year's Eve	14	除夕	23	li²²⁻²¹kau⁵³⁻⁵⁵e²²hŋ̍	二九下昏	53	-	preposition	-	二九下昏
+740	Xiamen	08	New Year's Eve	14	除夕	24	li²²⁻²¹kau⁵³⁻⁵⁵mi³⁵	二九暝	62	-	preposition	-	二九暝
+741	Fuzhou	09	New Year's Eve	14	除夕	17	saŋ⁴⁴⁻²¹nɛiʔ⁵⁻⁴⁴maŋ⁵³⁻⁴⁴muo⁴⁴	三十暝晡	33	-	preposition	-	三十暝晡
+742	Jian'ou	10	New Year's Eve	14	除夕	15	saŋ⁵⁴si⁴⁴niŋ³³maŋ³³	三十年暝	38	-	preposition	-	三十年暝
+743	Jian'ou	10	New Year's Eve	14	除夕	16	puiŋ⁵⁴sy³³	分岁	58	-	preposition	-	分岁
+744	Shantou	11	New Year's Eve	14	除夕	16	ziʔ⁵⁻²kau⁵³⁻²⁴mẽ⁵⁵	廿九暝	48	-	preposition	-	廿九暝
+745	Shantou	11	New Year's Eve	14	除夕	17	sã³³ʦap⁵⁻²mẽ⁵⁵	三十暝	59	-	preposition	-	三十暝
+746	Haikou	12	New Year's Eve	14	除夕	23	ta²³tap³mɛ³¹hui²³	三十夜昏	37	(特指),夜[冥]	preposition	-	三十夜昏
+747	Haikou	12	New Year's Eve	14	除夕	24	hi³¹ta²³tap³	年三十	30	-	preposition	-	年三十
+748	Haikou	12	New Year's Eve	14	除夕	25	zi²³kau²¹³ta²³tap³	二九三十	65	(特指)	preposition	-	二九三十
+749	Taibei	13	New Year's Eve	14	除夕	15	li³³⁻¹¹kau⁵³⁻⁵⁵am¹¹	二九暗	49	-	preposition	-	二九暗
+750	Meixian	14	New Year's Eve	14	除夕	13	ŋian¹¹sam⁴⁴səp⁵ŋit¹	年三十日	41	-	preposition	-	年三十日
+751	Taoyuan	15	New Year's Eve	14	除夕	15	sɑm²⁴⁻²²sïp⁵⁵ɑm⁵⁵pu²⁴⁻³³	三十暗晡	50	-	preposition	-	三十暗晡
+752	Nanchang	16	New Year's Eve	14	除夕	19	san⁴²sɨʔ²iɑ²¹uan²¹³	三十夜晚	42	-	preposition	-	三十夜晚
+753	Changsha	17	New Year's Eve	14	除夕	18	ʨy¹³si²⁴	除夕	31	-	preposition	-	除夕
+754	Changsha	17	New Year's Eve	14	除夕	19	san³³ʂʅ²⁴uan⁴¹ʂan¹¹	三十晚上	43	-	preposition	-	三十晚上
+755	Changsha	17	New Year's Eve	14	除夕	20	san³³ʂʅ²⁴uan⁴¹kaʦɿ	三十晚间子	64	-	preposition	-	三十晚间
+756	Xiangtan	18	New Year's Eve	14	除夕	20	dai²¹ȵiẽ¹²san³³ʂʅ⁵⁵	大年三十	54	-	preposition	-	大年三十
+757	Xiangtan	18	New Year's Eve	14	除夕	21	san³³ʂʅ⁵⁵uan⁴²ʂɔn²¹	三十晚上	43	-	preposition	-	三十晚上
+758	Shexian	19	New Year's Eve	14	除夕	21	sɛ³¹ɕi²²ia²²	三十夜	35	-	preposition	-	三十夜
+759	Tunxi	20	New Year's Eve	14	除夕	20	sɔ¹¹⁻²¹ɕi¹¹⁻²¹ia¹¹	三十夜	35	-	preposition	-	三十夜
+760	Taiyuan	21	New Year's Eve	14	除夕	16	nie¹¹sæ̃¹¹səʔ⁵⁴	年三十	30	-	preposition	-	年三十
+761	Taiyuan	21	New Year's Eve	14	除夕	17	nie¹¹ʦʰu¹¹	年除	60	-	preposition	-	年除
+762	Pingyao	22	New Year's Eve	14	除夕	16	ȵiᴇ¹³ʦʮ¹³⁻³¹xɑ³⁵	年除下	45	-	preposition	-	年除下
+763	Pingyao	22	New Year's Eve	14	除夕	17	ȵiᴇ¹³sɑŋ¹³⁻³¹ʂʌʔ⁵³ʐʌʔ¹³⁻⁵³	年三十儿	30	-	preposition	-	年三十
+764	Pingyao	22	New Year's Eve	14	除夕	18	tei³⁵ȵiᴇ¹³⁻³¹xɑ³⁵⁻³¹	大年下	67	-	preposition	-	大年下
+765	Huhehaote	23	New Year's Eve	14	除夕	24	nie³¹⁻³³sæ̃³¹⁻³³sar³¹	年三十儿	30	-	preposition	-	年三十
+766	Huhehaote	23	New Year's Eve	14	除夕	25	sæ̃³¹⁻³³sar³¹xəʔ⁴³⁻²¹ie⁵⁵	三十儿黑夜	57	-	preposition	-	三十儿黑夜
+767	Huhehaote	23	New Year's Eve	14	除夕	26	ʦʰu³¹ɕiəʔ⁴³	除夕	31	-	preposition	-	除夕
+768	Beijing	24	New Year's Eve	14	除夕	19	nian³⁵san⁵⁵ʂər³⁵	年三十儿	30	-	preposition	-	年三十
+769	Tianjin	25	New Year's Eve	14	除夕	16	san²¹ʂər⁴⁵van¹³ʂɑŋ³	三十儿晚上	36	-	preposition	-	三十儿晚上
+770	Jinan	26	New Year's Eve	14	除夕	21	ȵiã⁴²sã²¹³ʂer⁴²	年三十儿	30	-	preposition	-	年三十
+771	Jinan	26	New Year's Eve	14	除夕	22	ta²¹ȵiã⁴²sã²¹³ʂer⁴²	大年三十儿	54	-	preposition	-	大年三十
+772	Jinan	26	New Year's Eve	14	除夕	23	sã²¹³ʂer⁴²	三十儿	66	-	preposition	-	三十
+773	Qingdao	27	New Year's Eve	14	除夕	16	niã⁴²⁻³¹ʧʰu⁴²⁻⁵⁵i	年除日	46	-	preposition	-	年除日
+774	Nanjing	28	New Year's Eve	14	除夕	20	saŋ³¹ʂʅʔ⁵uaŋ²¹²⁻¹¹ʂaŋ	三十晚上	43	-	preposition	-	三十晚上
+775	Hefei	29	New Year's Eve	14	除夕	14	liɪ̃⁵⁵sæ̃²¹ʂəʔ⁵	年三十	30	-	preposition	-	年三十
+776	Zhengzhou	30	New Year's Eve	14	除夕	22	nian⁴²san²⁴ʂər⁴²uan⁵³ʂaŋ	年三十儿晚上	55	-	preposition	-	年三十儿晚上
+777	Zhengzhou	30	New Year's Eve	14	除夕	23	t͡ʂʰu⁴²si²⁴	除夕	31	-	preposition	-	除夕
+778	Wuhan	31	New Year's Eve	14	除夕	22	ʨʰy²¹³⁻²¹ɕi²¹³	除夕	31	-	preposition	-	除夕
+779	Wuhan	31	New Year's Eve	14	除夕	23	san⁵⁵sɿuan⁴²saŋ	三十晚上	43	-	preposition	-	三十晚上
+780	Chengdu	32	New Year's Eve	14	除夕	27	ȵian³¹san⁵⁵sɿ³¹uan⁵³saŋ	年三十晚上	32	-	preposition	-	年三十晚上
+781	Chengdu	32	New Year's Eve	14	除夕	28	ȵian³¹san⁵⁵sɿ³¹uan⁵³xe	年三十晚黑	56	-	preposition	-	年三十晚黑
+782	Chengdu	32	New Year's Eve	14	除夕	29	san⁵⁵sɿ³¹uan⁵³ɕi⁵⁵	三十晚夕	40	夕[些]	preposition	-	三十晚夕
+783	Guiyang	33	New Year's Eve	14	除夕	19	san⁵⁵sɿ²¹iɛ	三十夜	35	-	preposition	-	三十夜
+784	Guiyang	33	New Year's Eve	14	除夕	20	lian²¹san⁵⁵sɿ²¹uan⁴²	年三十晚	44	-	preposition	-	年三十晚
+785	Kunming	34	New Year's Eve	14	除夕	19	sᴀ̃⁴⁴ʂʅ³¹uᴀ̃⁵³ʂə̃³¹⁻⁴⁴	三十晚辰	39	-	preposition	-	三十晚辰
+786	Haerbin	35	New Year's Eve	14	除夕	15	san⁴⁴ʂər²⁴uan²¹³⁻²¹ʂaŋ	三十儿晚上	36	-	preposition	-	三十儿晚上
+787	Xi'an	36	New Year's Eve	14	除夕	14	sã²¹ʂər²⁴xei²¹liɛ	三十儿黑咧	52	-	preposition	-	三十儿黑咧
+788	Yinchuan	37	New Year's Eve	14	除夕	25	san⁴⁴ʂʅvan⁵³⁻³⁵ɕi	三十晚夕	40	-	preposition	-	三十晚夕
+789	Lanzhou	38	New Year's Eve	14	除夕	16	sɛ̃n³¹ʂʅ¹³⁻¹¹vɛ̃n⁴⁴²ɕĩn²¹	三十晚夕	40	-	preposition	-	三十晚夕
+790	Xining	39	New Year's Eve	14	除夕	18	sã⁴⁴⁻²¹ʂʅ²⁴uã⁵³⁻²¹ɕj	三十晚夕	40	-	preposition	-	三十晚夕
+791	Xining	39	New Year's Eve	14	除夕	19	la⁴⁴yusã⁴⁴ʂʅ²⁴⁻⁴⁴	腊月三十	63	-	preposition	-	腊月三十
+792	Xining	39	New Year's Eve	14	除夕	20	ta²¹³iã²⁴sã⁴⁴ʂʅ²⁴⁻⁴⁴	大年三十	54	-	preposition	-	大年三十
+793	Wulumuqi	40	New Year's Eve	14	除夕	19	ȵian⁵¹san⁴⁴ʂʅ	年三十	30	-	preposition	-	年三十
+794	Wulumuqi	40	New Year's Eve	14	除夕	20	ta²¹³⁻¹³ȵian⁵¹san⁴⁴ʂʅ	大年三十	54	-	preposition	-	大年三十
+795	Wulumuqi	40	New Year's Eve	14	除夕	21	san⁴⁴ʂʅxei⁴⁴lɤ	三十黑里	68	-	preposition	-	三十黑里
+#
+796	Shanghai	01	this year	15	今年	22	ʨiŋ⁵³⁻⁵⁵ȵi¹³⁻²¹	今年	2527	-	adverb	-	今年
+797	Suzhou	02	this year	15	今年	17	ʨin⁵⁵ȵiɪ¹³⁻²¹	今年	2527	-	adverb	-	今年
+798	Hangzhou	03	this year	15	今年	15	ken³³ȵiᴇ̃²¹³⁻³³	根年	2529	-	adverb	-	根年
+799	Wenzhou	04	this year	15	今年	23	ke²¹³⁻²²ȵi¹²	居年	2530	-	adverb	-	居年
+800	Guangzhou	05	this year	15	今年	21	kɐm⁵³nin²¹	今年	2527	-	adverb	-	今年
+801	Guangzhou	05	this year	15	今年	22	kɐm⁵³nin²¹si²¹	今年时	2531	-	adverb	-	今年时
+802	Nanning	06	this year	15	今年	15	kɐm⁵⁵nin²¹	今年	2527	-	adverb	-	今年
+803	Xianggang	07	this year	15	今年	19	kɐm³⁵nin²¹	今年	2527	nin²¹(⁻³⁵)	adverb	-	今年
+804	Xiamen	08	this year	15	今年	25	kin⁵⁵⁻²²ni³⁵	今年	2527	(kim⁵⁵>)kin⁵⁵⁻²²	adverb	-	今年
+805	Fuzhou	09	this year	15	今年	18	kie⁴⁴nieŋ⁵³⁻⁴⁴maŋ⁵³	今年暝	2528	-	adverb	-	今年暝
+806	Jian'ou	10	this year	15	今年	17	kiŋ⁵⁴niŋ³³	今年	2527	-	adverb	-	今年
+807	Shantou	11	this year	15	今年	18	kim³³nĩ⁵⁵	今年	2527	-	adverb	-	今年
+808	Haikou	12	this year	15	今年	26	kim²³hi³¹	今年	2527	-	adverb	-	今年
+809	Taibei	13	this year	15	今年	16	kin⁴⁴⁻³³lĩ²⁴	今年	2527	-	adverb	-	今年
+810	Meixian	14	this year	15	今年	14	kin⁴⁴⁻³⁵ŋian¹¹	今年	2527	-	adverb	-	今年
+811	Taoyuan	15	this year	15	今年	16	kin²⁴ŋien¹¹	今年	2527	-	adverb	-	今年
+812	Nanchang	16	this year	15	今年	20	ʨin⁴²ȵiɛn⁰²	今年	2527	-	adverb	-	今年
+813	Nanchang	16	this year	15	今年	21	ʨin⁴²ȵiɛn⁰²ʦɿ⁰²	今年子	2527	-	adverb	-	今年
+814	Changsha	17	this year	15	今年	21	ʨin³³ȵiẽ¹³	今年	2527	-	adverb	-	今年
+815	Changsha	17	this year	15	今年	22	ʨin³³ȵiẽ¹³ʦɿ	今年子	2527	-	adverb	-	今年
+816	Xiangtan	18	this year	15	今年	22	ʨin³³ȵiẽ¹²ʦɿ³³	今年子	2527	-	adverb	-	今年
+817	Shexian	19	this year	15	今年	22	kʌ̃³¹ne⁴⁴	今年	2527	根(今)	adverb	-	今年
+818	Tunxi	20	this year	15	今年	21	kə¹¹ȵiɛ⁴⁴	今年	2527	-	adverb	-	今年
+819	Taiyuan	21	this year	15	今年	18	ʨiəŋ¹¹nie¹¹	今年	2527	-	adverb	-	今年
+820	Pingyao	22	this year	15	今年	19	ʨiŋ¹³⁻³¹ȵiᴇ¹³⁻³⁵	今年	2527	-	adverb	-	今年
+821	Huhehaote	23	this year	15	今年	27	ʨĩŋ³¹nie³¹⁻⁵⁵	今年	2527	-	adverb	-	今年
+822	Beijing	24	this year	15	今年	20	ʨin⁵⁵nian³⁵kə³	今年个	2526	-	adverb	-	今年个
+823	Tianjin	25	this year	15	今年	17	ʨin²¹nian³	今年	2527	-	adverb	-	今年
+824	Jinan	26	this year	15	今年	24	ʨiẽ²¹³iã⁴²	今年	2527	-	adverb	-	今年
+825	Qingdao	27	this year	15	今年	17	ʨiə̃²¹³⁻³¹niã	今年	2527	-	adverb	-	今年
+826	Nanjing	28	this year	15	今年	21	kən³¹lien²⁴ʦɿ	今年子	2527	今[根]	adverb	-	今年
+827	Nanjing	28	this year	15	今年	22	kən³¹lien²⁴	今年	2527	今年[根年]	adverb	-	今年
+828	Hefei	29	this year	15	今年	15	ʨin²¹liɪ̃⁵⁵	今年	2527	-	adverb	-	今年
+829	Zhengzhou	30	this year	15	今年	24	ʨin²⁴nian⁴²	今年	2527	-	adverb	-	今年
+830	Wuhan	31	this year	15	今年	24	ʨin⁵⁵niɛn	今年	2527	-	adverb	-	今年
+831	Chengdu	32	this year	15	今年	30	ʨin⁵⁵ȵian³¹	今年	2527	-	adverb	-	今年
+832	Chengdu	32	this year	15	今年	31	ʨin⁵⁵ȵian³¹ʦɿ⁵³	今年子	2527	-	adverb	-	今年
+833	Guiyang	33	this year	15	今年	21	ʨin⁵⁵lian²¹	今年	2527	-	adverb	-	今年
+834	Guiyang	33	this year	15	今年	22	ʨin⁵⁵lian²¹ʦɿ⁴²	今年子	2527	-	adverb	-	今年
+835	Guiyang	33	this year	15	今年	23	ʦen⁵⁵lian²¹	真年	2533	-	adverb	-	真年
+836	Guiyang	33	this year	15	今年	24	ʦen⁵⁵lian²¹ʦɿ⁴²	真年子	2533	-	adverb	-	真年
+837	Kunming	34	this year	15	今年	20	ʨĩ⁴⁴niɛ̃³¹⁻⁴⁴	今年	2527	-	adverb	-	今年
+838	Haerbin	35	this year	15	今年	16	ʨin⁴⁴nian²⁴	今年	2527	-	adverb	-	今年
+839	Xi'an	36	this year	15	今年	15	ʨiẽ²¹niã	今年	2527	-	adverb	-	今年
+840	Yinchuan	37	this year	15	今年	26	ʨiŋ⁴⁴nian	今年	2527	-	adverb	-	今年
+841	Yinchuan	37	this year	15	今年	27	tɑŋ¹³⁻¹¹nian⁵³	当年	2532	-	adverb	-	当年
+842	Lanzhou	38	this year	15	今年	17	ʨĩn³¹ȵiɛ̃n²¹	今年	2527	-	adverb	-	今年
+843	Lanzhou	38	this year	15	今年	18	ʨĩn³¹ȵiɛ̃n²¹kə²¹	今年个	2526	-	adverb	-	今年个
+844	Xining	39	this year	15	今年	21	ʨiə̃⁴⁴ȵiã²⁴⁻⁴⁴	今年	2527	-	adverb	-	今年
+845	Wulumuqi	40	this year	15	今年	22	ʨiŋ⁴⁴ȵian⁵¹	今年	2527	-	adverb	-	今年
+#
+846	Shanghai	01	next year	16	明年	23	kʰe⁵³⁻⁵⁵ȵi¹³⁻²¹	开年	1820	-	adverb	-	开年
+847	Shanghai	01	next year	16	明年	24	miŋ¹³⁻²²ȵi¹³⁻⁴⁴	明年	1813	-	adverb	-	明年
+848	Suzhou	02	next year	16	明年	18	kʰᴇ⁵⁵ȵiɪ¹³⁻²¹	开年	1820	-	adverb	-	开年
+849	Hangzhou	03	next year	16	明年	17	men²¹³⁻²¹ȵiᴇ̃²¹³⁻¹³	门年	1817	-	adverb	-	门年
+850	Wenzhou	04	next year	16	明年	24	maŋ³¹⁻²²ȵi³¹⁻²	明年	1813	-	adverb	-	明年
+851	Guangzhou	05	next year	16	明年	23	ʦʰøt⁵nin²¹	出年	1815	-	adverb	-	出年
+852	Guangzhou	05	next year	16	明年	24	meŋ²¹nin²¹	明年	1813	-	adverb	-	明年
+853	Nanning	06	next year	16	明年	16	meŋ²¹nin²¹	明年	1813	-	adverb	-	明年
+854	Xianggang	07	next year	16	明年	20	ʦʰøt⁵nin²¹	出年	1815	nin²¹(⁻³⁵)	adverb	-	出年
+855	Xianggang	07	next year	16	明年	21	miŋ²¹nin²¹	明年	1813	nin²¹(⁻³⁵)	adverb	-	明年
+856	Xiamen	08	next year	16	明年	26	mẽ³⁵⁻²²ni³⁵	明年	1813	-	adverb	-	明年
+857	Fuzhou	09	next year	16	明年	19	maŋ⁵³⁻³²nieŋ⁵³⁻³²maŋ⁵³	明年暝	1814	-	adverb	-	明年暝
+858	Jian'ou	10	next year	16	明年	18	maŋ³³niŋ³³	明年	1813	-	adverb	-	明年
+859	Shantou	11	next year	16	明年	19	mẽ⁵⁵⁻³¹nĩ⁵⁵	明年	1813	-	adverb	-	明年
+860	Haikou	12	next year	16	明年	27	mɛ³¹hi³¹	明年	1813	-	adverb	-	明年
+861	Taibei	13	next year	16	明年	17	buã²⁴⁻¹¹lĩ²⁴	明年	1813	-	adverb	-	明年
+862	Meixian	14	next year	16	明年	15	kuo⁵³⁻⁵⁵eŋian¹¹	过了年	1819	-	adverb	-	过了年
+863	Taoyuan	15	next year	16	明年	17	mɑn¹¹⁻²²ŋien¹¹	萌年	1821	-	adverb	-	萌年
+864	Nanchang	16	next year	16	明年	22	miɑŋ⁴⁵ȵiɛn⁰⁴	明年	1813	-	adverb	-	明年
+865	Nanchang	16	next year	16	明年	23	miɑŋ⁴⁵ȵiɛn⁰⁴ʦɿ⁰⁴	明年子	1813	-	adverb	-	明年
+866	Changsha	17	next year	16	明年	23	min¹³ȵiẽ¹³	明年	1813	-	adverb	-	明年
+867	Changsha	17	next year	16	明年	24	min¹³ȵiẽ¹³ʦɿ	明年子	1813	-	adverb	-	明年
+868	Xiangtan	18	next year	16	明年	23	min¹²ȵiẽ¹²ʦɿ³³	明年子	1813	-	adverb	-	明年
+869	Shexian	19	next year	16	明年	23	mʌ̃⁴⁴ne⁴⁴	明年	1813	萌(明)	adverb	-	明年
+870	Tunxi	20	next year	16	明年	22	mɛ⁴⁴⁻⁴²ȵiɛ⁴⁴	明年	1813	-	adverb	-	明年
+871	Taiyuan	21	next year	16	明年	19	miəŋ¹¹nie¹¹	明年	1813	-	adverb	-	明年
+872	Pingyao	22	next year	16	明年	20	læ¹³ȵiᴇ¹³	来年	1816	-	adverb	-	来年
+873	Pingyao	22	next year	16	明年	21	xɑ³⁵ȵiᴇ¹³⁻⁵³	下年	1823	-	adverb	-	下年
+874	Huhehaote	23	next year	16	明年	28	mĩŋ³¹⁻³³nie³¹	明年	1813	-	adverb	-	明年
+875	Huhehaote	23	next year	16	明年	29	lɛ³¹⁻³³nie³¹	来年	1816	-	adverb	-	来年
+876	Beijing	24	next year	16	明年	21	miŋ³⁵nian³⁵kə³	明年个	1812	-	adverb	-	明年个
+877	Tianjin	25	next year	16	明年	18	lai⁴⁵nian³	来年	1816	-	adverb	-	来年
+878	Tianjin	25	next year	16	明年	19	kuo⁵³nian¹	过年	1822	-	adverb	-	过年
+879	Jinan	26	next year	16	明年	25	miŋ⁴²ȵiã	明年	1813	-	adverb	-	明年
+880	Jinan	26	next year	16	明年	26	kuə²¹ȵiã	过年	1822	-	adverb	-	过年
+881	Qingdao	27	next year	16	明年	18	miŋ⁴²⁻⁵⁵niã	明年	1813	-	adverb	-	明年
+882	Qingdao	27	next year	16	明年	19	ɕia⁴²⁻³¹niã⁴²	下年	1823	-	adverb	-	下年
+883	Qingdao	27	next year	16	明年	20	kuə⁴²niã	过年	1822	-	adverb	-	过年
+884	Nanjing	28	next year	16	明年	23	mən²⁴lien²⁴ʦɿ	明年子	1813	明年子[门年子]	adverb	-	明年
+885	Nanjing	28	next year	16	明年	24	mən²⁴lien²⁴	明年	1813	明年[门年]	adverb	-	明年
+886	Hefei	29	next year	16	明年	16	min⁵⁵liɪ̃⁵⁵	明年	1813	-	adverb	-	明年
+887	Zhengzhou	30	next year	16	明年	25	lai⁴²nian⁴²	来年	1816	-	adverb	-	来年
+888	Zhengzhou	30	next year	16	明年	26	miŋ⁴²nian⁴²	明年	1813	-	adverb	-	明年
+889	Zhengzhou	30	next year	16	明年	27	kuo³¹²⁻³¹niar⁴²	过年儿	1822	-	adverb	-	过年
+890	Wuhan	31	next year	16	明年	25	min²¹³⁻²¹niɛn	明年	1813	-	adverb	-	明年
+891	Wuhan	31	next year	16	明年	26	mən²¹³⁻²¹niɛn	门年	1817	-	adverb	-	门年
+892	Chengdu	32	next year	16	明年	32	min³¹ȵia	明年	1813	-	adverb	-	明年
+893	Chengdu	32	next year	16	明年	33	min³¹ȵian³¹⁻⁵⁵ʦɿ⁵³	明年子	1813	-	adverb	-	明年
+894	Guiyang	33	next year	16	明年	25	min²¹lian²¹	明年	1813	-	adverb	-	明年
+895	Guiyang	33	next year	16	明年	26	min²¹lian²¹ʦɿ⁴²	明年子	1813	-	adverb	-	明年
+896	Guiyang	33	next year	16	明年	27	men²¹lian⁵⁵	门年	1817	-	adverb	-	门年
+897	Guiyang	33	next year	16	明年	28	men²¹lian⁵⁵ʦɿ⁴²	门年子	1817	-	adverb	-	门年
+898	Kunming	34	next year	16	明年	21	mə³¹niɛ̃³¹⁻⁴⁴	明儿年	1818	(mĩ³¹ə³¹niɛ̃³¹>)mə³¹niɛ̃³¹⁻⁴⁴	adverb	-	明儿年
+899	Kunming	34	next year	16	明年	22	mĩ³¹niɛ̃³¹⁻⁴⁴	明年	1813	-	adverb	-	明年
+900	Haerbin	35	next year	16	明年	17	lai²⁴nian²⁴	来年	1816	-	adverb	-	来年
+901	Xi'an	36	next year	16	明年	16	miŋ²⁴niã	明年	1813	-	adverb	-	明年
+902	Yinchuan	37	next year	16	明年	28	lɛ⁵³nian⁵³	来年	1816	-	adverb	-	来年
+903	Yinchuan	37	next year	16	明年	29	kʰɛ⁴⁴ənian⁵³	开过年	1824	-	adverb	-	开过年
+904	Yinchuan	37	next year	16	明年	30	miŋ⁵³nian⁵³	明年	1813	-	adverb	-	明年
+905	Lanzhou	38	next year	16	明年	19	mĩn⁵³ȵiɛ̃n¹³	明年	1813	-	adverb	-	明年
+906	Lanzhou	38	next year	16	明年	20	mĩn⁵³ȵiɛ̃n¹³kə⁵³	明年个	1812	-	adverb	-	明年个
+907	Xining	39	next year	16	明年	22	miə̃²⁴⁻²¹ȵiã²⁴⁻⁵³	明年	1813	-	adverb	-	明年
+908	Wulumuqi	40	next year	16	明年	23	miŋ⁵¹⁻⁴⁴ȵian	明年	1813	-	adverb	-	明年
+909	Wulumuqi	40	next year	16	明年	24	lai⁵¹⁻⁴⁴ȵian	来年	1816	-	adverb	-	来年
+#
+910	Shanghai	01	last year	17	去年	25	ʨʰy³⁵⁻³³ȵi¹³⁻⁴⁴	去年	1512	-	adverb	-	去年
+911	Shanghai	01	last year	17	去年	26	ʥiɤ¹³⁻²²ȵi¹³⁻⁴⁴	旧年	1514	-	adverb	-	旧年
+912	Suzhou	02	last year	17	去年	19	ʥiʏ³¹⁻¹³ȵiɪ¹³⁻³³	旧年	1514	-	adverb	-	旧年
+913	Hangzhou	03	last year	17	去年	18	diø¹³ȵiᴇ̃²¹³⁻⁵³ʦɿ⁵³⁻³¹	旧年子	1514	-	adverb	-	旧年
+914	Wenzhou	04	last year	17	去年	25	ʥau²²⁻²²ȵi³¹⁻¹²	旧年	1514	-	adverb	-	旧年
+915	Guangzhou	05	last year	17	去年	25	kɐu²²nin²¹	旧年	1514	-	adverb	-	旧年
+916	Nanning	06	last year	17	去年	17	kɐu²²nin²¹	旧年	1514	-	adverb	-	旧年
+917	Xianggang	07	last year	17	去年	22	kɐu²²nin²¹	旧年	1514	nin²¹(⁻³⁵)	adverb	-	旧年
+918	Xiamen	08	last year	17	去年	27	ku²²⁻²¹ni³⁵	旧年	1514	-	adverb	-	旧年
+919	Fuzhou	09	last year	17	去年	20	kʰo²¹²⁻⁴⁴nieŋ⁵³⁻⁴⁴maŋ⁵³	去年暝	1513	-	adverb	-	去年暝
+920	Jian'ou	10	last year	17	去年	19	kʰɔ³³niŋ³³	去年	1512	-	adverb	-	去年
+921	Shantou	11	last year	17	去年	20	ku³¹nĩ⁵⁵	旧年	1514	-	adverb	-	旧年
+922	Haikou	12	last year	17	去年	28	hu³⁵hi³¹	去年	1512	-	adverb	-	去年
+923	Taibei	13	last year	17	去年	18	ku³³⁻¹¹lĩ²⁴	旧年	1514	-	adverb	-	旧年
+924	Meixian	14	last year	17	去年	16	kʰiu⁵³⁻⁵⁵ŋian¹¹ne	旧年儿	1514	-	adverb	-	旧年
+925	Taoyuan	15	last year	17	去年	18	kʰiu⁵⁵ŋien¹¹	旧年	1514	-	adverb	-	旧年
+926	Nanchang	16	last year	17	去年	24	ʨʰiu²¹ȵiɛn⁰²	旧年	1514	-	adverb	-	旧年
+927	Nanchang	16	last year	17	去年	25	ʨʰiu²¹ȵiɛn⁰²ʦɿ⁰²	旧年子	1514	-	adverb	-	旧年
+928	Changsha	17	last year	17	去年	25	kʰə⁵⁵ȵiẽ¹³	去年	1512	-	adverb	-	去年
+929	Changsha	17	last year	17	去年	26	kʰə⁵⁵ȵiẽ¹³ʦɿ	去年子	1512	-	adverb	-	去年
+930	Xiangtan	18	last year	17	去年	24	ʨʰy⁵⁵ȵiẽ¹²ʦɿ³³	去年子	1512	-	adverb	-	去年
+931	Xiangtan	18	last year	17	去年	25	ʥiəɯ²¹ȵiẽ¹²ʦɿ³³	旧年子	1514	-	adverb	-	旧年
+932	Shexian	19	last year	17	去年	24	ʨʰiu²²ne⁴⁴	旧年	1514	-	adverb	-	旧年
+933	Shexian	19	last year	17	去年	25	ɕia²²ne⁴⁴	上年	1517	-	adverb	-	上年
+934	Shexian	19	last year	17	去年	26	ʨʰy³²⁴⁻³²ne⁴⁴	去年	1512	-	adverb	-	去年
+935	Tunxi	20	last year	17	去年	23	ʨʰiu¹¹ȵiɛ⁴⁴	旧年	1514	-	adverb	-	旧年
+936	Taiyuan	21	last year	17	去年	20	nie¹¹sɿ¹¹	年时	1516	-	adverb	-	年时
+937	Taiyuan	21	last year	17	去年	21	ʨʰy⁴⁵nie¹¹	去年	1512	-	adverb	-	去年
+938	Pingyao	22	last year	17	去年	22	ȵiᴇ¹³sɿ¹³	年时	1516	-	adverb	-	年时
+939	Pingyao	22	last year	17	去年	23	ʨʰy³⁵ȵiᴇ¹³⁻⁵³	去年	1512	-	adverb	-	去年
+940	Huhehaote	23	last year	17	去年	30	nie³¹⁻³³sə̃ŋ⁵³	年省	1515	-	adverb	-	年省
+941	Huhehaote	23	last year	17	去年	31	nie³¹⁻³³sə̃ŋ⁵³kəʔ	年省个	1520	-	adverb	-	年省个
+942	Beijing	24	last year	17	去年	22	ʨʰy⁵¹nian³⁵	去年	1512	-	adverb	-	去年
+943	Tianjin	25	last year	17	去年	20	ʨʰy⁵³nian	去年	1512	-	adverb	-	去年
+944	Tianjin	25	last year	17	去年	21	tʰou⁴⁵nian	头年	1521	-	adverb	-	头年
+945	Tianjin	25	last year	17	去年	22	nian⁴⁵sɿ³kə¹	年时个	1519	-	adverb	-	年时个
+946	Jinan	26	last year	17	去年	27	ʨʰy²¹ȵiã	去年	1512	-	adverb	-	去年
+947	Jinan	26	last year	17	去年	28	ȵiã⁴²⁻⁵⁵ʂʅ	年时	1516	-	adverb	-	年时
+948	Qingdao	27	last year	17	去年	21	ʃaŋ⁴²niã	上年	1517	-	adverb	-	上年
+949	Qingdao	27	last year	17	去年	22	tʰou⁴²⁻³¹niã⁴²	头年	1521	-	adverb	-	头年
+950	Nanjing	28	last year	17	去年	25	ʨʰy⁴⁴lien²⁴	去年	1512	-	adverb	-	去年
+951	Hefei	29	last year	17	去年	17	ʦʰɿ⁵³liɪ̃⁵⁵	去年	1512	-	adverb	-	去年
+952	Zhengzhou	30	last year	17	去年	28	nian⁴²ʂʅkɤ	年时个	1519	-	adverb	-	年时个
+953	Zhengzhou	30	last year	17	去年	29	nian⁴²ʂʅnian⁴²	年时年	1522	-	adverb	-	年时年
+954	Zhengzhou	30	last year	17	去年	30	ʨʰy³¹²⁻³¹nian⁴²	去年	1512	-	adverb	-	去年
+955	Wuhan	31	last year	17	去年	27	ʨʰy³⁵niɛn	去年	1512	-	adverb	-	去年
+956	Wuhan	31	last year	17	去年	28	saŋ³⁵niɛn	上年	1517	-	adverb	-	上年
+957	Chengdu	32	last year	17	去年	34	ʨʰy¹³ȵian³¹	去年	1512	-	adverb	-	去年
+958	Chengdu	32	last year	17	去年	35	ʨʰy¹³ȵian³¹ʦɿ⁵³	去年子	1512	-	adverb	-	去年
+959	Guiyang	33	last year	17	去年	29	ʨʰi²¹³lian²¹	去年	1512	-	adverb	-	去年
+960	Guiyang	33	last year	17	去年	30	ʨʰi²¹³lian²¹ʦɿ⁴²	去年子	1512	-	adverb	-	去年
+961	Guiyang	33	last year	17	去年	31	ʨʰiəu²¹³lian²¹	旧年	1514	-	adverb	-	旧年
+962	Guiyang	33	last year	17	去年	32	ʨʰiəu²¹³lian²¹ʦɿ⁴²	旧年子	1514	-	adverb	-	旧年
+963	Kunming	34	last year	17	去年	23	ʨʰi²¹²niɛ̃³¹⁻⁴⁴	去年	1512	-	adverb	-	去年
+964	Haerbin	35	last year	17	去年	18	ʨʰy⁵³nian²⁴	去年	1512	-	adverb	-	去年
+965	Xi'an	36	last year	17	去年	17	niã²⁴sɿkɤ	年时个	1519	-	adverb	-	年时个
+966	Yinchuan	37	last year	17	去年	31	ʨʰy¹³nian⁵³	去年	1512	-	adverb	-	去年
+967	Yinchuan	37	last year	17	去年	32	nian⁵³ʂʅ	年时	1516	-	adverb	-	年时
+968	Lanzhou	38	last year	17	去年	21	ȵiɛ̃n⁵³ʂʅ¹³	年时	1516	-	adverb	-	年时
+969	Lanzhou	38	last year	17	去年	22	ȵiɛ̃n⁵³ʂʅ¹³kə⁵³	年时个	1519	-	adverb	-	年时个
+970	Xining	39	last year	17	去年	23	ȵiã²⁴⁻²¹sɿ²⁴⁻⁵³	年时	1516	-	adverb	-	年时
+971	Wulumuqi	40	last year	17	去年	25	ȵian⁵¹⁻⁴⁴sɿkɤ	年事个	1518	-	adverb	-	年事个
+972	Wulumuqi	40	last year	17	去年	26	ʨʰy²¹³⁻¹³ȵian	去年	1512	-	adverb	-	去年
+#
+973	Shanghai	01	tomorrow	18	明天	27	miŋ¹³⁻²²ʦɔ⁵³⁻⁴⁴	明朝	2646	-	adverb	-	明朝
+974	Shanghai	01	tomorrow	18	明天	28	miŋ¹³⁻²²ʦɔ⁵³⁻⁵⁵ʦɿ³⁵⁻²¹	明朝子	2646	-	adverb	-	明朝
+975	Suzhou	02	tomorrow	18	明天	20	mən¹³ʦæ⁵⁵⁻³³	萌朝	2652	-	adverb	-	萌朝
+976	Hangzhou	03	tomorrow	18	明天	19	men²¹³⁻²¹ʦɔ³³	门朝	2643	-	adverb	-	门朝
+977	Wenzhou	04	tomorrow	18	明天	26	maŋ³¹⁻²²ʨiɛ³³	明朝	2646	-	adverb	-	明朝
+978	Guangzhou	05	tomorrow	18	明天	26	tʰeŋ⁵³jɐt²	听日	2641	-	adverb	-	听日
+979	Xianggang	07	tomorrow	18	明天	23	tʰiŋ⁵⁵jɐt²	听日	2641	-	adverb	-	听日
+980	Xiamen	08	tomorrow	18	明天	28	bin³⁵⁻²²na⁵³⁻⁵⁵lit	明仔日	2655	(biŋ³⁵>)bin³⁵⁻²²(a⁵³>)na⁵³⁻⁵⁵	adverb	-	明仔日
+981	Xiamen	08	tomorrow	18	明天	29	bin³⁵⁻²²na⁵³⁻⁵⁵ʦai²¹	明仔载	2663	(biŋ³⁵>)bin³⁵⁻²²(a⁵³>)na⁵³⁻⁵⁵	adverb	-	明仔载
+982	Fuzhou	09	tomorrow	18	明天	21	miŋ⁵³⁻²¹nɑŋ²¹²	明旦	2640	-	adverb	-	明旦
+983	Jian'ou	10	tomorrow	18	明天	20	meiŋ³³tiɔ⁴⁴	明朝	2646	-	adverb	-	明朝
+984	Haikou	12	tomorrow	18	明天	29	hin³¹nua³⁵	现旦	2642	-	adverb	-	现旦
+985	Haikou	12	tomorrow	18	明天	30	nua³⁵ʔbɛ²¹³	旦白	2657	-	adverb	-	旦白
+986	Haikou	12	tomorrow	18	明天	31	hin³¹nua³⁵zit³	现旦日	2665	-	adverb	-	现旦日
+987	Haikou	12	tomorrow	18	明天	32	hin³¹nua³⁵ʔbɛ²¹³	现旦白	2666	-	adverb	-	现旦白
+988	Taibei	13	tomorrow	18	明天	19	bĩ²⁴⁻³³a⁵³⁻⁴⁴ʦai¹¹	明仔再	2653	-	adverb	-	明仔再
+989	Meixian	14	tomorrow	18	明天	17	sən¹¹ʦau⁴⁴⁻³⁵ŋit¹	辰朝日	2649	-	adverb	-	辰朝日
+990	Taoyuan	15	tomorrow	18	明天	19	tʰien²⁴⁻²²koŋ²⁴ŋit²²	天光日	2654	-	adverb	-	天光日
+991	Nanchang	16	tomorrow	18	明天	26	miɑŋ⁴⁵ȵiʔ⁰⁴	明日	2638	-	adverb	-	明日
+992	Changsha	17	tomorrow	18	明天	27	min¹³ʐʅ²⁴	明日	2638	-	adverb	-	明日
+993	Changsha	17	tomorrow	18	明天	28	min¹³ʐʅ²⁴ʦɿ	明日子	2638	-	adverb	-	明日
+994	Changsha	17	tomorrow	18	明天	29	min¹³t͡ʂau³³	明朝	2646	-	adverb	-	明朝
+995	Changsha	17	tomorrow	18	明天	30	min¹³t͡ʂau³³ʦɿ	明朝子	2646	-	adverb	-	明朝
+996	Xiangtan	18	tomorrow	18	明天	26	mai¹²i²⁴ʦɿ³³	明日子	2638	-	adverb	-	明日
+997	Xiangtan	18	tomorrow	18	明天	27	min¹²t͡ʂaɯ³³	明朝	2646	-	adverb	-	明朝
+998	Shexian	19	tomorrow	18	明天	27	kʌ̃³¹ʨiɔ³¹	今朝	2651	根(今)朝	adverb	-	今朝
+999	Tunxi	20	tomorrow	18	明天	24	mɛ⁴⁴ȵie¹¹	明日	2638	-	adverb	-	明日
+1000	Taiyuan	21	tomorrow	18	明天	22	miəŋ¹¹tʰie¹¹	明天	2639	-	adverb	-	明天
+1001	Taiyuan	21	tomorrow	18	明天	23	ʦau⁵³⁻¹¹ʨʰi⁵³	早起	2659	-	adverb	-	早起
+1002	Pingyao	22	tomorrow	18	明天	24	ti³⁵mi¹³⁻⁵³	第明	2650	-	adverb	-	第明
+1003	Pingyao	22	tomorrow	18	明天	25	miŋ¹³⁻³⁵ʐʌʔ⁵³⁻⁴²³	明日	2638	-	adverb	-	明日
+1004	Huhehaote	23	tomorrow	18	明天	32	miar³¹	明儿	2645	-	adverb	-	明
+1005	Huhehaote	23	tomorrow	18	明天	33	miar³¹kəʔ	明儿个	2637	-	adverb	-	明儿个
+1006	Huhehaote	23	tomorrow	18	明天	34	mĩŋ³¹⁻³³tʰie³¹	明天	2639	-	adverb	-	明天
+1007	Beijing	24	tomorrow	18	明天	23	miə̃r³⁵kə³	明儿个	2637	-	adverb	-	明儿个
+1008	Tianjin	25	tomorrow	18	明天	23	mier⁴⁵kə³	明儿个	2637	-	adverb	-	明儿个
+1009	Tianjin	25	tomorrow	18	明天	24	kan¹³mier⁴⁵	赶明儿	2660	-	adverb	-	赶明
+1010	Jinan	26	tomorrow	18	明天	29	miŋ⁴²⁻⁵⁵tʰia	明天	2639	-	adverb	-	明天
+1011	Qingdao	27	tomorrow	18	明天	23	miŋ⁴²⁻⁵⁵i	明日	2638	-	adverb	-	明日
+1012	Nanjing	28	tomorrow	18	明天	26	mər²⁴	明儿	2645	明儿个[门儿个]	adverb	-	明
+1013	Nanjing	28	tomorrow	18	明天	27	mər²⁴⁻¹¹ko	明儿个	2637	明儿[门儿]	adverb	-	明儿个
+1014	Nanjing	28	tomorrow	18	明天	28	min²⁴tʰien³¹	明天	2639	-	adverb	-	明天
+1015	Hefei	29	tomorrow	18	明天	18	ma⁵⁵kə	麻个	2644	-	adverb	-	麻个
+1016	Zhengzhou	30	tomorrow	18	明天	31	miaur⁴²kɤ	明儿个	2637	-	adverb	-	明儿个
+1017	Zhengzhou	30	tomorrow	18	明天	32	miŋ⁴²tʰian²⁴	明天	2639	-	adverb	-	明天
+1018	Zhengzhou	30	tomorrow	18	明天	33	miə̃r⁴²kɤ	明儿个	2637	-	adverb	-	明儿个
+1019	Wuhan	31	tomorrow	18	明天	29	min²¹³⁻²¹tʰiɛn	明天	2639	-	adverb	-	明天
+1020	Wuhan	31	tomorrow	18	明天	30	mən²¹³⁻²¹ɯ	门日	2661	-	adverb	-	门日
+1021	Chengdu	32	tomorrow	18	明天	36	min³¹tʰian⁵⁵	明天	2639	-	adverb	-	明天
+1022	Guiyang	33	tomorrow	18	明天	33	min²¹tʰian⁵⁵	明天	2639	-	adverb	-	明天
+1023	Guiyang	33	tomorrow	18	明天	34	men²¹tʰian⁵⁵	门天	2656	-	adverb	-	门天
+1024	Kunming	34	tomorrow	18	明天	24	miə³¹ʐʅ³¹⁻⁴⁴	明儿日	2647	(mĩ³¹ə³¹ʐʅ³¹>)miə³¹ʐʅ³¹⁻⁴⁴	adverb	-	明儿日
+1025	Haerbin	35	tomorrow	18	明天	19	miŋ²⁴tʰian⁴⁴	明天	2639	-	adverb	-	明天
+1026	Xi'an	36	tomorrow	18	明天	18	miər²⁴	明儿	2645	-	adverb	-	明
+1027	Yinchuan	37	tomorrow	18	明天	33	mie⁵³	明	2645	合音	adverb	-	明
+1028	Yinchuan	37	tomorrow	18	明天	34	miŋ⁵³tʰian⁴⁴	明天	2639	-	adverb	-	明天
+1029	Lanzhou	38	tomorrow	18	明天	23	mĩn⁵³kə¹³	明个	2648	-	adverb	-	明个
+1030	Lanzhou	38	tomorrow	18	明天	24	mĩn⁵³kə¹³tʰiɛ̃n³¹	明个天	2658	-	adverb	-	明个天
+1031	Xining	39	tomorrow	18	明天	24	miə̃²⁴⁻²¹tʰiã⁴⁴⁻⁵³	明天	2639	-	adverb	-	明天
+1032	Xining	39	tomorrow	18	明天	25	miə̃²⁴⁻²¹ʦɔ⁵³ɛ	明早儿	2664	-	adverb	-	明早
+1033	Wulumuqi	40	tomorrow	18	明天	27	miŋ⁵¹⁻⁴⁴tʰian	明天	2639	-	adverb	-	明天
+1034	Wulumuqi	40	tomorrow	18	明天	28	ɚ²¹³tʰian⁴⁴	二天	2662	-	adverb	-	二天
+#
+1035	Shanghai	01	yesterday	19	昨天	29	zoʔ¹⁻¹ȵiɪʔ¹⁻²³	昨日	3026	-	adverb	-	昨日
+1036	Shanghai	01	yesterday	19	昨天	30	zoʔ¹⁻¹ȵiɪʔ¹⁻²ʦɿ³⁵⁻²³	昨日子	3026	-	adverb	-	昨日
+1037	Suzhou	02	yesterday	19	昨天	21	zoʔ³ȵiəʔ³	昨日	3026	-	adverb	-	昨日
+1038	Hangzhou	03	yesterday	19	昨天	20	zɑŋ¹³ŋɑʔ²⁻⁵ʦɿ⁵³	上额子	3031	-	adverb	-	上额
+1039	Wenzhou	04	yesterday	19	昨天	27	zo³¹⁻²²ji²²⁻⁴²	昨夜	3042	-	adverb	-	昨夜
+1040	Guangzhou	05	yesterday	19	昨天	27	kʰɐm²¹jɐt²	琴日	3029	-	adverb	-	琴日
+1041	Guangzhou	05	yesterday	19	昨天	28	ʦʰɐm²¹jɐt²	寻日	3045	-	adverb	-	寻日
+1042	Xianggang	07	yesterday	19	昨天	24	kʰɐm²¹jɐt²	琴日	3029	-	adverb	-	琴日
+1043	Xianggang	07	yesterday	19	昨天	25	ʦʰɐm²¹jɐt²	寻日	3045	-	adverb	-	寻日
+1044	Xiamen	08	yesterday	19	昨天	30	ʦa²²⁻²¹lit⁵	昨日	3026	-	adverb	-	昨日
+1045	Fuzhou	09	yesterday	19	昨天	22	soʔ⁵⁻³²maŋ⁵³	昨暝	3028	-	adverb	-	昨暝
+1046	Jian'ou	10	yesterday	19	昨天	21	ka²⁴maŋ³³	隔暝	3034	-	adverb	-	隔暝
+1047	Jian'ou	10	yesterday	19	昨天	22	ʦia⁴⁴maŋ³³	昨暝	3028	-	adverb	-	昨暝
+1048	Haikou	12	yesterday	19	昨天	33	ta³³vɔu²³	昨晡	3030	-	adverb	-	昨晡
+1049	Haikou	12	yesterday	19	昨天	34	ta³³vɔu²³zit³	昨晡日	3041	-	adverb	-	昨晡日
+1050	Taibei	13	yesterday	19	昨天	20	ʦa²⁴⁻¹¹hŋ̍⁴⁴	昨荒	3039	JML: alternate reading [ʦaŋ²⁴]	adverb	-	昨荒
+1051	Meixian	14	yesterday	19	昨天	18	ʦʰiu⁴⁴pu⁴⁴⁻³⁵ŋit¹	秋晡日	3035	-	adverb	-	秋晡日
+1052	Taoyuan	15	yesterday	19	昨天	20	ʦʰo¹¹pu²⁴ŋit²²	昨晡日	3041	-	adverb	-	昨晡日
+1053	Nanchang	16	yesterday	19	昨天	27	ʦʰɔʔ²ȵiʔ⁰²	昨日	3026	-	adverb	-	昨日
+1054	Changsha	17	yesterday	19	昨天	31	ʦo¹³ʐʅ²⁴	昨日	3026	-	adverb	-	昨日
+1055	Changsha	17	yesterday	19	昨天	32	ʦo¹³ʐʅ²⁴ʦɿ	昨日子	3026	-	adverb	-	昨日
+1056	Xiangtan	18	yesterday	19	昨天	28	ʣo¹²i²⁴ʦɿ³³	昨日子	3026	-	adverb	-	昨日
+1057	Xiangtan	18	yesterday	19	昨天	29	ʣo¹²i²⁴	昨日	3026	-	adverb	-	昨日
+1058	Shexian	19	yesterday	19	昨天	28	mʌ̃⁴⁴ʨiɔ³¹	明朝	3038	萌(明)朝	adverb	-	明朝
+1059	Tunxi	20	yesterday	19	昨天	25	ʦʰo¹¹ȵie¹¹	昨日	3026	-	adverb	-	昨日
+1060	Taiyuan	21	yesterday	19	昨天	24	ie⁴⁵tʰie¹¹	夜天	3040	-	adverb	-	夜天
+1061	Taiyuan	21	yesterday	19	昨天	25	ie⁴⁵lai¹¹⁻⁵³	夜来	3037	-	adverb	-	夜来
+1062	Pingyao	22	yesterday	19	昨天	26	iᴇ³⁵læ¹³⁻⁵³	夜来	3037	-	adverb	-	夜来
+1063	Huhehaote	23	yesterday	19	昨天	35	iar⁵⁵	夜儿	3033	-	adverb	-	夜
+1064	Huhehaote	23	yesterday	19	昨天	36	iar⁵⁵kəʔ	夜儿个	3044	-	adverb	-	夜儿个
+1065	Huhehaote	23	yesterday	19	昨天	37	ʦuaʔ⁴³tʰie³¹	昨天	3027	-	adverb	-	昨天
+1066	Beijing	24	yesterday	19	昨天	24	ʦuor³⁵kə³	昨儿个	3025	-	adverb	-	昨儿个
+1067	Tianjin	25	yesterday	19	昨天	25	ʦuor⁴⁵kə³	昨儿个	3025	-	adverb	-	昨儿个
+1068	Tianjin	25	yesterday	19	昨天	26	ier⁵³kə¹	夜儿个	3044	-	adverb	-	夜儿个
+1069	Jinan	26	yesterday	19	昨天	30	ʦuə⁴²tʰiã	昨天	3027	-	adverb	-	昨天
+1070	Jinan	26	yesterday	19	昨天	31	iə²¹⁻⁵⁴⁴lɛ	夜来	3037	-	adverb	-	夜来
+1071	Qingdao	27	yesterday	19	昨天	24	iə⁴²lə	夜来	3037	-	adverb	-	夜来
+1072	Nanjing	28	yesterday	19	昨天	29	ʦor²⁴	昨儿	3036	-	adverb	-	昨
+1073	Nanjing	28	yesterday	19	昨天	30	ʦor²⁴⁻¹¹ko	昨儿个	3025	-	adverb	-	昨儿个
+1074	Nanjing	28	yesterday	19	昨天	31	ʦo²⁴tʰien³¹	昨天	3027	-	adverb	-	昨天
+1075	Hefei	29	yesterday	19	昨天	19	ʦu⁵⁵kə	昨个	3032	-	adverb	-	昨个
+1076	Hefei	29	yesterday	19	昨天	20	ʦuɐʔ⁵kə	昨个	3032	-	adverb	-	昨个
+1077	Zhengzhou	30	yesterday	19	昨天	34	iar³¹²kɤ	夜儿个	3044	-	adverb	-	夜儿个
+1078	Zhengzhou	30	yesterday	19	昨天	35	ʦuo⁵³tian²⁴	昨天	3027	-	adverb	-	昨天
+1079	Wuhan	31	yesterday	19	昨天	31	ʦuo²¹³⁻²¹ɯ	昨日	3026	-	adverb	-	昨日
+1080	Wuhan	31	yesterday	19	昨天	32	ʦuo²¹³⁻²¹tʰiɛn	昨天	3027	-	adverb	-	昨天
+1081	Chengdu	32	yesterday	19	昨天	37	ʦo³¹tʰian⁵⁵	昨天	3027	-	adverb	-	昨天
+1082	Guiyang	33	yesterday	19	昨天	35	ʦo²¹tʰian⁵⁵	昨天	3027	-	adverb	-	昨天
+1083	Kunming	34	yesterday	19	昨天	25	ʦo³¹ʐʅ³¹⁻⁴⁴	昨日	3026	-	adverb	-	昨日
+1084	Haerbin	35	yesterday	19	昨天	20	ʦuo²⁴tʰian⁴⁴	昨天	3027	-	adverb	-	昨天
+1085	Xi'an	36	yesterday	19	昨天	19	iɛ⁵³kɤ	夜个	3043	-	adverb	-	夜个
+1086	Yinchuan	37	yesterday	19	昨天	35	ʦuə⁵³	昨	3036	合音	adverb	-	昨
+1087	Yinchuan	37	yesterday	19	昨天	36	ʦuə⁵³tʰian⁴⁴	昨天	3027	-	adverb	-	昨天
+1088	Lanzhou	38	yesterday	19	昨天	25	ʦuə⁵³kə¹³	昨个	3032	-	adverb	-	昨个
+1089	Lanzhou	38	yesterday	19	昨天	26	ʦuə⁵³kə¹³tʰiɛ̃n³¹	昨个天	3046	-	adverb	-	昨个天
+1090	Xining	39	yesterday	19	昨天	26	iɛ²¹³⁻²¹lɛ²⁴⁻⁵³	夜来	3037	-	adverb	-	夜来
+1091	Xining	39	yesterday	19	昨天	27	iɛ²¹³⁻²¹lɛ²⁴⁻⁵³kɔ²¹³⁻²¹ɛ²⁴⁻⁵³	夜来个儿	3047	-	adverb	-	夜来个
+1092	Wulumuqi	40	yesterday	19	昨天	29	ʦuɤ⁵¹⁻⁴⁴tʰian	昨天	3027	-	adverb	-	昨天
+1093	Wulumuqi	40	yesterday	19	昨天	30	iɤ²¹³⁻¹³tʰian	夜天	3040	-	adverb	-	夜天
+1094	Wulumuqi	40	yesterday	19	昨天	31	iɤ²¹³⁻¹³likɤ	夜里个	3048	-	adverb	-	夜里个
+#
+1095	Shanghai	01	today	20	今天	31	ʨiŋ⁵³⁻⁵⁵ʦɔ⁵³⁻²¹	今朝	2568	-	adverb	-	今朝
+1096	Shanghai	01	today	20	今天	32	ʨiŋ⁵³⁻⁵⁵ʦɔ⁵³⁻³³ʦɿ³⁵⁻²¹	今朝子	2568	-	adverb	-	今朝
+1097	Suzhou	02	today	20	今天	22	ʨin⁵⁵ʦæ⁵⁵⁻²¹	今朝	2568	-	adverb	-	今朝
+1098	Hangzhou	03	today	20	今天	22	ken³³ʦɔ³³	根朝	2572	-	adverb	-	根朝
+1099	Wenzhou	04	today	20	今天	28	ke²¹³⁻²¹ne²¹³⁻¹³	居日	2580	-	adverb	-	居日
+1100	Guangzhou	05	today	20	今天	29	kɐm⁵³jɐt²	今日	2571	-	adverb	-	今日
+1101	Nanning	06	today	20	今天	20	kɐm⁵⁵jɐt²²	今日	2571	-	adverb	-	今日
+1102	Xianggang	07	today	20	今天	26	kɐm⁵⁵jɐt²	今日	2571	-	adverb	-	今日
+1103	Xiamen	08	today	20	今天	31	kin⁵⁵⁻²²na⁵³⁻⁵⁵lit⁵	今仔日	2578	((kim⁵⁵>)kin⁵⁵⁻²²a⁵³>)na⁵³⁻⁵⁵	adverb	-	今仔日
+1104	Fuzhou	09	today	20	今天	23	kiŋ⁴⁴⁻⁵³nɑŋ²¹²	今旦	2570	-	adverb	-	今旦
+1105	Jian'ou	10	today	20	今天	23	keiŋ⁵⁴tiɔ⁴⁴	今朝	2568	-	adverb	-	今朝
+1106	Shantou	11	today	20	今天	23	kim³³zik⁵	今日	2571	-	adverb	-	今日
+1107	Haikou	12	today	20	今天	35	kim²³nua³⁵	今旦	2570	-	adverb	-	今旦
+1108	Haikou	12	today	20	今天	36	kim²³nua³⁵zit³	今旦日	2582	-	adverb	-	今旦日
+1109	Haikou	12	today	20	今天	37	kim²³nua³⁵ʔbɛ²¹³	今旦白	2588	-	adverb	-	今旦白
+1110	Taibei	13	today	20	今天	21	kin⁴⁴⁻³³lã⁴⁴lit⁴⁴	今仔日	2578	-	adverb	-	今仔日
+1111	Meixian	14	today	20	今天	19	kim⁴⁴⁻³⁵ŋit¹	今日	2571	kim⁴⁴⁻³⁵<kin	adverb	-	今日
+1112	Taoyuan	15	today	20	今天	21	kim²⁴⁻²²pu²⁴ŋit²²	今晡日	2579	-	adverb	-	今晡日
+1113	Nanchang	16	today	20	今天	28	ʨin⁴²ȵiʔ⁰²	今日	2571	-	adverb	-	今日
+1114	Changsha	17	today	20	今天	33	ʨin³³t͡ʂau³³	今朝	2568	-	adverb	-	今朝
+1115	Changsha	17	today	20	今天	34	ʨin³³t͡ʂau³³ʦɿ	今朝子	2568	-	adverb	-	今朝
+1116	Changsha	17	today	20	今天	35	ʨin³³ʐʅ²⁴	今日	2571	-	adverb	-	今日
+1117	Changsha	17	today	20	今天	36	ʨin³³ʐʅ²⁴ʦɿ	今日子	2571	-	adverb	-	今日
+1118	Xiangtan	18	today	20	今天	30	ʨin³³i²⁴ʦɿ³³	今日子	2571	-	adverb	-	今日
+1119	Xiangtan	18	today	20	今天	31	ʨin³³t͡ʂaɯ³³	今朝	2568	-	adverb	-	今朝
+1120	Shexian	19	today	20	今天	29	ʦʰo²²ni²²	昨日	2577	-	adverb	-	昨日
+1121	Shexian	19	today	20	今天	30	ʦʰo²²ʨiɔ³¹	昨朝	2586	-	adverb	-	昨朝
+1122	Tunxi	20	today	20	今天	26	kə¹¹ȵie¹¹	今日	2571	-	adverb	-	今日
+1123	Taiyuan	21	today	20	今天	26	ʨiəŋ¹¹zəŋ²	今日	2571	-	adverb	-	今日
+1124	Taiyuan	21	today	20	今天	27	ʨiəŋ¹¹tʰie¹¹	今天	2569	-	adverb	-	今天
+1125	Pingyao	22	today	20	今天	27	ʨiŋ¹³⁻³¹ʐʌʔ⁵³	今日	2571	-	adverb	-	今日
+1126	Pingyao	22	today	20	今天	28	tɑŋ³⁵ʐʌʔ⁵³	当日	2585	-	adverb	-	当日
+1127	Huhehaote	23	today	20	今天	38	ʨiar³¹	今儿	2574	-	adverb	-	今
+1128	Huhehaote	23	today	20	今天	39	ʨiar³¹kəʔ	今儿个	2567	-	adverb	-	今儿个
+1129	Huhehaote	23	today	20	今天	40	ʨĩŋ³¹⁻³³tʰie³¹	今天	2569	-	adverb	-	今天
+1130	Beijing	24	today	20	今天	25	ʨiər⁵⁵kə²	今儿个	2567	-	adverb	-	今儿个
+1131	Tianjin	25	today	20	今天	27	ʨiər²¹kə¹	今儿个	2567	-	adverb	-	今儿个
+1132	Tianjin	25	today	20	今天	28	t͡ʂər²¹kə¹	知儿个	2587	-	adverb	-	知儿个
+1133	Tianjin	25	today	20	今天	29	ʦər²¹kə¹	兹儿个	2589	-	adverb	-	兹儿个
+1134	Jinan	26	today	20	今天	32	ʨiẽ²¹³⁻²³tʰiã²¹³	今天	2569	-	adverb	-	今天
+1135	Jinan	26	today	20	今天	33	ʨi²¹³⁻²¹mer	今们儿	2583	-	adverb	-	今们
+1136	Qingdao	27	today	20	今天	25	ʨiə̃²¹³⁻³¹i	今日	2571	-	adverb	-	今日
+1137	Nanjing	28	today	20	今天	32	kər³¹	今儿	2574	今儿个[根儿个]	adverb	-	今
+1138	Nanjing	28	today	20	今天	33	kər³¹ko	今儿个	2567	今儿[根儿]	adverb	-	今儿个
+1139	Nanjing	28	today	20	今天	34	ʨin³¹⁻³³tʰien³¹	今天	2569	-	adverb	-	今天
+1140	Hefei	29	today	20	今天	21	ʨi²¹kə	皆个	2573	-	adverb	-	皆个
+1141	Zhengzhou	30	today	20	今天	36	ʨiər²⁴kɤ	今儿个	2567	-	adverb	-	今儿个
+1142	Zhengzhou	30	today	20	今天	37	ʨin²⁴tʰian²⁴	今天	2569	-	adverb	-	今天
+1143	Wuhan	31	today	20	今天	33	ʨin²¹³⁻²¹ɯ	今日	2571	-	adverb	-	今日
+1144	Wuhan	31	today	20	今天	34	ʨin²¹³⁻²¹tʰiɛn	今天	2569	-	adverb	-	今天
+1145	Chengdu	32	today	20	今天	38	ʨin⁵⁵tʰian⁵⁵	今天	2569	-	adverb	-	今天
+1146	Guiyang	33	today	20	今天	36	ʨin⁵⁵tʰian⁵⁵	今天	2569	-	adverb	-	今天
+1147	Guiyang	33	today	20	今天	37	ʦen⁵⁵tʰian⁵⁵	真天	2581	-	adverb	-	真天
+1148	Kunming	34	today	20	今天	26	ʨiə⁴⁴ʐʅ³¹⁻⁴⁴	今儿日	2575	(ʨĩ⁴⁴ə³¹ʐʅ³¹>)ʨiə⁴⁴ʐʅ³¹⁻⁴⁴	adverb	-	今儿日
+1149	Haerbin	35	today	20	今天	21	ʨin⁴⁴tʰian⁴⁴	今天	2569	-	adverb	-	今天
+1150	Xi'an	36	today	20	今天	20	ʨiər²¹	今儿	2574	-	adverb	-	今
+1151	Yinchuan	37	today	20	今天	37	ʨie⁴⁴	今	2574	合音	adverb	-	今
+1152	Yinchuan	37	today	20	今天	38	ʨiŋ⁴⁴tʰian⁴⁴	今天	2569	-	adverb	-	今天
+1153	Lanzhou	38	today	20	今天	27	ʨĩn³¹kə²¹	今个	2576	-	adverb	-	今个
+1154	Lanzhou	38	today	20	今天	28	ʨĩn³¹kə²¹tʰiɛ̃n³¹	今个天	2584	-	adverb	-	今个天
+1155	Xining	39	today	20	今天	28	ʨiə̃⁴⁴ɛ	今儿	2574	-	adverb	-	今
+1156	Wulumuqi	40	today	20	今天	32	ʨiŋ⁴⁴tʰian	今天	2569	-	adverb	-	今天
+1157	Wulumuqi	40	today	20	今天	33	ʨiɤ̃r⁴⁴	今儿	2574	-	adverb	-	今

@@ -1,3 +1,14 @@
+"""
+Compute the convex hull for a given set of points.
+
+Note
+----
+
+This code has been taken from: http://www.scipy.org/Cookbook/Finding_Convex_Hull
+
+Author: Angus McMorland
+Date: 2007-08-16
+"""
 import numpy as n, pylab as p, time
 
 def _angle_to_point(point, centre):
@@ -8,13 +19,10 @@ def _angle_to_point(point, centre):
         res += n.pi
     return res
 
-
 def _draw_triangle(p1, p2, p3, **kwargs):
     tmp = n.vstack((p1,p2,p3))
     x,y = [x[0] for x in zip(tmp.transpose())]
     p.fill(x,y, **kwargs)
-    #time.sleep(0.2)
-
 
 def area_of_triangle(p1, p2, p3):
     '''calculate area of any triangle given co-ordinates of the corners'''
@@ -80,10 +88,3 @@ Recursively eliminates points that lie inside two neighbouring points until only
             n_pts = len(pts)
         k += 1
     return n.asarray(pts)
-
-#if __name__ == "__main__":
-#    points = n.random.random_sample((2,40))
-#    print points
-#    hull_pts = convex_hull(points)
-#    print hull_pts
-#    p.savefig('bla.pdf')

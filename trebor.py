@@ -1,12 +1,14 @@
-# created: 2013-01-21
-# modified: 2013-01-25
-
-__author__ = "Johann-Mattis List"
-__date__ = "2013-01-21"
-
+# author   : Johann-Mattis List
+# email    : mattis.list@gmail.com
+# created  : 2013-01-21 13:00
+# modified : 2013-02-17 13:03
 """
 Tree-based detection of borrowings in lexicostatistical wordlists.
 """
+
+__author_="Johann-Mattis List"
+__date__="2013-02-17"
+
 
 # basic imports
 import os
@@ -1670,7 +1672,7 @@ class TreBor(object):
                     if p < 0.001:
                         p_vsd.append('p<{0:.2f}'.format(p))
                     elif p >= 0.05:
-                        p_vsd.append(r'{p={0:.2f}'.format(p))
+                        p_vsd.append(r'p={0:.2f}'.format(p))
                     else:
                         p_vsd.append('p={0:.2f}'.format(p))
             
@@ -1884,7 +1886,6 @@ class TreBor(object):
                     )
 
         # draw the leaves
-
         for x,y,t in enodes:
             plt.text(
                     x,
