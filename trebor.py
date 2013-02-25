@@ -892,7 +892,7 @@ class TreBor(object):
         """
         # define taxa and concept as attribute for convenience
         taxa = self.taxa
-        concepts = self.wl.concept
+        concepts = self.wl.concept #XXX do we need this? XXX
 
         # calculate vocabulary size
         forms = []
@@ -922,7 +922,7 @@ class TreBor(object):
         Function retrieves all paps for ancestor languages in a given tree.
         """
         # define concepts for convenience
-        concepts = self.wl.concept
+        concepts = self.wl.concept # XXX do we need this? XXX
         
         # get all internal nodes, i.e. the nontips and also the root
         nodes = ['root'] + sorted(
@@ -1001,6 +1001,128 @@ class TreBor(object):
         if verbose: print("[i] Calculated the distributions for ancestral taxa.")
 
         return
+
+    def get_IVSD(
+            self,
+            verbose = True
+            ):
+        """
+        Calculate VSD on the basis of each item.
+
+        """
+
+        # define concepts and taxa for convenience
+        concepts = self.wl.concept
+        taxa = self.taxa
+
+        # get all internal nodes, i.e. the nontips and also the root
+        nodes = ['root'] + sorted(
+                [node.Name for node in self.tree.nontips()],
+                key=lambda x: len(self.tree.getNodeMatchingName(x).tips()),
+                reverse = True
+                )
+        
+        # make dictionary that stores the best models for each cognate set
+        best_models = {}
+
+        # iterate over concepts
+        for concept in concepts:
+
+            # get paps
+            tmp = self.wl.get_dict(row=concept,entry=self._pap_string)
+
+            # add to list if value is missing
+            for taxon in taxa:
+                if taxon not in tmp:
+                    tmp[taxon] = []
+
+            # calculate distribution for contemporary taxa
+            cvsd = [len([i for i in tmp[j] if i in self.cogs]) for j in taxa]
+
+            # calculate ancestral dists, get all paps first
+            pap_set = [i for i in set(
+                    self.wl.get_list(
+                        row=concept,
+                        entry=self._pap_string,
+                        flat=True
+                        )
+                    ) if i in self.cogs]
+
+            # get the models
+            models = sorted(list(self.gls.keys()))
+
+            # get the scenarios
+            avsd_list = []
+            for idx,glm in enumerate(models):
+                avsd_list += [[0 for node in nodes]]
+                for pap in pap_set:
+                    gls,noo = self.gls[glm][pap]
+
+                    # sort the gls
+                    gls = sorted(
+                            gls,
+                            key = lambda x: len(self.tree.getNodeMatchingName(x[0]).tips()),
+                            reverse = True
+                            )
+
+                    # retrieve the state of the root
+                    if gls[0][1] == 1 and gls[0][0] == 'root':
+                        state = 1
+                    else:
+                        state = 0
+
+                    # assign the state of the root to all nodes in tmp
+                    tmp = [state for node in nodes]
+
+                    # iterate over the gls and assign the respective values to all
+                    # children
+                    for name,event in gls:
+                        if event == 1:
+                            this_state = 1
+                        else:
+                            this_state = 0
+
+                        # get the subtree nodes
+                        sub_tree_nodes = [node.Name for node in
+                                self.tree.getNodeMatchingName(name).nontips()]
+
+                        # assign this state to all subtree nodes
+                        for node in sub_tree_nodes:
+                            tmp[nodes.index(node)] = this_state
+
+                    # add the values to the avsd_list
+                    avsd_list[-1] = [a+b for a,b in zip(avsd_list[-1],tmp)]
+            
+            # check for correctness
+            if verbose: print(concept,avsd_list[-1],models[-1])
+            
+            # calculate best distribution
+            zp_vsd = []
+            cvsd_set = set(cvsd)
+            for avsd in avsd_list:
+                if len(cvsd_set) == 1 and set(avsd):
+                    zp_vsd.append((0,1.0))
+                else:
+                    vsd = sps.mannwhitneyu(
+                            cvsd,
+                            avsd
+                            )
+
+                zp_vsd.append(vsd)
+            
+            # extract p-values
+            p_vsd = [p for z,p in zp_vsd]
+            maxP = max(p_vsd)
+            best_model = models[p_vsd.index(maxP)]
+
+            for p in pap_set:
+                noo = self.gls[best_model][p][1]
+                best_models[p] = (best_model,noo,maxP)
+        
+        self.best_models = best_models
+        print(sum([n for m,n,o in best_models.values()]) / len(best_models))
+
+        return best_models
 
     def get_MLN(
             self,
@@ -1528,10 +1650,8 @@ class TreBor(object):
                     ('weighted',(2,1)),
                     ('weighted',(1,1)),
                     ('weighted',(1,2)),
-                    ('weighted',(31,16)),
                     ('weighted',(3,2)),
                     ('weighted',(7,4)),
-                    ('weighted',(15,8)),
                     ('restriction',1),
                     ('restriction',2),
                     ('restriction',3),
