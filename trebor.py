@@ -1,13 +1,13 @@
 # author   : Johann-Mattis List
 # email    : mattis.list@gmail.com
 # created  : 2013-01-21 13:00
-# modified : 2013-02-17 13:03
+# modified : 2013-02-25 15:07
 """
 Tree-based detection of borrowings in lexicostatistical wordlists.
 """
 
 __author_="Johann-Mattis List"
-__date__="2013-02-17"
+__date__="2013-02-25"
 
 
 # basic imports
@@ -1025,6 +1025,10 @@ class TreBor(object):
         # make dictionary that stores the best models for each cognate set
         best_models = {}
 
+        # make array for all nodes and a dict for the scenarios
+        all_avsd = [0 for node in nodes]
+        scenarios = {}
+
         # iterate over concepts
         for concept in concepts:
 
@@ -1113,16 +1117,37 @@ class TreBor(object):
             # extract p-values
             p_vsd = [p for z,p in zp_vsd]
             maxP = max(p_vsd)
-            best_model = models[p_vsd.index(maxP)]
+            maxIdx = p_vsd.index(maxP)
+            best_model = models[maxIdx]
 
             for p in pap_set:
-                noo = self.gls[best_model][p][1]
+                gls,noo = self.gls[best_model][p]
                 best_models[p] = (best_model,noo,maxP)
+                scenarios[p] = (gls,noo)
+
+            # add sum to general model
+            all_avsd = [a+b for a,b in zip(avsd_list[maxIdx],all_avsd)]
+
         
         self.best_models = best_models
-        print(sum([n for m,n,o in best_models.values()]) / len(best_models))
+        #print(sum([n for m,n,o in best_models.values()]) / len(best_models))
+        
+        # append to distributions
+        self.dists['mixed'] = all_avsd
 
-        return best_models
+        # append to available models
+        self.gls['mixed'] = scenarios
+
+        # store some statistics as attributes
+        self.stats['mixed'] = {}
+        self.stats['mode'] = 'mixed'
+        self.stats['dataset'] = self.dataset
+        self.stats['mixed']['ano'] = sum(
+                [v[1] for v in self.gls['mixed'].values()]
+                ) / len(self.gls['mixed'])
+        self.stats['mixed']['mno'] = max([v[1] for v in self.gls['mixed'].values()])
+
+        return 
 
     def get_MLN(
             self,
@@ -1628,6 +1653,7 @@ class TreBor(object):
             If set to c{True}, be verbose when carrying out the analysis.
         usetex : bool (default=True)
             Specify whether you want to use LaTeX to render plots.
+
         """
         
         # set defaults
@@ -1647,13 +1673,14 @@ class TreBor(object):
         if runs == 'default':
             runs = [
                     ('weighted',(3,1)),
+                    ('weighted',(11,4)),
+                    ('weighted',(5,2)),
+                    ('weighted',(9,4)),
                     ('weighted',(2,1)),
-                    ('weighted',(1,1)),
-                    ('weighted',(1,2)),
-                    ('weighted',(3,2)),
                     ('weighted',(7,4)),
-                    ('restriction',1),
-                    ('restriction',2),
+                    ('weighted',(3,2)),
+                    ('weighted',(5,4)),
+                    ('weighted',(1,1)),
                     ('restriction',3),
                     ('restriction',4),
                     ('restriction',5)
@@ -1714,6 +1741,11 @@ class TreBor(object):
         modes = list(self.gls.keys())
         for m in modes:
             self.get_AVSD(m,verbose=verbose)
+
+        # calculate mixed model
+        if verbose: print("[i] Calculating the mixed model...")
+        self.get_IVSD()
+        modes += ['mixed']
 
         # compare the distributions using mannwhitneyu
         if verbose: print("[i] Comparing the distributions...")
