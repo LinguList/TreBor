@@ -1004,7 +1004,10 @@ class TreBor(object):
 
     def get_IVSD(
             self,
-            verbose = True
+            verbose = False,
+            output_gml = False,
+            output_plot = False,
+            tar = True
             ):
         """
         Calculate VSD on the basis of each item.
@@ -1138,6 +1141,151 @@ class TreBor(object):
         # append to available models
         self.gls['mixed'] = scenarios
 
+        # write the results to file
+        # make the folder for the data to store the stats
+        folder = self.dataset+'_trebor'
+        try:
+            os.mkdir(folder)
+        except:
+            pass       
+        
+        # if output of gls is chosen, load the gml-graph
+        if output_gml:
+
+            # make the directory for the files
+            try:
+                os.mkdir(folder+'/gml')
+            except:
+                pass
+
+            # make next directory
+            try:
+                os.mkdir(
+                        folder+'/gml/'+'{0}-{1}'.format(
+                            self.dataset,
+                            "mixed"
+                            )
+                        )
+            except:
+                pass
+
+            # make the folder for png
+            try:
+                os.mkdir(
+                        folder+'/gml/'+'{0}-{1}-figures'.format(
+                            self.dataset,
+                            "mixed"
+                            )
+                        )
+            except:
+                pass
+
+            # load the graph
+            self.gml = nx.read_gml(self.dataset+'.gml')
+
+            # store the graph
+            for cog in self.cogs:
+                gls = self.gls["mixed"][cog][0]
+                g = gls2gml(
+                        gls,
+                        self.gml,
+                        self.tree,
+                        filename = folder+'/gml/{0}-{1}/{2}'.format(
+                            self.dataset,
+                            "mixed",
+                            cog
+                            ),
+                        )
+
+                # if plot of gml is chose
+                if output_plot:
+                    nodes = []
+                    
+                    for n,d in g.nodes(data=True):
+                        x = d['graphics']['x']
+                        y = d['graphics']['y']
+                        f = d['graphics']['fill']
+                        o = d['origin']
+                        l = d['label']
+                        
+                        nodes.append((x,y,f,o,l))
+
+                    edges = []
+                    for a,b,d in g.edges(data=True):
+                    
+                        xA = g.node[a]['graphics']['x']
+                        xB = g.node[b]['graphics']['x']
+                        yA = g.node[a]['graphics']['y']
+                        yB = g.node[b]['graphics']['y']
+                    
+                        edges += [(xA,xB,yA,yB)]
+                    
+                    #mpl.rc('text',usetex=keywords['usetex'])
+                    fig = plt.figure()
+                    figsp = fig.add_subplot(111)
+                    ax = plt.axes(frameon=False)
+                    plt.xticks([])
+                    plt.yticks([])
+                    
+                    plt.axis('equal')
+                    
+                    for xA,xB,yA,yB in edges:
+                    
+                        plt.plot(
+                                [xA,xB],
+                                [yA,yB],
+                                '-',
+                                color='black',
+                                linewidth=5
+                                )
+                        plt.plot(
+                                [xA,xB],
+                                [yA,yB],
+                                '-',
+                                color='0.2',
+                                linewidth=4
+                                )
+                    for x,y,f,o,l in nodes:
+                        if f == '#000000':
+                            c = '#ffffff'
+                        else:
+                            c = '#000000'
+                        if o == 1:
+                            size = 20
+                        else:
+                            size = 10
+                        if l.startswith('edge') or l.startswith('root'):
+                            plt.plot(x,y,'o',markersize=size,color=f)
+                        else:
+                            plt.text(
+                                    x,
+                                    y,
+                                    l,
+                                    horizontalalignment='center',
+                                    verticalalignment='center',
+                                    size=8,fontweight='bold',color=c,backgroundcolor=f)
+                    
+                    #plt.subplots_adjust(left=0.02,right=0.98,top=0.98,bottom=0.02)
+                    plt.savefig(folder+'/gml/{0}-{1}-figures/{2}.png'.format(
+                        self.dataset,
+                        "mixed",
+                        cog
+                        ))
+                    plt.clf()
+
+            # if tar is chosen, put it into a tarfile
+            if tar:
+                os.system(
+                        'cd {0}_trebor/gml/ ; tar -pczf {0}-{1}.tar.gz {0}-{1}; cd ..; cd ..'.format(
+                            self.dataset,
+                            "mixed"
+                            )
+                        )
+                os.system('rm {0}_trebor/gml/{0}-{1}/*.gml'.format(self.dataset,"mixed"))
+                os.system('rmdir {0}_trebor/gml/{0}-{1}'.format(self.dataset,"mixed"))
+
+
+
         # store some statistics as attributes
         self.stats['mixed'] = {}
         self.stats['mode'] = 'mixed'
@@ -1146,6 +1294,28 @@ class TreBor(object):
                 [v[1] for v in self.gls['mixed'].values()]
                 ) / len(self.gls['mixed'])
         self.stats['mixed']['mno'] = max([v[1] for v in self.gls['mixed'].values()])
+
+        # store statistics and gain-loss-scenarios in textfiles
+        # create folder for gls-data
+        try:
+            os.mkdir(folder+'/gls')
+        except:
+            pass
+        
+        if verbose: print("[i] Writing GLS data to file... ",end="")
+        
+        # write gls-data to folder
+        f = open(folder+'/gls/{0}-{1}.gls'.format(self.dataset,"mixed"),'w')
+        f.write('PAP\tGainLossScenario\tNumberOfOrigins\n')
+        for cog in sorted(self.gls["mixed"]):
+            gls,noo = self.gls["mixed"][cog]
+            f.write(
+                    "{0}\t".format(cog)+','.join(
+                        ["{0}:{1}".format(a,b) for a,b in gls]
+                        ) + '\t'+str(noo)+'\n'
+                    )
+        f.close()
+        if verbose: print("done.")
 
         return 
 
@@ -1633,6 +1803,7 @@ class TreBor(object):
     def analyze(
             self,
             runs = "default",
+            mixed = False,
             verbose = False,
             output_gml = False,
             tar = False,
@@ -1683,7 +1854,10 @@ class TreBor(object):
                     ('weighted',(1,1)),
                     ('restriction',3),
                     ('restriction',4),
-                    ('restriction',5)
+                    ('restriction',5),
+                    ('topdown',2),
+                    ('topdown',3),
+                    ('topdown',4),
                     ]
         
         # carry out the various analyses
@@ -1743,9 +1917,15 @@ class TreBor(object):
             self.get_AVSD(m,verbose=verbose)
 
         # calculate mixed model
-        if verbose: print("[i] Calculating the mixed model...")
-        self.get_IVSD()
-        modes += ['mixed']
+        if mixed:
+            if verbose: print("[i] Calculating the mixed model...")
+            self.get_IVSD(
+                    verbose=verbose,
+                    output_plot=output_plot,
+                    output_gml=output_gml,
+                    tar=tar
+                    )
+            modes += ['mixed']
 
         # compare the distributions using mannwhitneyu
         if verbose: print("[i] Comparing the distributions...")
@@ -1864,11 +2044,15 @@ class TreBor(object):
 
         # carry out further analyses if this is specified
         if full_analysis:
-
-            # determine the best model
-            p_vsd = [p for z,p in zp_vsd]
-            maxP = max(p_vsd)
-            glm = modes[p_vsd.index(maxP)]
+            
+            # if the mixed model is not chosen
+            if not mixed:
+                # determine the best model
+                p_vsd = [p for z,p in zp_vsd]
+                maxP = max(p_vsd)
+                glm = modes[p_vsd.index(maxP)]
+            else:
+                glm = 'mixed'
 
             self.get_MLN(
                 glm,
